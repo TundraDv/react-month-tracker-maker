@@ -1,0 +1,10 @@
+[
+  { "id": 1, "src": "../Assets/BackgroundImage/None.png", "title": "None" },
+  { "id": 2, "src": "../Assets/BackgroundImage/blue.jpg", "title": "blue" },
+  { "id": 3, "src": "../Assets/BackgroundImage/soft.jpg", "title": "soft" },
+  { "id": 4, "src": "../Assets/BackgroundImage/dark.jpg", "title": "dark" },
+  { "id": 5, "src": "../Assets/BackgroundImage/monster.jpg", "title": "monster" },
+  { "id": 6, "src": "../Assets/BackgroundImage/roses.jpg", "title": "roses" },
+  { "id": 7, "src": "../Assets/BackgroundImage/tulipans.jpg", "title": "tulipans" },
+  { "id": 8, "src": "../Assets/BackgroundImage/university.jpg", "title": "university" }
+]

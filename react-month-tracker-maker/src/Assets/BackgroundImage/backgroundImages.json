@@ -1,0 +1,9 @@
+[
+  { "id": 1, "src": "BackgroundImage/None.png", "title": "None" },
+  { "id": 3, "src": "BackgroundImage/soft.jpg", "title": "soft" },
+  { "id": 4, "src": "BackgroundImage/dark.jpg", "title": "dark" },
+  { "id": 5, "src": "BackgroundImage/monster.jpg", "title": "monster" },
+  { "id": 6, "src": "BackgroundImage/roses.jpg", "title": "roses" },
+  { "id": 7, "src": "BackgroundImage/tulipans.jpg", "title": "tulipans" },
+  { "id": 8, "src": "BackgroundImage/university.jpg", "title": "university" }
+]
