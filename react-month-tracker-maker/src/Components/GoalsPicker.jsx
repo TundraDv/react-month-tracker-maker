@@ -1,52 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Stack, Slider, Grid, TextField, InputAdornment, IconButton } from "@mui/material";
 import EmojiPicker from 'emoji-picker-react';
-import { EmojiEmotions } from '@mui/icons-material';
 import { useGoalsContext } from '../Contexts/GoalsContext';
 
 function GoalsPicker() {
   const { updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
+  const [columns, setColumns] = useState(3);
   const [rows, setRows] = useState(4);
-  const [columns, setColumns] = useState(4);
-  const [selectedEmojis, setSelectedEmojis] = useState(Array(rows * columns).fill('❤️'));
-  const [textFields, setTextFields] = useState(Array(rows * columns).fill(''));
+  const [selectedEmojis, setSelectedEmojis] = useState(Array(24).fill('❤️'));
+  const [textFields, setTextFields] = useState(Array(24).fill(null).map((_, index) => `${index + 1}K Steps`));
   const [activeFieldIndex, setActiveFieldIndex] = useState(null);
 
+  const activeFieldIndexRef = useRef(activeFieldIndex);
+
+  useEffect(() => {
+    // Update the ref when activeFieldIndex changes
+    activeFieldIndexRef.current = activeFieldIndex;
+  }, [activeFieldIndex]);
+
   const handleTextField = (index, event) => {
-    console.log('Updating TextField:', index, event.target.value);
     const newTextFields = [...textFields];
     newTextFields[index] = event.target.value;
     setTextFields(newTextFields);
     updateTextfields(newTextFields);
   };
 
-  const handleColumns = (event, newValue) => {
-    console.log('Updating Columns:', newValue);
-    const validColumns = Math.max(1, newValue); // Ensure at least 1 column
-    setColumns(validColumns);
-    updateColumns(validColumns);
-    setTextFields(Array(rows * validColumns).fill(''));
-    setSelectedEmojis(Array(rows * validColumns).fill('❤️'));
+  const handleColumns = (event, value) => {
+    setColumns(value);
+    updateColumns(value);
   };
 
-  const handleRows = (event, newValue) => {
-    console.log('Updating Rows:', newValue);
-    const validRows = Math.max(0, newValue); // Ensure non-negative value
-    setRows(validRows);
-    updateRows(validRows);
-    setTextFields(Array(validRows * columns).fill(''));
-    setSelectedEmojis(Array(validRows * columns).fill('❤️'));
+  const handleRows = (event, value) => {
+    setRows(value);
+    updateRows(value);
   };
 
   const onEmojiClick = (emojiObject) => {
-    if (activeFieldIndex !== null) {
-      console.log('Updating Emoji:', activeFieldIndex, emojiObject.emoji);
+    const index = activeFieldIndexRef.current;
+    if (index !== null) {
       const newSelectedEmojis = [...selectedEmojis];
-      newSelectedEmojis[activeFieldIndex] = emojiObject.emoji;
+      newSelectedEmojis[index] = emojiObject.emoji;
       setSelectedEmojis(newSelectedEmojis);
-      setActiveFieldIndex(null);
       updateEmojis(newSelectedEmojis);
     }
+  };
+
+  const handleEmojiClick = (index) => {
+    setActiveFieldIndex(index);
   };
 
   return (
@@ -64,7 +64,7 @@ function GoalsPicker() {
       />
       Rows
       <Slider
-        aria-label="Goals per column"
+        aria-label="Rows"
         value={rows}
         step={1}
         marks
@@ -73,18 +73,19 @@ function GoalsPicker() {
         valueLabelDisplay="auto"
         onChange={handleRows}
       />
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: columns, md: 3 }}>
+      <Grid container rowSpacing={1} sx={{ marginY: 2 }} columnSpacing={{ xs: 1, sm: columns, md: 3 }}>
         {Array.from({ length: rows * columns }, (_, index) => (
           <Grid item key={`grid-item-${index}`} xs={12 / columns}>
             <TextField
               id={`outlined-basic-${index}`}
-              variant="standard"
-              value={textFields[index] || `${index + 1}K Steps`}
+              variant="outlined"
+              size="small"
+              value={textFields[index]}
               onChange={(event) => handleTextField(index, event)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <IconButton onClick={() => setActiveFieldIndex(index)}>
+                    <IconButton onClick={() => handleEmojiClick(index)}>
                       {selectedEmojis[index]}
                     </IconButton>
                   </InputAdornment>
@@ -94,11 +95,13 @@ function GoalsPicker() {
           </Grid>
         ))}
       </Grid>
-      <EmojiPicker
-        width="100%"
-        onEmojiClick={(emojiObject) => onEmojiClick(emojiObject)}
-        pickerStyle={{ position: 'absolute', zIndex: 1000 }}
-      />
+      {rows > 0 ? (
+        <EmojiPicker
+          width="100%"
+          onEmojiClick={onEmojiClick}
+          pickerStyle={{ position: 'absolute', zIndex: 1000 }}
+        />
+      ) : null}
     </Stack>
   );
 }

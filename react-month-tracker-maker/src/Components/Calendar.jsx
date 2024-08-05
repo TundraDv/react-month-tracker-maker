@@ -79,7 +79,7 @@ function Calendar({ startDay }) {
       <Typography variant="h4" sx={{ mb: 2 }}>
         August
       </Typography>
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%', margin: 2 }}>
         <Grid container spacing={0} justifyContent="center">
           {/* Day Names Row */}
           <Grid container item xs={12} spacing={0} justifyContent="center">

@@ -6,8 +6,7 @@ export const BackgroundImageProvider = ({ children }) => {
   const [selectedImageBackground, setSelectedImage] = useState(null);
 
   const updateSelectedImage = (image) => {
-    setSelectedImage(image);
-    console.log(image)
+    setSelectedImage(image.includes("None.png") ? "" : image);
   };
 
   return (

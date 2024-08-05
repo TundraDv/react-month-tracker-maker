@@ -3,10 +3,10 @@ import React, { createContext, useState, useContext } from 'react';
 const GoalsContext = createContext();
 
 export const GoalsProvider = ({ children }) => {
-  const [columns, setColumns] = useState(2);
-  const [rows, setRows] = useState(2);
-  const [textfields, setTextfields] = useState([]);
-  const [emojis, setEmojis] = useState([]);
+  const [columns, setColumns] = useState(3);
+  const [rows, setRows] = useState(4);
+  const [textfields, setTextfields] = useState(Array(24).fill(null).map((_, index) => `${index+1}K Steps`));
+  const [emojis, setEmojis] = useState(Array(24).fill('❤️'));
 
   const updateColumns = (columns) => {
     setColumns(columns);
@@ -15,6 +15,7 @@ export const GoalsProvider = ({ children }) => {
     setRows(rows);
   };
   const updateTextfields = (textfields) => {
+    console.log(textfields)
     setTextfields(textfields);
   };
   const updateEmojis = (emojis) => {
