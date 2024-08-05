@@ -4,6 +4,7 @@ import {Tabs, Tab, Box} from '@mui/material';
 import ComponentsSwitch from './ComponentsSwitch';
 import ImagePicker from "./ImagePicker";
 import FontPicker from "./FontPicker";
+import GoalsPicker from "./GoalsPicker"
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 
@@ -40,7 +41,7 @@ function a11yProps(index) {
 }
 
 function Picker() {
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(3);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -49,6 +50,7 @@ function Picker() {
     "Components": <ComponentsSwitch/>,
     "Background": <ImagePicker imageData={backgroundImages} cols={3} context={useBackgroundImageContext} />,
     "Days Shape": <ImagePicker imageData={daysShapes} cols={3} context={useDayShapeContext} />,
+    "Goals": <GoalsPicker />,
     "Top Left": "Top Left",
     "Top Right": "Top Right",
     "Top Center": "Top Center",

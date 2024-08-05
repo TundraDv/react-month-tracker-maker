@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import { Typography, Box } from '@mui/material';
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
+import Goals from "./Goals";
 
 function getDaysInMonth(month, year) {
   return new Date(year, month + 1, 0).getDate();
@@ -72,6 +73,9 @@ function Calendar({ startDay }) {
         backgroundPosition: 'center',
       }}
     >
+      <Typography variant="h3" sx={{  }}>
+        Month Tracker
+      </Typography>
       <Typography variant="h4" sx={{ mb: 2 }}>
         August
       </Typography>
@@ -138,6 +142,7 @@ function Calendar({ startDay }) {
           ))}
         </Grid>
       </Box>
+      <Goals />
     </Box>
   );
 }
