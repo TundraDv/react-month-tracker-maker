@@ -35,7 +35,7 @@ function ImagePicker({ imageData, context }) {
       Transparency & Color
     </Typography>
       <Grid container alignItems="center" spacing={2} sx={{ marginBottom: 1 }}>
-        <Grid item xs={11}>
+        <Grid item xs={10.5}>
           <Slider
             aria-label="Transparency"
             value={transparency}
@@ -47,7 +47,7 @@ function ImagePicker({ imageData, context }) {
             onChange={handleTransparency}
           />
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={1.5}>
           <Box
             sx={{
               height: 20,
