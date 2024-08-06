@@ -11,7 +11,7 @@ export const ComponentsProvider = ({ children }) => {
   const [monthContext, setMonthContext] = useState(true);
   const [dateValueContext, setDateValueContext] = useState(dayjs());
   const [firstDayContext, setFirstDayContext] = useState(0);
-  const [heightContext, setHeightContext] = useState(70);
+  const [heightContext, setHeightContext] = useState(660);
 
   const updateTitleTextContext = (value) => {
     setTitleTextContext(value);

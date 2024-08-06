@@ -1,0 +1,31 @@
+[
+  { 
+    "id": 1, 
+    "src": "DayShape/None.png", 
+    "title": "None",
+    "titleTextContext": "Step Tracker",
+    "titleContext": true,
+    "yearContext": true,
+    "daysNameContext": true,
+    "monthContext" : true,
+    "firstDayContext" : 0,
+    "heightContext" : 660,
+    "selectedImageBackground":"",
+    "transparency":"0.5",
+    "backgroundColor":"#fff",
+    "selectedImageDayShape":"",
+    "transparencyDayShape":"",
+    "backgroundColorDayShape":"#fff",
+    "rows": 3,
+    "columns": 3,
+    "textfields" : ["30min", "1hr","1hr 30min", "2hr", "2hr 30min", "2h", "","",""],
+    "emojis" : ["❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️"],
+    "SelectedFonts": ["Pacifico", "Lobster", "Open Sans", "Bebas Neue", "Poppins", "Silkscreen", ""],
+    "SelectedColors": ["#aabbcc", "#000", "#286097","#26486A", "#7E8389", "#aabbcc", ""]
+  },
+  { "id": 17, "src": "DayShape/cute.png", "title": "cute" },
+  { "id": 18, "src": "DayShape/roman.png", "title": "roman" },
+  { "id": 5, "src": "DayShape/pink.png", "title": "pink" },
+  { "id": 6, "src": "DayShape/green.png", "title": "green" },
+  { "id": 3, "src": "DayShape/circle.png", "title": "circle" }
+]

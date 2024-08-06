@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "watashiwasta-bdremoved.png",
+      "src": "watashiwasta-bgremoved.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "watashiwasta-bdremoved.png",
+      "src": "watashiwasta-bgremoved.png",
       "type": "image/png",
       "sizes": "512x512"
     }

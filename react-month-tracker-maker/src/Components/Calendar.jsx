@@ -66,7 +66,7 @@ function Calendar() {
   return (
     <Card
         sx={{
-          height: { xs: `${heightContext}vh`, sm: `${heightContext}vh` },
+          height: { xs: heightContext, sm: heightContext },
           minWidth: { xs: "100%", sm: "400px" },
           width: { xs: "100%", sm: "400px" },
           display: 'flex',

@@ -62,12 +62,12 @@ function Picker() {
 
   return (
     <Card
-                    sx={{
-                      height: { xs: "50vh", sm: "70vh" },
-                      width: { xs: "100%", sm: "550px" },
-                      overflow: 'auto',
-                    }}
-                  >
+      sx={{
+        height: { xs: 500, sm: 650 },
+        width: { xs: "100%", sm: "550px" },
+        overflow: 'auto',
+      }}
+    >
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       

@@ -108,15 +108,15 @@ function ComponentsSwitch() {
           </Select>
         </FormControl>
         <Typography sx={{ marginY: 2 }}>
-          Tracker Height
+          Tracker's Height
         </Typography>
         <Slider
             aria-label="height"
             value={heightContext}
-            step={5}
+            step={10}
             marks
-            min={50}
-            max={100}
+            min={500}
+            max={760}
             valueLabelDisplay="auto"
             onChange={handleHeight}
           />

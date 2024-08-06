@@ -1,5 +1,6 @@
 import * as React from "react";
 import MakerView from "./Views/MakerView";
+import ErrorView from "./Views/ErrorView";
 
 import {
   createBrowserRouter,
@@ -10,7 +11,15 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MakerView/>,
-  }
+  },
+  {
+    path: "/month",
+    element: <MakerView/>,
+  },
+  {
+    path: "*", // Catch-all route for undefined paths
+    element: <ErrorView />,
+  },
 ])
 
 function App() {

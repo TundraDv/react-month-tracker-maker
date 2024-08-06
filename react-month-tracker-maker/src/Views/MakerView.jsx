@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Grid, Container, useMediaQuery, useTheme } from "@mui/material";
 import Calendar from "../Components/Calendar";
 import Picker from "../Components/Picker";
+import Navbar from '../Components/Navbar'
 import { DayShapeProvider } from '../Contexts/DayShapeContext';
 import { BackgroundImageProvider } from '../Contexts/BackgroundImageContext';
 import { GoalsProvider } from '../Contexts/GoalsContext';
@@ -18,9 +19,10 @@ function MakerView() {
         <GoalsProvider>
           <ComponentsProvider>
             <FontProvider>
+              <Navbar/>
               <Container
                 sx={{
-                  minHeight: '100vh',
+                  // minHeight: '100vh',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -34,7 +36,7 @@ function MakerView() {
                   alignItems={isMobile ? 'flex-start' : 'stretch'}
                   sx={{
                     minWidth: '300px',
-                    marginTop: 2,
+                    marginTop: 1,
                     marginBottom: (theme) => ({
                       xs: theme.spacing(10), // Large bottom margin on extra-small screens (phones)
                       sm: theme.spacing(2)  // Smaller margin on small screens and up
