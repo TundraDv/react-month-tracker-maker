@@ -105,7 +105,7 @@ function FontPicker() {
               onChange={handleChange(index)} fullWidth>
                 {fonts.map((font) => (
                   <MenuItem key={font} value={font}>
-                    <Typography style={{ fontFamily: font }}>{font}</Typography>
+                    <Typography key={font} style={{ fontFamily: font }}>{font}</Typography>
                   </MenuItem>
                 ))}
               </Select>

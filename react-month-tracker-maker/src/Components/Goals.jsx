@@ -12,7 +12,7 @@ function Goals() {
   const totalItems = rows * columns;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginY: 2 }}>
-      <Grid container spacing={0.7} direction="row">
+      <Grid container spacing={0.7} justifyContent="center" alignItems="center" sx={{ marginLeft: 1}}>
         {Array.from({ length: totalItems }).map((_, index) => (
           <Grid item xs={12 / columns} key={index}>
             {/[^\s]/.test(textfields[index]) ? (
