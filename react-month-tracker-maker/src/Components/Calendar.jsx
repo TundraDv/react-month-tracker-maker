@@ -24,11 +24,17 @@ function getWeekDays(startDay) {
 }
 
 function Calendar() {
-  const { selectedImageDayShape } = useDayShapeContext();
+  const {
+    selectedImageDayShape,
+    transparency: transparencyDayShape,
+    backgroundColor: backgroundColorDayShape
+  } = useDayShapeContext();
   const { selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
+  
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
+  const rgbaColorDayShape = chroma(backgroundColorDayShape).alpha(transparencyDayShape).rgba();
 
   const days = generateDaysArray(dateValueContext);
   const startDayOffset = getStartDayOffset(dateValueContext, firstDayContext);
@@ -119,8 +125,8 @@ function Calendar() {
                     <Typography variant="body1"></Typography>
                   ) : (
                     <Box
-                    sx={{
-                      position: 'relative',
+                      sx={{
+                        position: 'relative',
                         width: 50,
                         height: 50,
                         display: 'flex',
@@ -131,9 +137,6 @@ function Calendar() {
                     >
                       {selectedImageDayShape && (
                         <Box
-                        component="img"
-                          src={require(`../Assets/${selectedImageDayShape}`)}
-                          alt="Background"
                           sx={{
                             position: 'absolute',
                             width: '80%',
@@ -142,8 +145,12 @@ function Calendar() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
+                            backgroundColor: rgbaColorDayShape ? `rgba(${rgbaColorDayShape[0]}, ${rgbaColorDayShape[1]}, ${rgbaColorDayShape[2]}, ${rgbaColorDayShape[3]})` : 'transparent',
+                            maskImage: `url(${require(`../Assets/${selectedImageDayShape}`)})`,
+                            maskSize: 'contain',
+                            maskRepeat: 'no-repeat',
                           }}
-                          />
+                        />
                       )}
                       <Typography
                         sx={{
@@ -153,7 +160,7 @@ function Calendar() {
                           fontSize: 20,
                           textAlign: 'center',
                         }}
-                        >
+                      >
                         {day}
                       </Typography>
                     </Box>

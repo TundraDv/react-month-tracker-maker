@@ -7,10 +7,69 @@ import '@fontsource/lobster';
 import '@fontsource/open-sans';
 import '@fontsource/kalam';
 import '@fontsource/spectral';
+import '@fontsource/abril-fatface';
+import '@fontsource-variable/exo';
+import '@fontsource-variable/comfortaa';
+import '@fontsource/poppins';
+import '@fontsource/bebas-neue';
+// Supports weights 100-900
+import '@fontsource-variable/montserrat';
+// Supports weights 200-900
+import '@fontsource-variable/cairo';
+import '@fontsource/dm-serif-display';
+// Supports weights 400-700
+import '@fontsource-variable/dancing-script';
+// Supports weights 200-900
+import '@fontsource-variable/inconsolata';
+import '@fontsource/merriweather';
+import '@fontsource/megrim';
+import '@fontsource/ribeye-marrow';
+// Supports weights 100-700
+import '@fontsource-variable/josefin-sans';
+import '@fontsource/pacifico';
+// Supports weights 100-900
+import '@fontsource-variable/lexend';
+// Supports weights 200-900
+import '@fontsource-variable/nunito';
+// Supports weights 100-900
+import '@fontsource-variable/lexend';
+import '@fontsource/press-start-2p';
+import '@fontsource/audiowide';
+import '@fontsource/bungee-shade';
+import '@fontsource/silkscreen';
+import '@fontsource/bungee-hairline';
 
 function FontPicker() {
   const { selectedFonts, updateSelectedFonts, selectedColors, updateSelectedColors } = useFontContext();
-  const fonts = ['Roboto', 'Lobster', 'Open Sans', 'Kalam', 'Spectral'];
+  const fonts = [
+    'Abril Fatface', 
+    'Audiowide', 
+    'Bebas Neue', 
+    'Bungee Hairline', 
+    'Bungee Shade', 
+    'Cairo', 
+    'Comfortaa', 
+    'Dancing Script', 
+    'DM Serif Display', 
+    'Exo', 
+    'Inconsolata', 
+    'Josefin Sans', 
+    'Kalam', 
+    'Lexend', 
+    'Lobster', 
+    'Megrim', 
+    'Merriweather', 
+    'Montserrat', 
+    'Nunito', 
+    'Open Sans', 
+    'Pacifico', 
+    'Poppins', 
+    'Press Start 2P', 
+    'Ribeye Marrow', 
+    'Roboto', 
+    'Silkscreen', 
+    'Spectral'
+  ];  
   const parts = ['Title', 'Month', 'Year', 'Days Name', 'Days Numbers', 'Goals'];
   const [activeIndex, setActiveIndex] = useState(null);
 

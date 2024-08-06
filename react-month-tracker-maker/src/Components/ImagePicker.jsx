@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Box, ImageList, ImageListItem, Slider, Grid, Typography } from "@mui/material";
-import { useBackgroundImageContext } from "../Contexts/BackgroundImageContext";
 import { HexColorPicker } from "react-colorful";
 
 function ImagePicker({ imageData, context }) {
   const [selectedId, setSelectedId] = useState(1);
   const [activeColorPicker, setActiveColorPicker] = useState(false);
-  const { updateSelectedImage } = context();
-  const { transparency, updateTransparency, backgroundColor, updateBackgroundColor } = useBackgroundImageContext();
+  const { updateSelectedImage, 
+          updateTransparency, 
+          updateBackgroundColor,
+          transparency, 
+          backgroundColor } = context();
 
   const handleImageClick = (image) => {
     setSelectedId(image.id);
