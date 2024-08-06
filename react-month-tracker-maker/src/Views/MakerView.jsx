@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Card } from "@mui/material";
+import { Box, Grid,Container, useMediaQuery, useTheme } from "@mui/material";
 import Calendar from "../Components/Calendar";
 import Picker from "../Components/Picker";
 import { DayShapeProvider } from '../Contexts/DayShapeContext';
@@ -9,60 +9,54 @@ import { ComponentsProvider } from '../Contexts/ComponentsContext';
 import { FontProvider } from '../Contexts/FontContext';
 
 function MakerView() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-    <Box 
-      sx={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        width: '100wh', 
-      }}
-    >
       <DayShapeProvider>
         <BackgroundImageProvider>
           <GoalsProvider>
             <ComponentsProvider>
               <FontProvider>
-                <Stack
-                  direction={{ xs: 'column', sm: 'row' }}
-                  spacing={3}
-                  alignItems="stretch"
-                  sx={{
-                    width: '100%', 
-                    maxWidth: 1000, // Set a maximum width for centering
-                    mx: 'auto', // Center the Stack horizontally
-                    m: 1, // Margin around Stack
-                  }}
+                <Container>
+
+                <Grid 
+                  container 
+                  spacing={0} 
+                  direction={isMobile ? 'column' : 'row'}
+                  justifyContent="center"
+                  alignItems={isMobile ? 'flex-start' : 'stretch'}
+                  sx={{ minWidth: '300px', marginTop: 2 }} // Set minimum width for Grid container
                 >
-                  <Card
-                    sx={{
-                      height: { xs: "50vh", sm: "70vh" },
-                      width: { xs: "100%", sm: "400px" },
-                      display: 'flex',
-                      alignItems: 'stretch',
-                      m: 1,
-                    }}
+                  <Grid 
+                    item 
+                    xs={6} 
+                    key={0} 
+                    container
+                    justifyContent={isMobile ? 'center' : 'flex-end'}
+                    alignItems="center"
+                    sx={{ minWidth: '300px' }} // Set minimum width for Grid item
                   >
-                    <Calendar />
-                  </Card>
-                  <Card
-                    sx={{
-                      height: { xs: "50vh", sm: "70vh" },
-                      width: { xs: "100%", sm: "550px" },
-                      overflow: 'auto',
-                      m: 1,
-                    }}
-                  >
+                    <Calendar /> 
+                  </Grid>
+                  <Grid 
+                    item 
+                    xs={6} 
+                    key={1} 
+                    container
+                    justifyContent={isMobile ? 'center' : 'flex-start'}
+                    alignItems="center"
+                    sx={{ minWidth: '300px' }} // Set minimum width for Grid item
+                    >
                     <Picker />
-                  </Card>
-                </Stack>
+                  </Grid>
+                </Grid>
+                    </Container>
               </FontProvider>
             </ComponentsProvider>
           </GoalsProvider>
         </BackgroundImageProvider>
       </DayShapeProvider>
-    </Box>
   );
 }
 

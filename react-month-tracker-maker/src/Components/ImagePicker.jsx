@@ -101,7 +101,7 @@ function ImagePicker({ imageData, cols, context }) {
               backgroundColor: backgroundColor,
               cursor: 'pointer',
               borderRadius: 1,
-              border: '0.1px solid',
+              border: '0.1px solid'
               // borderColor: backgroundColor === '#ffffff' ? backgroundColor : '#fff'
             }}
             onClick={handleSquareClick}

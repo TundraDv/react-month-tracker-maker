@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import chroma from "chroma-js";
-import { Typography, Box } from '@mui/material';
+import { Typography, Card, Box } from '@mui/material';
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
@@ -26,7 +26,7 @@ function getWeekDays(startDay) {
 function Calendar() {
   const { selectedImageDayShape } = useDayShapeContext();
   const { selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
-  const { titleTextContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
+  const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
 
@@ -58,6 +58,15 @@ function Calendar() {
   const weekdays = getWeekDays(firstDayContext);
 
   return (
+    <Card
+        sx={{
+          height: { xs: `${heightContext}vh`, sm: `${heightContext}vh` },
+          minWidth: { xs: "100%", sm: "400px" },
+          display: 'flex',
+          alignItems: 'stretch',
+        }}
+      >
+
     <Box
       sx={{
         display: 'flex',
@@ -94,7 +103,9 @@ function Calendar() {
             {daysNameContext ? (
               weekdays.map((dayName, index) => (
                 <Grid item xs key={index} sx={{ textAlign: 'center' }}>
-                  <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>{dayName}</Typography>
+                  <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>
+                    {dayName}
+                  </Typography>
                 </Grid>
               ))
             ) : null }
@@ -107,8 +118,8 @@ function Calendar() {
                     <Typography variant="body1"></Typography>
                   ) : (
                     <Box
-                      sx={{
-                        position: 'relative',
+                    sx={{
+                      position: 'relative',
                         width: 50,
                         height: 50,
                         display: 'flex',
@@ -119,7 +130,7 @@ function Calendar() {
                     >
                       {selectedImageDayShape && (
                         <Box
-                          component="img"
+                        component="img"
                           src={require(`../Assets/${selectedImageDayShape}`)}
                           alt="Background"
                           sx={{
@@ -131,7 +142,7 @@ function Calendar() {
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
                           }}
-                        />
+                          />
                       )}
                       <Typography
                         sx={{
@@ -141,7 +152,7 @@ function Calendar() {
                           fontSize: 20,
                           textAlign: 'center',
                         }}
-                      >
+                        >
                         {day}
                       </Typography>
                     </Box>
@@ -154,6 +165,7 @@ function Calendar() {
       </Box>
       <Goals />
     </Box>
+    </Card>
   );
 }
 

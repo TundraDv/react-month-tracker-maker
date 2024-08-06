@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import PropTypes from 'prop-types';
-import {Tabs, Tab, Box} from '@mui/material';
+import {Tabs, Tab, Box, Card} from '@mui/material';
 import ComponentsSwitch from './ComponentsSwitch';
 import ImagePicker from "./ImagePicker";
 import FontPicker from "./FontPicker";
@@ -61,15 +61,24 @@ function Picker() {
   };
 
   return (
+    <Card
+                    sx={{
+                      height: { xs: "50vh", sm: "70vh" },
+                      width: { xs: "100%", sm: "550px" },
+                      overflow: 'auto',
+                      marginTop: 2,
+                    }}
+                  >
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      
         <Tabs
           value={value}
           onChange={handleChange}
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto"
-        >
+          >
           {Object.keys(ComponentsPickers).map((key, index) => (
             <Tab key={index} label={key} {...a11yProps(index)} />
           ))}
@@ -81,6 +90,7 @@ function Picker() {
         </CustomTabPanel>
       ))}
     </Box>
+          </Card>
   );
 }
 

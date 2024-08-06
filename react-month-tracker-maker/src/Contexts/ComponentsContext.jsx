@@ -11,6 +11,7 @@ export const ComponentsProvider = ({ children }) => {
   const [monthContext, setMonthContext] = useState(true);
   const [dateValueContext, setDateValueContext] = useState(dayjs());
   const [firstDayContext, setFirstDayContext] = useState(0);
+  const [heightContext, setHeightContext] = useState(70);
 
   const updateTitleTextContext = (value) => {
     setTitleTextContext(value);
@@ -34,6 +35,9 @@ export const ComponentsProvider = ({ children }) => {
   const updateFirstDayContext = (value) => {
     setFirstDayContext(value)
   }
+  const updateHeightContext = (value) => {
+    setHeightContext(value)
+  }
   return (
     <ComponentsContext.Provider value={{ 
       daysNameContext,
@@ -43,6 +47,8 @@ export const ComponentsProvider = ({ children }) => {
       titleContext, 
       yearContext,
       firstDayContext,
+      heightContext,
+      updateHeightContext,
       updateDaysNameContext,
       updateTitleTextContext,
       updateTitleContext,

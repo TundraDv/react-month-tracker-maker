@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Switch, Stack, TextField, InputLabel, FormControl, Select, MenuItem , FormControlLabel, FormGroup } from "@mui/material"
+import {Box, Switch, Typography, Stack, Slider,TextField, InputLabel, FormControl, Select, MenuItem , FormControlLabel, FormGroup } from "@mui/material"
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -14,13 +14,15 @@ function ComponentsSwitch() {
           monthContext,
           firstDayContext,
           dateValueContext,
+          heightContext,
           updateDateValueContext,
           updateFirstDayContext,
           updateDaysNameContext, 
           updateTitleContext, 
           updateYearContext, 
           updateTitleTextContext,
-          updateMonthContext} = useComponentsContext();
+          updateMonthContext,
+          updateHeightContext} = useComponentsContext();
   const handleDate = (newValue) => {
     updateDateValueContext(newValue);
   }
@@ -41,6 +43,9 @@ function ComponentsSwitch() {
   }
   const handleFirstDay = (event) => {
     updateFirstDayContext(event.target.value)
+  }
+  const handleHeight = (event) => {
+    updateHeightContext(event.target.value)
   }
   return (
     <Box>
@@ -102,6 +107,19 @@ function ComponentsSwitch() {
             <MenuItem value={6}>Sunday</MenuItem>
           </Select>
         </FormControl>
+        <Typography sx={{ marginY: 2 }}>
+          Tracker Height
+        </Typography>
+        <Slider
+            aria-label="height"
+            value={heightContext}
+            step={5}
+            marks
+            min={50}
+            max={100}
+            valueLabelDisplay="auto"
+            onChange={handleHeight}
+          />
       </FormGroup>
     </Box>
   )
