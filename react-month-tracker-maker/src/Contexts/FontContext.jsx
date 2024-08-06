@@ -3,8 +3,8 @@ import React, { createContext, useState, useContext } from 'react';
 const FontContext = createContext();
 
 export const FontProvider = ({ children }) => {
-  const [selectedFonts, setSelectedFonts] = useState(['Roboto', 'Lobster', 'Open Sans', 'Bebas Neue', 'Poppins', 'Silkscreen']);
-  const [selectedColors, setSelectedColors] = useState(['#aabbcc', '#000', '#286097','#26486A', '#7E8389', '#aabbcc']);
+  const [selectedFonts, setSelectedFonts] = useState(['Pacifico', 'Lobster', 'Open Sans', 'Bebas Neue', 'Poppins', 'Silkscreen', '']);
+  const [selectedColors, setSelectedColors] = useState(['#aabbcc', '#000', '#286097','#26486A', '#7E8389', '#aabbcc', '']);
 
   const updateSelectedFonts = (value) => {
     setSelectedFonts(value);

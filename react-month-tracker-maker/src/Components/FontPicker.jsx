@@ -70,14 +70,19 @@ function FontPicker() {
     'Silkscreen', 
     'Spectral'
   ];  
-  const parts = ['Title', 'Month', 'Year', 'Days Name', 'Days Numbers', 'Goals'];
+  const parts = ['Title', 'Month', 'Year', 'Days Name', 'Days Numbers', 'Goals' , 'All'];
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const handleChange = (index) => (event) => {
-    setActiveIndex(null);
+  const handleFont = (index) => (event) => {
     const newSelectedFonts = [...selectedFonts];
-    newSelectedFonts[index] = event.target.value;
-    updateSelectedFonts(newSelectedFonts);
+    if (index === (selectedFonts.length - 1)) {
+      updateSelectedFonts(newSelectedFonts.fill(event.target.value));
+    } else {
+      newSelectedFonts[index] = event.target.value;
+      newSelectedFonts[selectedFonts.length - 1] = '';
+      updateSelectedFonts(newSelectedFonts);
+    }
+    setActiveIndex(null);
   };
 
   const handleSquareClick = (index) => () => {
@@ -85,10 +90,15 @@ function FontPicker() {
   }
 
   const handleColorPicker = (color) => {
-    if (activeIndex !== null) {
+    if (activeIndex !== null && activeIndex !== (selectedColors.length - 1)) {
       const newSelectedColors = [...selectedColors];
       newSelectedColors[activeIndex] = color;
+      newSelectedColors[selectedFonts.length - 1] = '';
       updateSelectedColors(newSelectedColors);
+    }
+    if (activeIndex === (selectedColors.length - 1)) {
+      const newSelectedColors = [...selectedColors];
+      updateSelectedColors(newSelectedColors.fill(color));
     }
   };
 
@@ -102,7 +112,7 @@ function FontPicker() {
             </Grid>
             <Grid item xs={5.5}>
               <Select value={selectedFonts[index]} onClick={() => setActiveIndex(null)}
-              onChange={handleChange(index)} fullWidth>
+              onChange={handleFont(index)} fullWidth>
                 {fonts.map((font) => (
                   <MenuItem key={font} value={font}>
                     <Typography key={font} style={{ fontFamily: font }}>{font}</Typography>
