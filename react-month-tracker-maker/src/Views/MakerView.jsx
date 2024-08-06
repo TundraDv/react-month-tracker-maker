@@ -9,30 +9,56 @@ import { ComponentsProvider } from '../Contexts/ComponentsContext';
 import { FontProvider } from '../Contexts/FontContext';
 
 function MakerView() {
-
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        width: '100wh', 
+      }}
+    >
       <DayShapeProvider>
         <BackgroundImageProvider>
           <GoalsProvider>
-           <ComponentsProvider>
-            <FontProvider>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} alignItems="stretch">
-                <Card sx={{ height: "70vh", width: "400px", display: 'flex', alignItems: 'stretch'  }}>
-                  <Calendar startDay={0} />
-                </Card>
-                <Card
+            <ComponentsProvider>
+              <FontProvider>
+                <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={3}
+                  alignItems="stretch"
                   sx={{
-                    height: "70vh",
-                    width: "550px",
-                    overflow: 'auto',
+                    width: '100%', 
+                    maxWidth: 1000, // Set a maximum width for centering
+                    mx: 'auto', // Center the Stack horizontally
+                    m: 1, // Margin around Stack
                   }}
+                >
+                  <Card
+                    sx={{
+                      height: { xs: "50vh", sm: "70vh" },
+                      width: { xs: "100%", sm: "400px" },
+                      display: 'flex',
+                      alignItems: 'stretch',
+                      m: 1,
+                    }}
                   >
-                  <Picker />
-                </Card>
-              </Stack>
+                    <Calendar />
+                  </Card>
+                  <Card
+                    sx={{
+                      height: { xs: "50vh", sm: "70vh" },
+                      width: { xs: "100%", sm: "550px" },
+                      overflow: 'auto',
+                      m: 1,
+                    }}
+                  >
+                    <Picker />
+                  </Card>
+                </Stack>
               </FontProvider>
-            </ComponentsProvider> 
+            </ComponentsProvider>
           </GoalsProvider>
         </BackgroundImageProvider>
       </DayShapeProvider>
