@@ -1,9 +1,14 @@
 import React from "react";
 import { Grid, Stack, Typography, Box } from "@mui/material"
 import { useGoalsContext } from '../Contexts/GoalsContext';
+import { useFontContext } from "../Contexts/FontContext";
 
 function Goals() {
   const { columns, rows, textfields, emojis } = useGoalsContext();
+  const { selectedFonts, selectedColors } = useFontContext();
+  const lastFont = selectedFonts[selectedFonts.length - 1];
+  const lastColor = selectedColors[selectedColors.length - 1];
+
   const totalItems = rows * columns;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginY: 2 }}>
@@ -26,7 +31,7 @@ function Goals() {
                 }}>
                   {emojis[index]}
                 </span>
-                <Typography sx={{ fontSize: '0.8rem' }}>
+                <Typography sx={{ fontSize: '0.8rem', fontFamily: lastFont, color: lastColor }}>
                   {textfields[index]}
                 </Typography>
               </Stack>

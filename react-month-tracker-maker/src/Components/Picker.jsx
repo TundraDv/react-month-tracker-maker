@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 function Picker() {
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(4);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -51,17 +51,13 @@ function Picker() {
     "Background": <ImagePicker imageData={backgroundImages} cols={3} context={useBackgroundImageContext} />,
     "Days Shape": <ImagePicker imageData={daysShapes} cols={3} context={useDayShapeContext} />,
     "Goals": <GoalsPicker />,
+    "Fonts": <FontPicker />,
     "Top Left": "Top Left",
     "Top Right": "Top Right",
     "Top Center": "Top Center",
     "Bottom Left": "Bottom Left",
     "Bottom Right": "Bottom Right",
     "Bottom Center": "Bottom Center",
-    "Days Font": "Days Font",
-    "Day Name Font": "Days Name Font",
-    "Month Font": "Month Font",
-    "Title Font": "Title Font",
-    "Year Font": "Year Font",
   };
 
   return (
