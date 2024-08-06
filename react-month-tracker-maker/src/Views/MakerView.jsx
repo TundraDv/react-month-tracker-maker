@@ -18,11 +18,17 @@ function MakerView() {
           <GoalsProvider>
             <ComponentsProvider>
               <FontProvider>
-                <Container>
+              <Container
+                sx={{
+                  minHeight: '100vh',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
 
                 <Grid 
                   container 
-                  spacing={0} 
+                  spacing={3} 
                   direction={isMobile ? 'column' : 'row'}
                   justifyContent="center"
                   alignItems={isMobile ? 'flex-start' : 'stretch'}
@@ -30,23 +36,23 @@ function MakerView() {
                 >
                   <Grid 
                     item 
-                    xs={6} 
+                    xs={5} 
                     key={0} 
                     container
                     justifyContent={isMobile ? 'center' : 'flex-end'}
                     alignItems="center"
-                    sx={{ minWidth: '300px' }} // Set minimum width for Grid item
+                    sx={{ minWidth: '300px' }} 
                   >
                     <Calendar /> 
                   </Grid>
                   <Grid 
                     item 
-                    xs={6} 
+                    xs={7} 
                     key={1} 
                     container
                     justifyContent={isMobile ? 'center' : 'flex-start'}
                     alignItems="center"
-                    sx={{ minWidth: '300px' }} // Set minimum width for Grid item
+                    sx={{ minWidth: '300px' }}
                     >
                     <Picker />
                   </Grid>

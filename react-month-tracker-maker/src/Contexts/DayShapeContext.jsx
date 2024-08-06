@@ -4,7 +4,8 @@ const DayShapeContext = createContext();
 
 export const DayShapeProvider = ({ children }) => {
   const [selectedImageDayShape, setSelectedImage] = useState(null);
-
+  const [transparency, setTransparency] = useState(1);
+  const [backgroundColor, setBackgroundColor] = useState('#ffff');
   const updateSelectedImage = (image) => {
     setSelectedImage(image.includes("None.png") ? "" : image);
   };

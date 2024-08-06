@@ -62,6 +62,7 @@ function Calendar() {
         sx={{
           height: { xs: `${heightContext}vh`, sm: `${heightContext}vh` },
           minWidth: { xs: "100%", sm: "400px" },
+          width: { xs: "100%", sm: "400px" },
           display: 'flex',
           alignItems: 'stretch',
         }}

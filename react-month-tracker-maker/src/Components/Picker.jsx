@@ -66,7 +66,6 @@ function Picker() {
                       height: { xs: "50vh", sm: "70vh" },
                       width: { xs: "100%", sm: "550px" },
                       overflow: 'auto',
-                      marginTop: 2,
                     }}
                   >
     <Box sx={{ width: '100%' }}>

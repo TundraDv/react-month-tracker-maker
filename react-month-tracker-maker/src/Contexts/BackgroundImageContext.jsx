@@ -8,7 +8,7 @@ export const BackgroundImageProvider = ({ children }) => {
   const [backgroundColor, setBackgroundColor] = useState('#ffff');
 
   const updateSelectedImage = (image) => {
-    setSelectedImage(image.includes("None.png") ? "blank.png" : image);
+    setSelectedImage(image.includes("None.png") ? "blank.jpg" : image);
   };
   const updateTransparency = (value) => {
     setTransparency(value);
