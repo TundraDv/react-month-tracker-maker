@@ -6,8 +6,8 @@ import { useFontContext } from "../Contexts/FontContext";
 function Goals() {
   const { columns, rows, textfields, emojis } = useGoalsContext();
   const { selectedFonts, selectedColors } = useFontContext();
-  const lastFont = selectedFonts[selectedFonts.length - 1];
-  const lastColor = selectedColors[selectedColors.length - 1];
+  const lastFont = selectedFonts[selectedFonts.length - 2];
+  const lastColor = selectedColors[selectedColors.length - 2];
 
   const totalItems = rows * columns;
   return (
