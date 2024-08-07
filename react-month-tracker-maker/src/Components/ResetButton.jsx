@@ -20,7 +20,9 @@ function ResetButton() {
       updateSelectedImage(dataDefault.selectedImageBackground);
       updateTransparency(dataDefault.transparency);
       updateBackgroundColor(dataDefault.backgroundColor);
+
       updateSelectedImageDayShape(dataDefault.selectedImageDayShape);
+      updateTransparencyDayShape(dataDefault.transparencyDayShape);
       updateBackgroundColorDayShape(dataDefault.backgroundColorDayShape);
   
       updateTitleTextContext(dataDefault.titleTextContext);

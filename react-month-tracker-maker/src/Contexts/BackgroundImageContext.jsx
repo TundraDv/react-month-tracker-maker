@@ -20,7 +20,7 @@ export const BackgroundImageProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('selectedImageBackground', JSON.stringify(selectedImageBackground));
     localStorage.setItem('transparency', JSON.stringify(transparency));
-    localStorage.setItem('textfields', JSON.stringify(backgroundColor));
+    localStorage.setItem('backgroundColor', JSON.stringify(backgroundColor));
   }, [
     selectedImageBackground,
     transparency,

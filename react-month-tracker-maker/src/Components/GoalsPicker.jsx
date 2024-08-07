@@ -6,7 +6,6 @@ import { useGoalsContext } from '../Contexts/GoalsContext';
 function GoalsPicker() {
   const { textfields, columns, rows, emojis, updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
   const [selectedEmojis, setSelectedEmojis] = useState(emojis);
-  const [textFields, setTextFields] = useState(textfields);
   const [activeFieldIndex, setActiveFieldIndex] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false); 
 
@@ -18,9 +17,8 @@ function GoalsPicker() {
 
   const handleTextField = (index, event) => {
     setShowEmojiPicker(false); 
-    const newTextFields = [...textFields];
+    const newTextFields = [...textfields];
     newTextFields[index] = event.target.value;
-    setTextFields(newTextFields);
     updateTextfields(newTextFields);
   };
 
@@ -84,7 +82,7 @@ function GoalsPicker() {
                 id={`outlined-basic-${index}`}
                 variant="outlined"
                 size="small"
-                value={textFields[index]}
+                value={textfields[index]}
                 sx = {{'& .MuiInputBase-input': {
                         padding: '10px', 
                       },}}
