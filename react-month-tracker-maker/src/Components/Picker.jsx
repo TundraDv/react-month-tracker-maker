@@ -63,7 +63,7 @@ function Picker() {
   return (
     <Card
       sx={{
-        height: { xs: 500, sm: 650 },
+        height: 650,
         width: { xs: "100%", sm: "550px" },
         overflow: 'auto',
       }}
