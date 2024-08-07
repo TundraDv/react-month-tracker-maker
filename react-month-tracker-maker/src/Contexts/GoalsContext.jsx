@@ -15,7 +15,7 @@ export const GoalsProvider = ({ children }) => {
 
   const [textfields, setTextfields] = useState(() => {
     const saved = localStorage.getItem('textfields');
-    return saved ? JSON.parse(saved) : Array(24).fill('');
+    return saved ? JSON.parse(saved) : Array(24).fill(null).map((_, index) => `${index+1}K Steps`);
   });
   
   const [emojis, setEmojis] = useState(() => {
