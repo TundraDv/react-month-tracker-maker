@@ -1,8 +1,7 @@
 [
   { 
     "id": 1, 
-    "src": "DayShape/None.png", 
-    "title": "None",
+    "title": "Default",
     "titleTextContext": "Step Tracker",
     "titleContext": true,
     "yearContext": true,
@@ -11,17 +10,25 @@
     "firstDayContext" : 0,
     "heightContext" : 660,
     "selectedImageBackground":"",
-    "transparency":"0.5",
+    "transparency":0,
     "backgroundColor":"#fff",
     "selectedImageDayShape":"",
-    "transparencyDayShape":"",
-    "backgroundColorDayShape":"#fff",
-    "rows": 3,
+    "transparencyDayShape":1,
+    "backgroundColorDayShape":"#000",
+    "rows": 2,
     "columns": 3,
-    "textfields" : ["30min", "1hr","1hr 30min", "2hr", "2hr 30min", "2h", "","",""],
-    "emojis" : ["❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️"],
-    "SelectedFonts": ["Pacifico", "Lobster", "Open Sans", "Bebas Neue", "Poppins", "Silkscreen", ""],
-    "SelectedColors": ["#aabbcc", "#000", "#286097","#26486A", "#7E8389", "#aabbcc", ""]
+    "textfields" : [
+      "30min", "1hr", "1hr 30min", "2hr", "2hr 30min", "2h", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+    ],
+    "emojis" : [
+      "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️"
+    ],
+    "SelectedFonts": [
+      "Pacifico", "Lobster", "Open Sans", "Bebas Neue", "Poppins", "Silkscreen", ""
+    ],
+    "SelectedColors": [
+      "#aabbcc", "#000", "#286097", "#26486A", "#7E8389", "#aabbcc", ""
+    ]  
   },
   { "id": 17, "src": "DayShape/cute.png", "title": "cute" },
   { "id": 18, "src": "DayShape/roman.png", "title": "roman" },

@@ -83,7 +83,7 @@ function Calendar() {
         width: '100%',
         height: '100%',
         backgroundImage: selectedImageBackground ? 
-          `linear-gradient(rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${transparency}), rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${transparency})), url(${require(`../Assets/${selectedImageBackground}`)})` 
+          `linear-gradient(rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]}), rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})), url(${require(`../Assets/${selectedImageBackground}`)})` 
           : 'none',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -106,71 +106,71 @@ function Calendar() {
       ) : null}
       <Box sx={{ width: '100%', margin: 2 }}>
       <Grid container spacing={0} justifyContent="center">
-  <Grid container item xs={12} spacing={0} justifyContent="center">
-    {daysNameContext ? (
-      weekdays.map((dayName, index) => (
-        <Grid item xs key={index} sx={{ textAlign: 'center' }}>
-          <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>
-            {dayName}
-          </Typography>
+          <Grid container item xs={12} spacing={0} justifyContent="center">
+            {daysNameContext ? (
+              weekdays.map((dayName, index) => (
+                <Grid item xs key={index} sx={{ textAlign: 'center' }}>
+                  <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>
+                    {dayName}
+                  </Typography>
+                </Grid>
+              ))
+            ) : null}
+          </Grid>
+          {rows.map((row, rowIndex) => (
+            <Grid container item key={rowIndex} spacing={0.5} justifyContent="center">
+              {row.map((day, index) => (
+                <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
+                  {day === null ? (
+                    <Typography variant="body1"></Typography>
+                  ) : (
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        width: 50,
+                        height: 50,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {selectedImageDayShape && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            width: '80%',
+                            height: '80%',
+                            objectFit: 'contain',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            backgroundColor: rgbaColorDayShape ? `rgba(${rgbaColorDayShape[0]}, ${rgbaColorDayShape[1]}, ${rgbaColorDayShape[2]}, ${rgbaColorDayShape[3]})` : 'transparent',
+                            maskImage: `url(${require(`../Assets/${selectedImageDayShape}`)})`,
+                            maskSize: 'contain',
+                            maskRepeat: 'no-repeat',
+                          }}
+                        />
+                      )}
+                      <Typography
+                        sx={{
+                          position: 'relative',
+                          fontFamily: selectedFonts[4],
+                          color: selectedColors[4],
+                          fontSize: 20,
+                          textAlign: 'center',
+                          zIndex: 1, //text above image
+                        }}
+                      >
+                        {day}
+                      </Typography>
+                    </Box>
+                  )}
+                </Grid>
+              ))}
+            </Grid>
+          ))}
         </Grid>
-      ))
-    ) : null}
-  </Grid>
-  {rows.map((row, rowIndex) => (
-    <Grid container item key={rowIndex} spacing={0.5} justifyContent="center">
-      {row.map((day, index) => (
-        <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
-          {day === null ? (
-            <Typography variant="body1"></Typography>
-          ) : (
-            <Box
-              sx={{
-                position: 'relative',
-                width: 50,
-                height: 50,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                overflow: 'hidden',
-              }}
-            >
-              {selectedImageDayShape && (
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: '80%',
-                    height: '80%',
-                    objectFit: 'contain',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    backgroundColor: rgbaColorDayShape ? `rgba(${rgbaColorDayShape[0]}, ${rgbaColorDayShape[1]}, ${rgbaColorDayShape[2]}, ${rgbaColorDayShape[3]})` : 'transparent',
-                    maskImage: `url(${require(`../Assets/${selectedImageDayShape}`)})`,
-                    maskSize: 'contain',
-                    maskRepeat: 'no-repeat',
-                  }}
-                />
-              )}
-              <Typography
-                sx={{
-                  position: 'relative',
-                  fontFamily: selectedFonts[4],
-                  color: selectedColors[4],
-                  fontSize: 20,
-                  textAlign: 'center',
-                }}
-              >
-                {day}
-              </Typography>
-            </Box>
-          )}
-        </Grid>
-      ))}
-    </Grid>
-  ))}
-</Grid>
-
       </Box>
       <Goals />
     </Box>

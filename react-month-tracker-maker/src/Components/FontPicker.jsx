@@ -8,7 +8,9 @@ import '@fontsource/open-sans';
 import '@fontsource/kalam';
 import '@fontsource/spectral';
 import '@fontsource/abril-fatface';
+// Supports weights 100-900
 import '@fontsource-variable/exo';
+// Supports weights 100-900
 import '@fontsource-variable/comfortaa';
 import '@fontsource/poppins';
 import '@fontsource/bebas-neue';
@@ -47,20 +49,20 @@ function FontPicker() {
     'Bebas Neue', 
     'Bungee Hairline', 
     'Bungee Shade', 
-    'Cairo', 
-    'Comfortaa', 
-    'Dancing Script', 
+    'Cairo Variable', 
+    'Comfortaa Variable', 
+    'Dancing Script Variable', 
     'DM Serif Display', 
-    'Exo', 
-    'Inconsolata', 
-    'Josefin Sans', 
+    'Exo Variable', 
+    'Inconsolata Variable', 
+    'Josefin Sans Variable', 
     'Kalam', 
-    'Lexend', 
+    'Lexend Variable', 
     'Lobster', 
     'Megrim', 
     'Merriweather', 
-    'Montserrat', 
-    'Nunito', 
+    'Montserrat Variable', 
+    'Nunito Variable', 
     'Open Sans', 
     'Pacifico', 
     'Poppins', 
@@ -115,7 +117,7 @@ function FontPicker() {
               onChange={handleFont(index)} fullWidth>
                 {fonts.map((font) => (
                   <MenuItem key={font} value={font}>
-                    <Typography key={font} style={{ fontFamily: font }}>{font}</Typography>
+                    <Typography key={font} style={{ fontFamily: font }}>{font.replace(' Variable', '')}</Typography>
                   </MenuItem>
                 ))}
               </Select>

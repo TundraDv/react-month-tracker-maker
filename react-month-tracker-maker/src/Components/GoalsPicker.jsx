@@ -4,9 +4,7 @@ import EmojiPicker from 'emoji-picker-react';
 import { useGoalsContext } from '../Contexts/GoalsContext';
 
 function GoalsPicker() {
-  const { textfields, emojis, updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
-  const [columns, setColumns] = useState(3);
-  const [rows, setRows] = useState(4);
+  const { textfields, columns, rows, emojis, updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
   const [selectedEmojis, setSelectedEmojis] = useState(emojis);
   const [textFields, setTextFields] = useState(textfields);
   const [activeFieldIndex, setActiveFieldIndex] = useState(null);
@@ -28,13 +26,11 @@ function GoalsPicker() {
 
   const handleColumns = (event, value) => {
     setShowEmojiPicker(false); 
-    setColumns(value);
     updateColumns(value);
   };
 
   const handleRows = (event, value) => {
     setShowEmojiPicker(false); 
-    setRows(value);
     updateRows(value);
   };
 

@@ -1,11 +1,31 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const BackgroundImageContext = createContext();
 
 export const BackgroundImageProvider = ({ children }) => {
-  const [selectedImageBackground, setSelectedImage] = useState(null);
-  const [transparency, setTransparency] = useState(0.5);
-  const [backgroundColor, setBackgroundColor] = useState('#ffff');
+  const [selectedImageBackground, setSelectedImage] = useState(() => {
+    const saved = localStorage.getItem('selectedImageBackground');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [transparency, setTransparency] = useState(() => {
+    const saved = localStorage.getItem('transparency');
+    return saved ? JSON.parse(saved) : 0.5;
+  });
+
+  const [backgroundColor, setBackgroundColor] = useState(() => {
+    const saved = localStorage.getItem('backgroundColor');
+    return saved ? JSON.parse(saved) : '#fff';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('selectedImageBackground', JSON.stringify(selectedImageBackground));
+    localStorage.setItem('transparency', JSON.stringify(transparency));
+    localStorage.setItem('textfields', JSON.stringify(backgroundColor));
+  }, [
+    selectedImageBackground,
+    transparency,
+    backgroundColor,
+  ]);
 
   const updateSelectedImage = (image) => {
     setSelectedImage(image.includes("None.png") ? "blank.jpg" : image);

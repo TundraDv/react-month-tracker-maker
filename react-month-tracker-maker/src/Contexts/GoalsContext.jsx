@@ -1,12 +1,41 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const GoalsContext = createContext();
 
 export const GoalsProvider = ({ children }) => {
-  const [columns, setColumns] = useState(3);
-  const [rows, setRows] = useState(4);
-  const [textfields, setTextfields] = useState(Array(24).fill(null).map((_, index) => `${index+1}K Steps`));
-  const [emojis, setEmojis] = useState(Array(24).fill('❤️'));
+  const [columns, setColumns] = useState(() => {
+    const saved = localStorage.getItem('columns');
+    return saved ? JSON.parse(saved) : 3;
+  });
+
+  const [rows, setRows] = useState(() => {
+    const saved = localStorage.getItem('rows');
+    return saved ? JSON.parse(saved) : 3;
+  });
+
+  const [textfields, setTextfields] = useState(() => {
+    const saved = localStorage.getItem('textfields');
+    return saved ? JSON.parse(saved) : Array(24).fill(null).map((_, index) => `${index+1}K Steps`);
+  });
+  
+  const [emojis, setEmojis] = useState(() => {
+    const saved = localStorage.getItem('emojis');
+    return saved ? JSON.parse(saved) : Array(24).fill('❤️');
+  });
+
+  
+  useEffect(() => {
+    localStorage.setItem('columns', JSON.stringify(columns));
+    localStorage.setItem('rows', JSON.stringify(rows));
+    localStorage.setItem('textfields', JSON.stringify(textfields));
+    localStorage.setItem('emojis', JSON.stringify(emojis));
+
+  }, [
+    columns,
+    rows,
+    textfields,
+    emojis,
+  ]);
 
   const updateColumns = (columns) => {
     setColumns(columns);

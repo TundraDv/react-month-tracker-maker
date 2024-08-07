@@ -89,7 +89,7 @@ function Picker() {
         </CustomTabPanel>
       ))}
     </Box>
-          </Card>
+    </Card>
   );
 }
 
