@@ -3,7 +3,6 @@ import { Box, Grid, Container, useMediaQuery, useTheme } from "@mui/material";
 import Calendar from "../Components/Calendar";
 import Picker from "../Components/Picker";
 import Navbar from '../Components/Navbar'
-import ResetButton from "../Components/ResetButton";
 import { DayShapeProvider } from '../Contexts/DayShapeContext';
 import { BackgroundImageProvider } from '../Contexts/BackgroundImageContext';
 import { GoalsProvider } from '../Contexts/GoalsContext';
@@ -65,16 +64,6 @@ function MakerView() {
                     sx={{ minWidth: '300px' }}
                   >
                     <Picker />
-                  <Grid
-                    item
-                    xs={12} // Make it span the entire width
-                    container
-                    justifyContent="flex-start" // Align to the right
-                    alignItems="center"
-                    sx={{ marginTop: 2 }}
-                  >
-                    <ResetButton/>
-                  </Grid>
                   </Grid>
                 </Grid>
               </Container>

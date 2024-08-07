@@ -45,7 +45,7 @@ function ResetButton() {
     }
   };
   return (
-    <Button sx={{ width: { xs: "50%", sm: "250px" }, }} variant="outlined" onClick={handleResetButton}>
+    <Button sx={{ width: "50%" }} variant="outlined" onClick={handleResetButton}>
       Reset
     </Button>
   )

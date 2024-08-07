@@ -1,12 +1,14 @@
 import React, {useState, useContext} from "react";
 import PropTypes from 'prop-types';
-import {Tabs, Tab, Box, Card} from '@mui/material';
+import {Tabs, Tab, Box, Card, Stack} from '@mui/material';
 import ComponentsSwitch from './ComponentsSwitch';
 import ImagePicker from "./ImagePicker";
 import FontPicker from "./FontPicker";
 import GoalsPicker from "./GoalsPicker"
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
+import ResetButton from "../Components/ResetButton";
+import DownloadButton from "../Components/DownloadButton";
 
 import backgroundImages from "../Assets/BackgroundImage/backgroundImages.json"
 import daysShapes from "../Assets/DayShape/daysShapes.json"
@@ -61,35 +63,40 @@ function Picker() {
   };
 
   return (
-    <Card
-      sx={{
-        height: 650,
-        width: { xs: "100%", sm: "550px" },
-        overflow: 'auto',
-      }}
-    >
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-      
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto"
-          >
+    <Box>
+      <Card
+        sx={{
+          height: 650,
+          width: { xs: "100%", sm: "550px" },
+          overflow: 'auto',
+        }}
+      >
+        <Box sx={{ width: '100%' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="scrollable auto"
+              >
+              {Object.keys(ComponentsPickers).map((key, index) => (
+                <Tab key={index} label={key} {...a11yProps(index)} />
+              ))}
+            </Tabs>
+          </Box>
           {Object.keys(ComponentsPickers).map((key, index) => (
-            <Tab key={index} label={key} {...a11yProps(index)} />
+            <CustomTabPanel key={key} value={value} index={index}>
+              {ComponentsPickers[key]}
+            </CustomTabPanel>
           ))}
-        </Tabs>
-      </Box>
-      {Object.keys(ComponentsPickers).map((key, index) => (
-        <CustomTabPanel key={key} value={value} index={index}>
-          {ComponentsPickers[key]}
-        </CustomTabPanel>
-      ))}
+        </Box>
+      </Card>
+      <Stack direction={"row"} spacing={1} margin={1}>
+        <ResetButton/> <DownloadButton id_CardElement="CustomTracker" />
+      </Stack>
     </Box>
-    </Card>
   );
 }
 
