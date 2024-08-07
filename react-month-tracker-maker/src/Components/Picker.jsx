@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import {Tabs, Tab, Box, Card, Stack} from '@mui/material';
 import ComponentsSwitch from './ComponentsSwitch';
@@ -7,6 +7,7 @@ import FontPicker from "./FontPicker";
 import GoalsPicker from "./GoalsPicker"
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
+import { useComponentsContext } from '../Contexts/ComponentsContext';
 import ResetButton from "../Components/ResetButton";
 import DownloadButton from "../Components/DownloadButton";
 
@@ -47,6 +48,8 @@ function Picker() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const { titleTextContext } = useComponentsContext();
+
 
   const ComponentsPickers = {
     "Components": <ComponentsSwitch/>,
@@ -94,7 +97,7 @@ function Picker() {
         </Box>
       </Card>
       <Stack direction={"row"} spacing={1} margin={1}>
-        <ResetButton/> <DownloadButton id_CardElement="CustomTracker" />
+        <ResetButton/> <DownloadButton id_CardElement="CustomTracker" title={titleTextContext} />
       </Stack>
     </Box>
   );
