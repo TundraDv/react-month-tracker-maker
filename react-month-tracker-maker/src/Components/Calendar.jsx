@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Grid from '@mui/material/Grid';
 import chroma from "chroma-js";
 import { Typography, Card, Box } from '@mui/material';
@@ -6,7 +6,13 @@ import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import { useFontContext } from "../Contexts/FontContext";
+import { hexToCSSFilter, HexToCssConfiguration } from 'hex-to-css-filter';
 import Goals from "./Goals";
+
+// const config: HexToCssConfiguration = {
+//   acceptanceLossPercentage: 1,
+//   maxChecks: 10,
+// };
 
 function generateDaysArray(selectedDate) {
   const daysInMonth = selectedDate.daysInMonth();
@@ -32,13 +38,11 @@ function Calendar() {
   const { selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
-  
-  const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
-  const rgbaColorDayShape = chroma(backgroundColorDayShape).alpha(transparencyDayShape).rgba();
 
+  const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
   const days = generateDaysArray(dateValueContext);
   const startDayOffset = getStartDayOffset(dateValueContext, firstDayContext);
-
+  console.log(selectedImageDayShape)
   const rows = [];
   let currentRow = [];
 
@@ -58,7 +62,7 @@ function Calendar() {
     const emptyCells = Array(7 - currentRow.length).fill(null);
     rows.push([...currentRow, ...emptyCells]);
   } else if (rows.length === 0) {
-    rows.push(Array(7).fill(null)); // Handle edge case where month starts and ends on the same week
+    rows.push(Array(7).fill(null));
   }
 
   const weekdays = getWeekDays(firstDayContext);
@@ -121,9 +125,7 @@ function Calendar() {
             <Grid container item key={rowIndex} spacing={0.5} justifyContent="center">
               {row.map((day, index) => (
                 <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
-                  {day === null ? (
-                    <Typography variant="body1"></Typography>
-                  ) : (
+                  {day === null ? ( null ) : (
                     <Box
                       sx={{
                         position: 'relative',
@@ -135,23 +137,25 @@ function Calendar() {
                         overflow: 'hidden',
                       }}
                     >
-                      {selectedImageDayShape && (
-                        <Box
-                          sx={{
-                            position: 'absolute',
-                            width: '80%',
-                            height: '80%',
-                            objectFit: 'contain',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            backgroundColor: rgbaColorDayShape ? `rgba(${rgbaColorDayShape[0]}, ${rgbaColorDayShape[1]}, ${rgbaColorDayShape[2]}, ${rgbaColorDayShape[3]})` : 'transparent',
-                            maskImage: `url(${require(`../Assets/${selectedImageDayShape}`)})`,
-                            maskSize: 'contain',
-                            maskRepeat: 'no-repeat',
-                          }}
-                        />
-                      )}
+                        {selectedImageDayShape ? (
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              width: '80%',
+                              height: '80%',
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)',
+                              backgroundImage: `url(${require(`../Assets/${selectedImageDayShape}`)})`,
+                              backgroundSize: 'contain',
+                              backgroundRepeat: 'no-repeat',
+                              backgroundPosition: 'center',
+                              filter: hexToCSSFilter(backgroundColorDayShape).filter,
+                              opacity: transparencyDayShape
+                            }}
+                          />
+
+                        ) : null }
                       <Typography
                         sx={{
                           position: 'relative',
@@ -159,7 +163,7 @@ function Calendar() {
                           color: selectedColors[4],
                           fontSize: 20,
                           textAlign: 'center',
-                          zIndex: 1, //text above image
+                          zIndex: 1, 
                         }}
                       >
                         {day}

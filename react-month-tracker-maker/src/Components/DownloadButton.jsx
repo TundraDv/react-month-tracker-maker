@@ -1,17 +1,23 @@
 import React from "react";
 import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image-more';
 import { Button } from '@mui/material';
 
 function DownloadButton({ id_CardElement, title }) {
   const handleDownload = () => {
     const cardElement = document.getElementById(id_CardElement);
-
-    html2canvas(cardElement).then((canvas) => {
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = `${title}-star-tracker-maker.png`;
-      link.click();
-    });
+    domtoimage.toPng(cardElement, { 
+      bgcolor: 'null', 
+      quality: 1 
+    }).then((dataUrl) => {
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = `${title}-star-tracker-maker.png`;
+        link.click();
+      })
+      .catch((error) => {
+        console.error('Error capturing image:', error);
+      });
   };
 
   return (

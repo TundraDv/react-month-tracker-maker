@@ -45,8 +45,11 @@
     "@testing-library/user-event": "^13.5.0",
     "chroma-js": "^2.6.0",
     "dayjs": "^1.11.12",
+    "dom-to-image": "^2.6.0",
+    "dom-to-image-more": "^3.3.1",
     "emoji-dictionary": "^1.0.11",
     "emoji-picker-react": "^4.11.1",
+    "hex-to-css-filter": "^5.4.0",
     "html2canvas": "^1.4.1",
     "moment": "^2.30.1",
     "node-emoji": "^2.1.3",
@@ -55,6 +58,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.0",
     "react-scripts": "5.0.1",
+    "react-svg": "^16.1.34",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -83,6 +87,7 @@
     ]
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "prettier": "3.3.3"
   }
 }
