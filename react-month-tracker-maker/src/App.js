@@ -1,11 +1,13 @@
 import * as React from "react";
-import MakerView from "./Views/MakerView";
-import ErrorView from "./Views/ErrorView";
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import MakerView from "./Views/MakerView";
+import ErrorView from "./Views/ErrorView";
+import TemplatesView from "./Views/TemplatesView";
+import AboutView from "./Views/AboutView";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
   {
     path: "/month",
     element: <MakerView/>,
+  },
+  {
+    path: "/templates",
+    element: <TemplatesView/>,
+  },
+  {
+    path: "/about",
+    element: <AboutView/>,
   },
   {
     path: "*", // Catch-all route for undefined paths

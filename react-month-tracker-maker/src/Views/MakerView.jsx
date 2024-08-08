@@ -22,7 +22,6 @@ function MakerView() {
               <Navbar/>
               <Container
                 sx={{
-                  // minHeight: '100vh',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',

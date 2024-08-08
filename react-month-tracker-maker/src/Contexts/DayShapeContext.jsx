@@ -20,7 +20,7 @@ export const DayShapeProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('selectedImageDayShape', JSON.stringify(selectedImageDayShape));
     localStorage.setItem('transparencyDayShape', JSON.stringify(transparency));
-    localStorage.setItem('textfieldsDayShape', JSON.stringify(backgroundColor));
+    localStorage.setItem('backgroundColorDayShape', JSON.stringify(backgroundColor));
   }, [
     selectedImageDayShape,
     transparency,

@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [languageAnchorEl, setLanguageAnchorEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
@@ -32,6 +33,19 @@ const Navbar = () => {
   const handleMenuItemClick = (path) => {
     navigate(path);
     handleMenuClose();
+  };
+
+  const handleLanguageClick = (event) => {
+    setLanguageAnchorEl(event.currentTarget);
+  };
+
+  const handleLanguageClose = () => {
+    setLanguageAnchorEl(null);
+  };
+
+  const handleLanguageChange = (language) => {
+    console.log(`Language changed to: ${language}`);
+    handleLanguageClose();
   };
 
   return (
@@ -62,15 +76,33 @@ const Navbar = () => {
             >
               <MenuItem onClick={() => handleMenuItemClick("/")}>Maker</MenuItem>
               <MenuItem onClick={() => handleMenuItemClick("/templates")}>Templates</MenuItem>
-              <MenuItem onClick={() => handleMenuItemClick("/language")}>Language</MenuItem>
+              <MenuItem onClick={handleLanguageClick}>Language</MenuItem>
               <MenuItem onClick={() => handleMenuItemClick("/about")}>About</MenuItem>
+            </Menu>
+            <Menu
+              anchorEl={languageAnchorEl}
+              open={Boolean(languageAnchorEl)}
+              onClose={handleLanguageClose}
+              PaperProps={{ sx: { width: '200px' } }}
+            >
+              <MenuItem onClick={() => handleLanguageChange('en')}>End</MenuItem>
+              <MenuItem onClick={() => handleLanguageChange('es')}>Esp</MenuItem>
             </Menu>
           </>
         ) : (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Button color="inherit" onClick={() => handleMenuItemClick("/")}>Maker</Button>
             <Button color="inherit" onClick={() => handleMenuItemClick("/templates")}>Templates</Button>
-            <Button color="inherit" onClick={() => handleMenuItemClick("/language")}>Language</Button>
+            <Button color="inherit" onClick={handleLanguageClick}>Language</Button>
+            <Menu
+              anchorEl={languageAnchorEl}
+              open={Boolean(languageAnchorEl)}
+              onClose={handleLanguageClose}
+              sx={{ width: '200px' }}
+            >
+              <MenuItem onClick={() => handleLanguageChange('en')}>English</MenuItem>
+              <MenuItem onClick={() => handleLanguageChange('es')}>Español</MenuItem>
+            </Menu>
             <Button color="inherit" onClick={() => handleMenuItemClick("/about")}>About</Button>
           </Box>
         )}
