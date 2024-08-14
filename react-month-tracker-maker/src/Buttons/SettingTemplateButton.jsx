@@ -14,8 +14,8 @@ const SettingTemplateButton = ({ index, actionType }) => {
   const { templatesData } = useTemplates();
   const dataDefault = actionType === 'reset' ? templatesData[0] : templatesData[index];
   
-  const { updateSelectedImage, updateTransparency, updateBackgroundColor } = useBackgroundImageContext();
-  const { updateSelectedImage: updateSelectedImageDayShape, updateTransparency: updateTransparencyDayShape, updateBackgroundColor: updateBackgroundColorDayShape } = useDayShapeContext();
+  const { updateSelectedLocalImage, updateSelectedImage, updateTransparency, updateBackgroundColor } = useBackgroundImageContext();
+  const { updateSelectedLocalImage: updateSelectedLocalImageDayShape, updateSelectedImage: updateSelectedImageDayShape, updateTransparency: updateTransparencyDayShape, updateBackgroundColor: updateBackgroundColorDayShape } = useDayShapeContext();
   const { updateTitleTextContext, updateTitleContext, updateYearContext, updateDaysNameContext, updateMonthContext, updateFirstDayContext, updateHeightContext } = useComponentsContext();
   const { updateSelectedFonts, updateSelectedColors } = useFontContext();
   const { updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
@@ -23,6 +23,9 @@ const SettingTemplateButton = ({ index, actionType }) => {
 
   const handleClick = () => {
     if (dataDefault) {
+      updateSelectedLocalImage(null);
+      updateBackgroundColorDayShape(null);
+
       updateSelectedImage(dataDefault.selectedImageBackground);
       updateTransparency(dataDefault.transparency);
       updateBackgroundColor(dataDefault.backgroundColor);
