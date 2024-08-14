@@ -1,11 +1,7 @@
 import React from "react";
 import { Grid, Stack, Typography, Box } from "@mui/material"
-import { useGoalsContext } from '../Contexts/GoalsContext';
-import { useFontContext } from "../Contexts/FontContext";
 
-function Goals() {
-  const { columns, rows, textfields, emojis } = useGoalsContext();
-  const { selectedFonts, selectedColors } = useFontContext();
+function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColors} ) {
   const lastFont = selectedFonts[selectedFonts.length - 2];
   const lastColor = selectedColors[selectedColors.length - 2];
 

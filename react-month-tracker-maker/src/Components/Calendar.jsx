@@ -1,12 +1,10 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import chroma from "chroma-js";
+import dayjs from 'dayjs';
 import { Typography, Card, Box } from '@mui/material';
-import { useDayShapeContext } from '../Contexts/DayShapeContext';
-import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
-import { useComponentsContext } from '../Contexts/ComponentsContext';
 import { useLanguage } from '../Contexts/LanguageContext';
-import { useFontContext } from "../Contexts/FontContext";
+
 import { hexToCSSFilter } from 'hex-to-css-filter';
 
 import Goals from "./Goals";
@@ -25,22 +23,36 @@ function getWeekDays(startDay, weedays) {
   return [...weedays.slice(startDay), ...weedays.slice(0, startDay)];
 }
 
-function Calendar() {
-  const {
-    selectedImageDayShape,
-    transparency: transparencyDayShape,
-    backgroundColor: backgroundColorDayShape
-  } = useDayShapeContext();
-  const { selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
-  const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
-  const { selectedFonts, selectedColors } = useFontContext();
+function Calendar({ 
+  selectedImageDayShape, 
+  transparencyDayShape,
+  backgroundColorDayShape,
+  selectedImageBackground,
+  transparency,
+  backgroundColor,
+  titleTextContext,
+  heightContext,
+  titleContext,
+  yearContext,
+  monthContext,
+  daysNameContext,
+  firstDayContext,
+  dateValueContext = dayjs(),
+  columns,
+  rows,
+  textfields,
+  emojis,
+  selectedFonts,
+  selectedColors,
+  indexCard = 0}) {
+
   const { translate } = useLanguage();
 
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
   const days = generateDaysArray(dateValueContext);
   const startDayOffset = getStartDayOffset(dateValueContext, firstDayContext);
-  console.log(selectedImageDayShape)
-  const rows = [];
+
+  const rowsCalendar = [];
   let currentRow = [];
 
   if (startDayOffset > 0) {
@@ -50,16 +62,16 @@ function Calendar() {
   days.forEach((day, index) => {
     currentRow.push(day);
     if (currentRow.length === 7) {
-      rows.push(currentRow);
+      rowsCalendar.push(currentRow);
       currentRow = [];
     }
   });
 
   if (currentRow.length > 0) {
     const emptyCells = Array(7 - currentRow.length).fill(null);
-    rows.push([...currentRow, ...emptyCells]);
-  } else if (rows.length === 0) {
-    rows.push(Array(7).fill(null));
+    rowsCalendar.push([...currentRow, ...emptyCells]);
+  } else if (rowsCalendar.length === 0) {
+    rowsCalendar.push(Array(7).fill(null));
   }
 
   const weekdays = getWeekDays(firstDayContext, translate("weekdays"));
@@ -75,7 +87,7 @@ function Calendar() {
       }}
       >
     <Box
-      id="CustomTracker"
+      id={`CustomTracker-${indexCard}`}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -118,7 +130,7 @@ function Calendar() {
               ))
             ) : null}
           </Grid>
-          {rows.map((row, rowIndex) => (
+          {rowsCalendar.map((row, rowIndex) => (
             <Grid container item key={rowIndex} spacing={0.5} justifyContent="center">
               {row.map((day, index) => (
                 <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
@@ -173,7 +185,7 @@ function Calendar() {
           ))}
         </Grid>
       </Box>
-      <Goals />
+      <Goals columns={columns} rows={rows} textfields={textfields} emojis={emojis} selectedFonts={selectedFonts} selectedColors={selectedColors}/>
     </Box>
     </Card>
   );

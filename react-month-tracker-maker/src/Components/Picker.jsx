@@ -9,8 +9,8 @@ import TopImagePicker from "../Components/TopImagePicker";
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
-import ResetButton from "../Components/ResetButton";
-import DownloadButton from "../Components/DownloadButton";
+import SettingTemplateButton from "../Buttons/SettingTemplateButton";
+import DownloadButton from "../Buttons/DownloadButton";
 import backgroundImages from "../Assets/BackgroundImage/backgroundImages.json";
 import daysShapes from "../Assets/DayShape/daysShapes.json";
 import { useLanguage } from '../Contexts/LanguageContext';
@@ -84,8 +84,8 @@ function Picker() {
         </Box>
       </Card>
       <Stack direction={"row"} spacing={1} margin={1}>
-        <ResetButton />
-        <DownloadButton id_CardElement="CustomTracker" title={titleTextContext} />
+        <SettingTemplateButton index={0} actionType='reset' />
+        <DownloadButton id_CardElement="CustomTracker-0" title={titleTextContext} />
       </Stack>
     </Box>
   );

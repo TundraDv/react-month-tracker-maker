@@ -67,6 +67,14 @@
     "en": "Reset",
     "es": "Resetear"
   },
+  "edit-button": {
+    "en": "Edit",
+    "es": "Editar"
+  },
+  "config-button": {
+    "en": "Download CONFIG",
+    "es": "Descargar CONFIG"
+  },
   "top-images": {
     "en": "Amount of pictures",
     "es": "Cantidad de imágenes"
@@ -82,6 +90,14 @@
   "navbar-templates": {
     "en": "Templates",
     "es": "Plantillas"
+  },
+  "about-body": {
+    "en": "Hello, I'm the creator of this page. I enjoy building web applications and sharing knowledge with the community.",
+    "es": "Hola, soy el creador esta página. Disfruto creando aplicaciones web y compartiendo conocimientos con la comunidad."
+  },
+  "about-body2": {
+    "en": "Feel free to make the trackers you need.",
+    "es": "Se libre de hacer los trackers que quieras."
   },
   "error-h1": {
     "en": "Oops! Something went wrong.",
