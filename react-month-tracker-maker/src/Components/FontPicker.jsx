@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Select, Box, MenuItem, Grid, Typography } from "@mui/material";
 import { useFontContext } from "../Contexts/FontContext";
 import { HexColorPicker } from "react-colorful";
+import { useLanguage } from '../Contexts/LanguageContext';
 import '@fontsource/roboto';
 import '@fontsource/lobster';
 import '@fontsource/open-sans';
@@ -43,6 +44,7 @@ import '@fontsource/bungee-hairline';
 
 function FontPicker() {
   const { selectedFonts, updateSelectedFonts, selectedColors, updateSelectedColors } = useFontContext();
+  const { translate } = useLanguage();
   const fonts = [
     'Abril Fatface', 
     'Audiowide', 
@@ -72,7 +74,7 @@ function FontPicker() {
     'Silkscreen', 
     'Spectral'
   ];  
-  const parts = ['Title', 'Month', 'Year', 'Days Name', 'Days Numbers', 'Goals' , 'All'];
+  const parts = translate("fonts-label");
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleFont = (index) => (event) => {

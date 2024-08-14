@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import dayjs from 'dayjs';
 import {Box, Switch, Typography, Stack, Slider,TextField, InputLabel, FormControl, Select, MenuItem , FormControlLabel, FormGroup } from "@mui/material"
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useComponentsContext } from "../Contexts/ComponentsContext"
+import { useLanguage } from '../Contexts/LanguageContext';
 
 function ComponentsSwitch() {
   const { titleTextContext, 
@@ -23,6 +24,10 @@ function ComponentsSwitch() {
           updateTitleTextContext,
           updateMonthContext,
           updateHeightContext} = useComponentsContext();
+
+  const { locale, translate, calendarKey } = useLanguage();
+  const weekdays = translate("weekdays-full");
+
   const handleDate = (newValue) => {
     updateDateValueContext(newValue);
   }
@@ -47,13 +52,17 @@ function ComponentsSwitch() {
   const handleHeight = (event) => {
     updateHeightContext(event.target.value)
   }
+  useEffect(() => {
+    dayjs.locale(locale);
+  }, [locale]);
+
   return (
     <Box>
       <FormGroup>
       <FormControl fullWidth>
         <TextField
             id="title-label"
-            label="Title Tracker"
+            label={translate("title-name")}
             variant="outlined"
             onChange={handleTitleText}
             value={titleTextContext}
@@ -63,52 +72,51 @@ function ComponentsSwitch() {
           <FormControlLabel
           control={
             <Switch checked={titleContext} onChange={handleTitle} name="title" /> }
-          label="Show title" />
+          label={translate("title-label")} />
           <FormControlLabel
             control={
           <Switch checked={yearContext} onChange={handleYear} name="year" />}
-          label="Show year" />
+          label={translate("year-label")}  />
           <FormControlLabel
             control={
           <Switch checked={daysNameContext} onChange={handleDaysName} name="days" />}
-          label="Show days names" />
+          label={translate("days-label")}  />
           <FormControlLabel
             control={
           <Switch checked={monthContext} onChange={handleMonthName} name="month" />}
-          label="Show month name" />
+          label={translate("month-label")}  />
         </Stack>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-              views={['year', 'month']}
-              label="Year and Month"
-              minDate={dayjs('2010-01-01')}
-              maxDate={dayjs('2050-12-01')}
-              value={dateValueContext}
-              sx={{ marginY: 2 }}
-              onChange={handleDate}
-              renderInput={(params) => <TextField {...params} helperText={null} />}
-              />
+          key={calendarKey}
+          views={['year', 'month']}
+          label={translate("date-label")}
+          minDate={dayjs('2010-01-01')}
+          maxDate={dayjs('2050-12-01')}
+          value={dateValueContext}
+          sx={{ marginY: 2 }}
+          onChange={handleDate}
+          renderInput={(params) => <TextField {...params} helperText={null} />}
+          />
         </LocalizationProvider>
         <FormControl fullWidth>
-          <InputLabel id="first-day-picker-label">First Day of the Week</InputLabel>
+          <InputLabel id="first-day-picker-label">{translate("weekday-label")}</InputLabel>
           <Select
             labelId="first-day-picker-label"
             id="first-day-picker"
             value={firstDayContext}
             onChange={handleFirstDay}
-            label="First Day of the Week"
+            label={translate("weekday-label")}
           >
-            <MenuItem value={0}>Monday</MenuItem>
-            <MenuItem value={1}>Tuesday</MenuItem>
-            <MenuItem value={2}>Wednesday</MenuItem>
-            <MenuItem value={3}>Thursday</MenuItem>
-            <MenuItem value={4}>Friday</MenuItem>
-            <MenuItem value={5}>Saturday</MenuItem>
-            <MenuItem value={6}>Sunday</MenuItem>
+            {weekdays.map((item, index) => (
+              <MenuItem key={index} value={index}>
+                {item}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <Typography sx={{ marginY: 2 }}>
-          Tracker's Height
+        {translate("height-label")}
         </Typography>
         <Slider
             aria-label="height"

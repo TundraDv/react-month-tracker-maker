@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Box, ImageList, ImageListItem, Slider, Grid, Typography } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
+import { useLanguage } from '../Contexts/LanguageContext';
 
 function ImagePicker({ imageData, context }) {
-  const [selectedId, setSelectedId] = useState(1);
   const [activeColorPicker, setActiveColorPicker] = useState(false);
   const { updateSelectedImage, 
-          updateTransparency, 
-          updateBackgroundColor,
-          transparency, 
-          backgroundColor } = context();
-
+    updateTransparency, 
+    updateBackgroundColor,
+    transparency, 
+    backgroundColor } = context();
+  
+  const [selectedId, setSelectedId] = useState(1);
+  const { translate } = useLanguage();
   const handleImageClick = (image) => {
     setSelectedId(image.id);
     updateSelectedImage(image.src);
@@ -32,7 +34,7 @@ function ImagePicker({ imageData, context }) {
   return (
     <Box sx={{ position: 'relative' }}>
     <Typography >
-      Transparency & Color
+      {translate("color-label")}
     </Typography>
       <Grid container alignItems="center" spacing={2} sx={{ marginBottom: 1 }}>
         <Grid item xs={10.5}>

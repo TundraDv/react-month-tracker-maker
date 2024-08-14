@@ -1,8 +1,11 @@
 import React from "react";
 import domtoimage from 'dom-to-image-more';
+import { useLanguage } from '../Contexts/LanguageContext';
 import { Button } from '@mui/material';
 
 function DownloadButton({ id_CardElement, title }) {
+  const { translate } = useLanguage();
+
   const handleDownload = () => {
     const cardElement = document.getElementById(id_CardElement);
     domtoimage.toPng(cardElement, { 
@@ -21,7 +24,7 @@ function DownloadButton({ id_CardElement, title }) {
 
   return (
     <Button sx={{ width: "50%" }} variant="contained" onClick={handleDownload}>
-      Download Image
+      {translate("download-button")}
     </Button>
   )
 }

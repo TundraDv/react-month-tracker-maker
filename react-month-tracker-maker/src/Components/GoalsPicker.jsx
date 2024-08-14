@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { Stack, Slider, Grid, TextField, IconButton } from "@mui/material";
 import EmojiPicker from 'emoji-picker-react';
 import { useGoalsContext } from '../Contexts/GoalsContext';
+import { useLanguage } from '../Contexts/LanguageContext';
 
 function GoalsPicker() {
   const { textfields, columns, rows, emojis, updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
   const [selectedEmojis, setSelectedEmojis] = useState(emojis);
   const [activeFieldIndex, setActiveFieldIndex] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false); 
+  const { translate } = useLanguage();
 
   const activeFieldIndexRef = useRef(activeFieldIndex);
 
@@ -44,12 +46,12 @@ function GoalsPicker() {
 
   const handleEmojiClick = (index) => {
     setActiveFieldIndex(index);
-    setShowEmojiPicker(true); // Show emoji picker when an emoji icon is clicked
+    setShowEmojiPicker(true); 
   };
 
   return (
     <Stack spacing={0}>
-      Columns
+      {translate("column-label")}
       <Slider
         aria-label="Columns"
         value={columns}
@@ -60,7 +62,7 @@ function GoalsPicker() {
         valueLabelDisplay="auto"
         onChange={handleColumns}
       />
-      Rows
+      {translate("row-label")}
       <Slider
         aria-label="Rows"
         value={rows}

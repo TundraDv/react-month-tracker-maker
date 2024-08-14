@@ -1,18 +1,19 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import {Tabs, Tab, Box, Card, Stack} from '@mui/material';
+import { Tabs, Tab, Box, Card, Stack } from '@mui/material';
 import ComponentsSwitch from './ComponentsSwitch';
 import ImagePicker from "./ImagePicker";
 import FontPicker from "./FontPicker";
-import GoalsPicker from "./GoalsPicker"
+import GoalsPicker from "./GoalsPicker";
+import TopImagePicker from "../Components/TopImagePicker";
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import ResetButton from "../Components/ResetButton";
 import DownloadButton from "../Components/DownloadButton";
-
-import backgroundImages from "../Assets/BackgroundImage/backgroundImages.json"
-import daysShapes from "../Assets/DayShape/daysShapes.json"
+import backgroundImages from "../Assets/BackgroundImage/backgroundImages.json";
+import daysShapes from "../Assets/DayShape/daysShapes.json";
+import { useLanguage } from '../Contexts/LanguageContext';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,72 +37,55 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 function Picker() {
-  const [value, setValue] = useState(4);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [tab, setTab] = useState(0);
   const { titleTextContext } = useComponentsContext();
+  const { translate } = useLanguage();
 
+  const componentNames = translate("tabs-names");
 
-  const ComponentsPickers = {
-    "Components": <ComponentsSwitch/>,
-    "Background": <ImagePicker imageData={backgroundImages} cols={3} context={useBackgroundImageContext} />,
-    "Days Shape": <ImagePicker imageData={daysShapes} cols={3} context={useDayShapeContext} />,
-    "Goals": <GoalsPicker />,
-    "Fonts": <FontPicker />,
-    "Top Left": "Top Left",
-    "Top Right": "Top Right",
-    "Top Center": "Top Center",
-    "Bottom Left": "Bottom Left",
-    "Bottom Right": "Bottom Right",
-    "Bottom Center": "Bottom Center",
+  const componentList = [
+    <ComponentsSwitch />,
+    <ImagePicker imageData={backgroundImages} cols={3} context={useBackgroundImageContext} />,
+    <ImagePicker imageData={daysShapes} cols={3} context={useDayShapeContext} />,
+    <GoalsPicker />,
+    <FontPicker />,
+    <TopImagePicker />,
+    "Top Right", // Placeholder if you need something here
+    "Top Center" // Placeholder if you need something here
+  ];
+
+  const handleChange = (event, newValue) => {
+    setTab(newValue);
   };
 
   return (
-    <Box sx={{
-      width: { xs: "100%", sm: "550px" },
-      overflow: 'auto',
-    }}
-    >
-      <Card
-        sx={{
-          height: 650,
-          width: { xs: "100%", sm: "550px" },
-          overflow: 'auto',
-        }}
-      >
+    <Box sx={{ width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
+      <Card sx={{ height: 650, width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          
             <Tabs
-              value={value}
+              value={tab}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons="auto"
               aria-label="scrollable auto"
-              >
-              {Object.keys(ComponentsPickers).map((key, index) => (
-                <Tab key={index} label={key} {...a11yProps(index)} />
+            >
+              {componentNames.map((name, index) => (
+                <Tab key={index} label={name} value={index} />
               ))}
             </Tabs>
           </Box>
-          {Object.keys(ComponentsPickers).map((key, index) => (
-            <CustomTabPanel key={key} value={value} index={index}>
-              {ComponentsPickers[key]}
+          {componentList.map((component, index) => (
+            <CustomTabPanel key={index} value={tab} index={index}>
+              {component}
             </CustomTabPanel>
           ))}
         </Box>
       </Card>
       <Stack direction={"row"} spacing={1} margin={1}>
-        <ResetButton/> <DownloadButton id_CardElement="CustomTracker" title={titleTextContext} />
+        <ResetButton />
+        <DownloadButton id_CardElement="CustomTracker" title={titleTextContext} />
       </Stack>
     </Box>
   );

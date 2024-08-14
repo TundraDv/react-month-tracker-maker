@@ -14,8 +14,11 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Sta from '../Assets/watashiwasta-bgremoved.png';
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from '../Contexts/LanguageContext';
+
 
 const Navbar = () => {
+  const { updateLocale, translate } = useLanguage();
   const [anchorEl, setAnchorEl] = useState(null);
   const [languageAnchorEl, setLanguageAnchorEl] = useState(null);
   const theme = useTheme();
@@ -44,7 +47,7 @@ const Navbar = () => {
   };
 
   const handleLanguageChange = (language) => {
-    console.log(`Language changed to: ${language}`);
+    updateLocale(language);
     handleLanguageClose();
   };
 
@@ -75,9 +78,9 @@ const Navbar = () => {
               PaperProps={{ sx: { width: '200px' } }}
             >
               <MenuItem onClick={() => handleMenuItemClick("/")}>Maker</MenuItem>
-              <MenuItem onClick={() => handleMenuItemClick("/templates")}>Templates</MenuItem>
-              <MenuItem onClick={handleLanguageClick}>Language</MenuItem>
-              <MenuItem onClick={() => handleMenuItemClick("/about")}>About</MenuItem>
+              <MenuItem onClick={() => handleMenuItemClick("/templates")}>{translate("navbar-templates")}</MenuItem>
+              <MenuItem onClick={handleLanguageClick}>{translate("navbar-language")}</MenuItem>
+              <MenuItem onClick={() => handleMenuItemClick("/about")}>{translate("navbar-about")}</MenuItem>
             </Menu>
             <Menu
               anchorEl={languageAnchorEl}
@@ -85,15 +88,15 @@ const Navbar = () => {
               onClose={handleLanguageClose}
               PaperProps={{ sx: { width: '200px' } }}
             >
-              <MenuItem onClick={() => handleLanguageChange('en')}>End</MenuItem>
-              <MenuItem onClick={() => handleLanguageChange('es')}>Esp</MenuItem>
+              <MenuItem onClick={() => handleLanguageChange('en')}>English</MenuItem>
+              <MenuItem onClick={() => handleLanguageChange('es')}>Español</MenuItem>
             </Menu>
           </>
         ) : (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Button color="inherit" onClick={() => handleMenuItemClick("/")}>Maker</Button>
-            <Button color="inherit" onClick={() => handleMenuItemClick("/templates")}>Templates</Button>
-            <Button color="inherit" onClick={handleLanguageClick}>Language</Button>
+            <Button color="inherit" onClick={() => handleMenuItemClick("/templates")}>{translate("navbar-templates")}</Button>
+            <Button color="inherit" onClick={handleLanguageClick}>{translate("navbar-language")}</Button>
             <Menu
               anchorEl={languageAnchorEl}
               open={Boolean(languageAnchorEl)}
@@ -103,7 +106,7 @@ const Navbar = () => {
               <MenuItem onClick={() => handleLanguageChange('en')}>English</MenuItem>
               <MenuItem onClick={() => handleLanguageChange('es')}>Español</MenuItem>
             </Menu>
-            <Button color="inherit" onClick={() => handleMenuItemClick("/about")}>About</Button>
+            <Button color="inherit" onClick={() => handleMenuItemClick("/about")}>{translate("navbar-about")}</Button>
           </Box>
         )}
       </Toolbar>

@@ -1,12 +1,18 @@
 import React from "react";
 import Navbar from '../Components/Navbar'
+import { useLanguage } from '../Contexts/LanguageContext';
 
-const ErrorView = () => (
+const ErrorView = () => {
+  const { translate } = useLanguage();
+
+  return (
   <div>
     <Navbar/>
-    <h1>Oops! Something went wrong.</h1>
-    <p>We're sorry, but the page you're looking for cannot be found or an error has occurred.</p>
+    <h1>{translate("error-h1")}</h1>
+    <p>{translate("error-p")}</p>
   </div>
-);
+
+  )
+};
 
 export default ErrorView;

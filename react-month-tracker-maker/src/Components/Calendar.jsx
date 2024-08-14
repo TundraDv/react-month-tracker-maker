@@ -1,18 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Grid from '@mui/material/Grid';
 import chroma from "chroma-js";
 import { Typography, Card, Box } from '@mui/material';
 import { useDayShapeContext } from '../Contexts/DayShapeContext';
 import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
+import { useLanguage } from '../Contexts/LanguageContext';
 import { useFontContext } from "../Contexts/FontContext";
-import { hexToCSSFilter, HexToCssConfiguration } from 'hex-to-css-filter';
-import Goals from "./Goals";
+import { hexToCSSFilter } from 'hex-to-css-filter';
 
-// const config: HexToCssConfiguration = {
-//   acceptanceLossPercentage: 1,
-//   maxChecks: 10,
-// };
+import Goals from "./Goals";
 
 function generateDaysArray(selectedDate) {
   const daysInMonth = selectedDate.daysInMonth();
@@ -24,9 +21,8 @@ function getStartDayOffset(selectedDate, startDay) {
   return (firstDay - startDay + 7) % 7;
 }
 
-function getWeekDays(startDay) {
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  return [...days.slice(startDay), ...days.slice(0, startDay)];
+function getWeekDays(startDay, weedays) {
+  return [...weedays.slice(startDay), ...weedays.slice(0, startDay)];
 }
 
 function Calendar() {
@@ -38,6 +34,7 @@ function Calendar() {
   const { selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
+  const { translate } = useLanguage();
 
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
   const days = generateDaysArray(dateValueContext);
@@ -65,7 +62,7 @@ function Calendar() {
     rows.push(Array(7).fill(null));
   }
 
-  const weekdays = getWeekDays(firstDayContext);
+  const weekdays = getWeekDays(firstDayContext, translate("weekdays"));
 
   return (
     <Card

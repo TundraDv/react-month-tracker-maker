@@ -8,6 +8,8 @@ import MakerView from "./Views/MakerView";
 import ErrorView from "./Views/ErrorView";
 import TemplatesView from "./Views/TemplatesView";
 import AboutView from "./Views/AboutView";
+import Navbar from './Components/Navbar'
+import { LanguageProvider } from './Contexts/LanguageContext'
 
 const router = createBrowserRouter([
   {
@@ -27,16 +29,18 @@ const router = createBrowserRouter([
     element: <AboutView/>,
   },
   {
-    path: "*", // Catch-all route for undefined paths
+    path: "*", 
     element: <ErrorView />,
   },
 ])
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+    <LanguageProvider>
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
+    </LanguageProvider>
   );
 }
 

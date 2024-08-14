@@ -1,0 +1,94 @@
+{
+  "title-name": {
+    "en": "Title Tracker",
+    "es": "Nombre Tracker"
+  },
+  "title-label": {
+    "en": "Show title",
+    "es": "Mostrar nombre"
+  },
+  "year-label": {
+    "en": "Show year",
+    "es": "Mostrar año"
+  },
+  "days-label": {
+    "en": "Show days names",
+    "es": "Mostrar nombres de días"
+  },
+  "month-label": {
+    "en": "Show month's name",
+    "es": "Mostrar nombre del mes"
+  },
+  "date-label": {
+    "en": "Year and Month",
+    "es": "Año y mes"
+  },
+  "weekday-label": {
+    "en": "First day of the week",
+    "es": "Primer día de la semana"
+  },
+  "height-label": {
+    "en": "Tracker's Height",
+    "es": "Altura"
+  },
+  "weekdays-full": {
+    "en": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "es": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+  },
+  "weekdays": {
+    "en": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "es": ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"]
+  },
+  "color-label": {
+    "en": "Transparency & Color",
+    "es": "Transparencia & Color"
+  },
+  "column-label": {
+    "en": "Columns",
+    "es": "Columnas"
+  },
+  "row-label": {
+    "en": "Rows",
+    "es": "Filas"
+  },
+  "fonts-label": {
+    "en": ["Title", "Month", "Year", "Days Name", "Days Numbers", "Goals" , "All"],
+    "es": ["Nombre", "Mes", "Año", "Nombres días", "Números días", "Metas", "Todos"]
+  },
+  "tabs-names": {
+    "en":  ["Components", "Background", "Days Shape",  "Goals" ,"Fonts", "Top Images", "Fill"],
+    "es":  ["Componentes", "Fondo", "Forma de día", "Goals" ,"Fuentes", "Imágenes Arriba",  "Llenar"]
+  },
+  "download-button": {
+    "en": "Download",
+    "es": "Descargar"
+  },
+  "reset-button": {
+    "en": "Reset",
+    "es": "Resetear"
+  },
+  "top-images": {
+    "en": "Amount of pictures",
+    "es": "Cantidad de imágenes"
+  },
+  "navbar-language": {
+    "en": "Language",
+    "es": "Idioma"
+  },
+  "navbar-about": {
+    "en": "About",
+    "es": "Info"
+  },
+  "navbar-templates": {
+    "en": "Templates",
+    "es": "Plantillas"
+  },
+  "error-h1": {
+    "en": "Oops! Something went wrong.",
+    "es": "Uups! Algo salió mal."
+  },
+  "error-p": {
+    "en": "We're sorry, but the page you're looking for cannot be found or an error has occurred.",
+    "es": "Lo sentimos, pero la página que estas buscando no se encuentra o un error ha ocurrido."
+  }
+}

@@ -4,8 +4,9 @@ import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import { useFontContext } from "../Contexts/FontContext";
 import { useGoalsContext } from '../Contexts/GoalsContext';
+import { useLanguage } from '../Contexts/LanguageContext';
 import { Button } from "@mui/material"
-import templates from "../Templates/templates.json"
+import templates from "../Assets/Templates/templates.json"
 
 function ResetButton() {
   const dataDefault = templates[0];
@@ -14,6 +15,7 @@ function ResetButton() {
   const { updateTitleTextContext, updateTitleContext, updateYearContext, updateDaysNameContext, updateMonthContext,  updateFirstDayContext, updateHeightContext } = useComponentsContext();
   const { updateSelectedFonts, updateSelectedColors } = useFontContext();
   const { updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
+  const { translate } = useLanguage();
 
   const handleResetButton = () => {
     if (dataDefault) {
@@ -46,7 +48,7 @@ function ResetButton() {
   };
   return (
     <Button sx={{ width: "50%" }} variant="outlined" onClick={handleResetButton}>
-      Reset
+      {translate("reset-button")}
     </Button>
   )
 }
