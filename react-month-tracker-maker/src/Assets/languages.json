@@ -51,12 +51,26 @@
     "en": "Rows",
     "es": "Filas"
   },
+  "filling-label": {
+    "en": "Fill your tracker",
+    "es": "Llena el tracker"
+  },
+  "filling-day": {
+    "en": "Day",
+    "es": "Día"
+  },
   "fonts-label": {
     "en": ["Title", "Month", "Year", "Days Name", "Days Numbers", "Goals" , "All"],
     "es": ["Nombre", "Mes", "Año", "Nombres días", "Números días", "Metas", "Todos"]
   },
   "tabs-names": {
-    "en":  ["Components", "Background", "Days Shape",  "Goals" ,"Fonts", "Top Images", "Fill"],
+    "en":  ["Components",
+            "Background",
+            "Days Shape", 
+            "Goals",
+            "Fonts",
+            "Top Images",
+            "Fill"],
     "es":  ["Componentes", "Fondo", "Forma de día", "Goals" ,"Fuentes", "Imágenes Arriba",  "Llenar"]
   },
   "download-button": {

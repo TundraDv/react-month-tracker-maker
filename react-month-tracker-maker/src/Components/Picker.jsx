@@ -11,8 +11,7 @@ import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import SettingTemplateButton from "../Buttons/SettingTemplateButton";
 import DownloadButton from "../Buttons/DownloadButton";
-import backgroundImages from "../Assets/BackgroundImage/backgroundImages.json";
-import daysShapes from "../Assets/DayShape/daysShapes.json";
+import FillingTab from "../Components/FillingTab";
 import { useLanguage } from '../Contexts/LanguageContext';
 
 function CustomTabPanel(props) {
@@ -51,8 +50,7 @@ function Picker() {
     <GoalsPicker />,
     <FontPicker />,
     <TopImagePicker />,
-    "Top Right", // Placeholder if you need something here
-    "Top Center" // Placeholder if you need something here
+    <FillingTab />,
   ];
 
   const handleChange = (event, newValue) => {

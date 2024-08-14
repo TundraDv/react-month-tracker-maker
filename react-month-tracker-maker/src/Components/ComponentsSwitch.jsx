@@ -96,7 +96,6 @@ function ComponentsSwitch() {
           value={dateValueContext}
           sx={{ marginY: 2 }}
           onChange={handleDate}
-          renderInput={(params) => <TextField {...params} helperText={null} />}
           />
         </LocalizationProvider>
         <FormControl fullWidth>

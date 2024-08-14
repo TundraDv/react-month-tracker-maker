@@ -19,8 +19,8 @@ function getStartDayOffset(selectedDate, startDay) {
   return (firstDay - startDay + 7) % 7;
 }
 
-function getWeekDays(startDay, weedays) {
-  return [...weedays.slice(startDay), ...weedays.slice(0, startDay)];
+function getWeekDays(startDay, weekdays) {
+  return [...weekdays.slice(startDay), ...weekdays.slice(0, startDay)];
 }
 
 function Calendar({ 
@@ -42,6 +42,7 @@ function Calendar({
   rows,
   textfields,
   emojis,
+  fillingEmojis = Array(24).fill(""),
   selectedFonts,
   selectedColors,
   imageLocalDataBackground = [],
@@ -69,7 +70,6 @@ function Calendar({
       rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]}),
       rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})
     ), url(${imageLocalDataBackground[selectedLocalImageBackground]})`;
-    
   }
 
   let imgUrlDayShape = selectedImageDayShape ? `url(${require(`../Assets/${selectedImageDayShape}`)})` : 'none';
@@ -103,66 +103,64 @@ function Calendar({
         display: 'flex',
         alignItems: 'stretch',
       }}
-      >
-    <Box
-      id={`CustomTracker-${indexCard}`}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundImage: imgUrlBackground,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
     >
-      {titleContext ? (
-        <Typography variant="h3" sx={{ mb: 2, fontFamily: selectedFonts[0], color: selectedColors[0] }}>
-          {titleTextContext}
-        </Typography>
-      ) : null }
-      {monthContext ? (
-        <Typography variant="h4" sx={{ mb: 2, fontFamily: selectedFonts[1], color: selectedColors[1] }}>
-          {dateValueContext.format('MMMM')}
-        </Typography>
-      ) : null }
-      {yearContext ? (
-        <Typography variant="body1" sx={{ mb: 2, fontFamily: selectedFonts[2], color: selectedColors[2] }}>
-          {dateValueContext.format('YYYY')}
-        </Typography>
-      ) : null}
-      <Box sx={{ width: '100%', margin: 2 }}>
-      <Grid container spacing={0} justifyContent="center">
-          <Grid container item xs={12} spacing={0} justifyContent="center">
-            {daysNameContext ? (
-              weekdays.map((dayName, index) => (
+      <Box
+        id={`CustomTracker-${indexCard}`}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          backgroundImage: imgUrlBackground,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {titleContext && (
+          <Typography variant="h3" sx={{ mb: 2, fontFamily: selectedFonts[0], color: selectedColors[0] }}>
+            {titleTextContext}
+          </Typography>
+        )}
+        {monthContext && (
+          <Typography variant="h4" sx={{ mb: 2, fontFamily: selectedFonts[1], color: selectedColors[1] }}>
+            {dateValueContext.format('MMMM')}
+          </Typography>
+        )}
+        {yearContext && (
+          <Typography variant="body1" sx={{ mb: 2, fontFamily: selectedFonts[2], color: selectedColors[2] }}>
+            {dateValueContext.format('YYYY')}
+          </Typography>
+        )}
+        <Box sx={{ width: '100%', margin: 2 }}>
+          <Grid container spacing={0} justifyContent="center">
+            <Grid container item xs={12} spacing={0} justifyContent="center">
+              {daysNameContext && weekdays.map((dayName, index) => (
                 <Grid item xs key={index} sx={{ textAlign: 'center' }}>
                   <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>
                     {dayName}
                   </Typography>
                 </Grid>
-              ))
-            ) : null}
-          </Grid>
-          {rowsCalendar.map((row, rowIndex) => (
-            <Grid container item key={rowIndex} spacing={0.5} justifyContent="center">
-              {row.map((day, index) => (
-                <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
-                  {day === null ? ( null ) : (
-                    <Box
-                      sx={{
-                        position: 'relative',
-                        width: 50,
-                        height: 50,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        overflow: 'hidden',
-                      }}
-                    >
-                        {selectedImageDayShape ? (
+              ))}
+            </Grid>
+            {rowsCalendar.map((row, rowIndex) => (
+              <Grid container item key={rowIndex} spacing={0} justifyContent="center">
+                {row.map((day, index) => (
+                  <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
+                    {day !== null && (
+                      <Box
+                        sx={{
+                          position: 'relative',
+                          width: 50,
+                          height: 50,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {selectedImageDayShape && (
                           <Box
                             sx={{
                               position: 'absolute',
@@ -176,33 +174,54 @@ function Calendar({
                               backgroundRepeat: 'no-repeat',
                               backgroundPosition: 'center',
                               filter: hexToCSSFilter(backgroundColorDayShape).filter,
-                              opacity: transparencyDayShape
+                              opacity: transparencyDayShape,
+                              zIndex: 0,
                             }}
                           />
-
-                        ) : null }
-                      <Typography
-                        sx={{
-                          position: 'relative',
-                          fontFamily: selectedFonts[4],
-                          color: selectedColors[4],
-                          fontSize: 20,
-                          textAlign: 'center',
-                          zIndex: 1, 
-                        }}
-                      >
-                        {day}
-                      </Typography>
-                    </Box>
-                  )}
-                </Grid>
-              ))}
-            </Grid>
-          ))}
-        </Grid>
+                        )}
+                        <Typography
+                          sx={{
+                            position: 'relative',
+                            fontFamily: selectedFonts[4],
+                            color: selectedColors[4],
+                            fontSize: 20,
+                            textAlign: 'center',
+                            zIndex: 1, 
+                          }}
+                        >
+                          {day}
+                        </Typography>
+                        {fillingEmojis[day - 1] && (
+                          <Typography
+                            sx={{
+                              position: 'absolute',
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)',
+                              fontSize: 16,
+                              zIndex: 2,
+                            }}
+                          >
+                            {fillingEmojis[day - 1]}
+                          </Typography>
+                        )}
+                      </Box>
+                    )}
+                  </Grid>
+                ))}
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        <Goals 
+          columns={columns} 
+          rows={rows} 
+          textfields={textfields} 
+          emojis={emojis} 
+          selectedFonts={selectedFonts} 
+          selectedColors={selectedColors} 
+        />
       </Box>
-      <Goals columns={columns} rows={rows} textfields={textfields} emojis={emojis} selectedFonts={selectedFonts} selectedColors={selectedColors}/>
-    </Box>
     </Card>
   );
 }
