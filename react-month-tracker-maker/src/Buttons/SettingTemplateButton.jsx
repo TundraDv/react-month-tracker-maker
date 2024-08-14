@@ -18,13 +18,14 @@ const SettingTemplateButton = ({ index, actionType }) => {
   const { updateSelectedLocalImage: updateSelectedLocalImageDayShape, updateSelectedImage: updateSelectedImageDayShape, updateTransparency: updateTransparencyDayShape, updateBackgroundColor: updateBackgroundColorDayShape } = useDayShapeContext();
   const { updateTitleTextContext, updateTitleContext, updateYearContext, updateDaysNameContext, updateMonthContext, updateFirstDayContext, updateHeightContext } = useComponentsContext();
   const { updateSelectedFonts, updateSelectedColors } = useFontContext();
-  const { updateColumns, updateRows, updateTextfields, updateEmojis } = useGoalsContext();
+  const { updateColumns, updateRows, updateTextfields, updateEmojis, updateFillingEmojis } = useGoalsContext();
   const { translate } = useLanguage();
 
   const handleClick = () => {
     if (dataDefault) {
       updateSelectedLocalImage(null);
       updateBackgroundColorDayShape(null);
+      updateFillingEmojis(Array(24).fill(""));
 
       updateSelectedImage(dataDefault.selectedImageBackground);
       updateTransparency(dataDefault.transparency);
