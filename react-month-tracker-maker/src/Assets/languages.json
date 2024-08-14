@@ -71,9 +71,21 @@
     "en": "Edit",
     "es": "Editar"
   },
+  "upload-button": {
+    "en": "Upload",
+    "es": "Subir"
+  },
+  "upload-alert": {
+    "en": "You can only upload a maximum of 2 images. Please delete one before uploading more.",
+    "es": "Solo puede subir un máximo de 2 imágenes. Por favor, elimina una antes de subir más"
+  },
   "config-button": {
     "en": "Download CONFIG",
     "es": "Descargar CONFIG"
+  },
+  "selected-label": {
+    "en": "Selected",
+    "es": "Seleccionada"
   },
   "top-images": {
     "en": "Amount of pictures",

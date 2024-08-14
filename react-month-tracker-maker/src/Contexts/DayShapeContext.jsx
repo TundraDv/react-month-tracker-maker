@@ -1,8 +1,11 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import DayShapeImage from '../Assets/DayShape/daysShapes.json'; 
 
 const DayShapeContext = createContext();
 
 export const DayShapeProvider = ({ children }) => {
+  const [imageData, setDayShapeImageData] = useState(DayShapeImage);
+
   const [selectedImageDayShape, setSelectedImage] = useState(() => {
     const saved = localStorage.getItem('selectedImageDayShape');
     return saved ? JSON.parse(saved) : null;
@@ -40,6 +43,7 @@ export const DayShapeProvider = ({ children }) => {
   return (
     <DayShapeContext.Provider 
     value={{
+      imageData,
       transparency,
       updateTransparency,
       backgroundColor,

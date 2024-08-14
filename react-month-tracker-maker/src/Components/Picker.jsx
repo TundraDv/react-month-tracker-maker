@@ -46,8 +46,8 @@ function Picker() {
 
   const componentList = [
     <ComponentsSwitch />,
-    <ImagePicker imageData={backgroundImages} cols={3} context={useBackgroundImageContext} />,
-    <ImagePicker imageData={daysShapes} cols={3} context={useDayShapeContext} />,
+    <ImagePicker context={useBackgroundImageContext} />,
+    <ImagePicker context={useDayShapeContext} />,
     <GoalsPicker />,
     <FontPicker />,
     <TopImagePicker />,

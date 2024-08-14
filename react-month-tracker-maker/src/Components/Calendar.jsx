@@ -44,7 +44,10 @@ function Calendar({
   emojis,
   selectedFonts,
   selectedColors,
-  indexCard = 0}) {
+  imageLocalData = [],
+  selectedLocalImageBackground =null,
+  localSelectionDayShape = false,
+  indexCard = 0,}) {
 
   const { translate } = useLanguage();
 
@@ -58,6 +61,14 @@ function Calendar({
   if (startDayOffset > 0) {
     currentRow = Array(startDayOffset).fill(null);
   }
+
+  let imgUrlBackground = selectedImageBackground ? `linear-gradient(rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]}), rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})), url(${require(`../Assets/${selectedImageBackground}`)})` : 'none';
+  console.log(selectedLocalImageBackground)
+  if (selectedLocalImageBackground !== null) {
+    imgUrlBackground = imageLocalData[selectedLocalImageBackground]
+  }
+  console.log(imgUrlBackground)
+  const imgUrlDayShape = `url(${require(`../Assets/${selectedImageDayShape}`)})`;
 
   days.forEach((day, index) => {
     currentRow.push(day);
@@ -95,9 +106,7 @@ function Calendar({
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        backgroundImage: selectedImageBackground ? 
-          `linear-gradient(rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]}), rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})), url(${require(`../Assets/${selectedImageBackground}`)})` 
-          : 'none',
+        backgroundImage: imgUrlBackground,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -155,7 +164,7 @@ function Calendar({
                               top: '50%',
                               left: '50%',
                               transform: 'translate(-50%, -50%)',
-                              backgroundImage: `url(${require(`../Assets/${selectedImageDayShape}`)})`,
+                              backgroundImage: imgUrlDayShape,
                               backgroundSize: 'contain',
                               backgroundRepeat: 'no-repeat',
                               backgroundPosition: 'center',

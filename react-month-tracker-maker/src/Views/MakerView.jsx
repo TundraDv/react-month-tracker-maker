@@ -18,10 +18,11 @@ function MakerView() {
     transparency: transparencyDayShape,
     backgroundColor: backgroundColorDayShape
   } = useDayShapeContext();
-  const { selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
+  const { imageLocalData, selectedLocalImage, selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
   const { columns, rows, textfields, emojis } = useGoalsContext();
+  
   const dataTemplate = {
     "selectedImageBackground": selectedImageBackground,
     "transparency": transparency,
@@ -93,6 +94,8 @@ function MakerView() {
             dateValueContext={dateValueContext}
             selectedFonts={selectedFonts}
             selectedColors={selectedColors}
+            imageLocalData={imageLocalData}
+            selectedLocalImageBackground={selectedLocalImage}
             columns={columns}
             rows={rows}
             textfields={textfields}
