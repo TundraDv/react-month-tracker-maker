@@ -1,9 +1,5 @@
 [
   { "id": 1, "src": "DayShape/None.png", "title": "None" },
-  { "id": 17, "src": "DayShape/cute.png", "title": "cute" },
-  { "id": 18, "src": "DayShape/roman.png", "title": "roman" },
-  { "id": 5, "src": "DayShape/pink.png", "title": "pink" },
-  { "id": 6, "src": "DayShape/green.png", "title": "green" },
   { "id": 3, "src": "DayShape/circle.png", "title": "circle" },
   { "id": 30, "src": "DayShape/circle-fill.png", "title": "circle-fill" },
   { "id": 7, "src": "DayShape/diamond.png", "title": "diamond" },
@@ -23,5 +19,9 @@
   { "id": 22, "src": "DayShape/sun.png", "title": "sun" },
   { "id": 23, "src": "DayShape/sun2.png", "title": "sun2" },
   { "id": 27, "src": "DayShape/sun1-fill.png", "title": "sun2" },
-  { "id": 24, "src": "DayShape/badge.png", "title": "badge" }
+  { "id": 24, "src": "DayShape/badge.png", "title": "badge" },
+  { "id": 17, "src": "DayShape/cute.png", "title": "cute" },
+  { "id": 18, "src": "DayShape/roman.png", "title": "roman" },
+  { "id": 5, "src": "DayShape/pink.png", "title": "pink" },
+  { "id": 6, "src": "DayShape/green.png", "title": "green" }
 ]

@@ -44,9 +44,10 @@ function Calendar({
   emojis,
   selectedFonts,
   selectedColors,
-  imageLocalData = [],
+  imageLocalDataBackground = [],
   selectedLocalImageBackground =null,
-  localSelectionDayShape = false,
+  imageLocalDataDayShape = [],
+  selectedLocalImageDayShape = null,
   indexCard = 0,}) {
 
   const { translate } = useLanguage();
@@ -63,13 +64,19 @@ function Calendar({
   }
 
   let imgUrlBackground = selectedImageBackground ? `linear-gradient(rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]}), rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})), url(${require(`../Assets/${selectedImageBackground}`)})` : 'none';
-  console.log(selectedLocalImageBackground)
   if (selectedLocalImageBackground !== null) {
-    imgUrlBackground = imageLocalData[selectedLocalImageBackground]
+    imgUrlBackground = `linear-gradient(
+      rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]}),
+      rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})
+    ), url(${imageLocalDataBackground[selectedLocalImageBackground]})`;
+    
   }
-  console.log(imgUrlBackground)
-  const imgUrlDayShape = `url(${require(`../Assets/${selectedImageDayShape}`)})`;
 
+  let imgUrlDayShape = selectedImageDayShape ? `url(${require(`../Assets/${selectedImageDayShape}`)})` : 'none';
+  if (selectedLocalImageDayShape !== null) {
+    imgUrlDayShape = `url(${imageLocalDataDayShape[selectedLocalImageDayShape]})`;
+  }
+  console.log(imgUrlDayShape);
   days.forEach((day, index) => {
     currentRow.push(day);
     if (currentRow.length === 7) {

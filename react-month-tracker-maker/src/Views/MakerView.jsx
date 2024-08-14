@@ -14,11 +14,18 @@ function MakerView() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const {
+    imageLocalData: imageLocalDataDayShape,  
+    selectedLocalImage: selectedLocalImageDayShape,
     selectedImageDayShape,
     transparency: transparencyDayShape,
     backgroundColor: backgroundColorDayShape
   } = useDayShapeContext();
-  const { imageLocalData, selectedLocalImage, selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
+  const { 
+    imageLocalData: imageLocalDataBackground, 
+    selectedLocalImage: selectedLocalImageBackground,
+    selectedImageBackground, 
+    transparency, 
+    backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
   const { columns, rows, textfields, emojis } = useGoalsContext();
@@ -94,8 +101,10 @@ function MakerView() {
             dateValueContext={dateValueContext}
             selectedFonts={selectedFonts}
             selectedColors={selectedColors}
-            imageLocalData={imageLocalData}
-            selectedLocalImageBackground={selectedLocalImage}
+            imageLocalDataBackground={imageLocalDataBackground}
+            selectedLocalImageBackground={selectedLocalImageBackground}
+            imageLocalDataDayShape={imageLocalDataDayShape}
+            selectedLocalImageDayShape={selectedLocalImageDayShape}
             columns={columns}
             rows={rows}
             textfields={textfields}

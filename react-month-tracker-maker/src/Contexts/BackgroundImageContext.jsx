@@ -42,7 +42,6 @@ export const BackgroundImageProvider = ({ children }) => {
 
   const updateImageLocalData = (images) => {
     setImageLocalData(images);
-    console.log("imageLocalData", imageLocalData);
   };
 
   const updateSelectedLocalImage = (index) => {

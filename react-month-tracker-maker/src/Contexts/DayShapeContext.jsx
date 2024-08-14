@@ -5,6 +5,15 @@ const DayShapeContext = createContext();
 
 export const DayShapeProvider = ({ children }) => {
   const [imageData, setDayShapeImageData] = useState(DayShapeImage);
+  const [imageLocalData, setImageLocalData] = useState(() => {
+    const saved = localStorage.getItem('selectedLocalDayShape');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [selectedLocalImage, setSelectedLocalImage] = useState(() => {
+    const saved = localStorage.getItem('selectedLocalImageDayShape');
+    return saved ? JSON.parse(saved) : null;
+  });
+
 
   const [selectedImageDayShape, setSelectedImage] = useState(() => {
     const saved = localStorage.getItem('selectedImageDayShape');
@@ -21,14 +30,26 @@ export const DayShapeProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    localStorage.setItem('selectedLocalDayShape', JSON.stringify(imageLocalData));
+    localStorage.setItem('selectedLocalImageDayShape', JSON.stringify(selectedLocalImage));
     localStorage.setItem('selectedImageDayShape', JSON.stringify(selectedImageDayShape));
     localStorage.setItem('transparencyDayShape', JSON.stringify(transparency));
     localStorage.setItem('backgroundColorDayShape', JSON.stringify(backgroundColor));
   }, [
+    imageLocalData,
+    selectedLocalImage,
     selectedImageDayShape,
     transparency,
     backgroundColor,
   ]);
+
+  const updateImageLocalData = (images) => {
+    setImageLocalData(images);
+  };
+
+  const updateSelectedLocalImage = (index) => {
+    setSelectedLocalImage(index);
+  };
 
   const updateSelectedImage = (image) => {
     setSelectedImage(image.includes("None.png") ? "" : image);
@@ -44,6 +65,10 @@ export const DayShapeProvider = ({ children }) => {
     <DayShapeContext.Provider 
     value={{
       imageData,
+      imageLocalData,
+      updateImageLocalData,
+      selectedLocalImage,
+      updateSelectedLocalImage,
       transparency,
       updateTransparency,
       backgroundColor,
