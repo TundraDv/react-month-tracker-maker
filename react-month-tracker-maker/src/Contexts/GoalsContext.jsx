@@ -26,15 +26,21 @@ export const GoalsProvider = ({ children }) => {
     const saved = localStorage.getItem('fillingEmojis');
     return saved ? JSON.parse(saved) : Array(24).fill('');
   });
+  const [emojiSize, setEmojiSize] = useState(() => {
+    const saved = localStorage.getItem('emojiSize');
+    return saved ? JSON.parse(saved) : 15;
+  });
 
   
   useEffect(() => {
+    localStorage.setItem('emojiSize', JSON.stringify(emojiSize));
     localStorage.setItem('columns', JSON.stringify(columns));
     localStorage.setItem('rows', JSON.stringify(rows));
     localStorage.setItem('textfields', JSON.stringify(textfields));
     localStorage.setItem('emojis', JSON.stringify(emojis));
     localStorage.setItem('fillingEmojis', JSON.stringify(fillingEmojis));
   }, [
+    emojiSize,
     columns,
     rows,
     textfields,
@@ -57,9 +63,12 @@ export const GoalsProvider = ({ children }) => {
   const updateFillingEmojis = (fillingEmojis) => {
     setFillingEmojis(fillingEmojis);
   };
+  const updateEmojiSize = (emojiSize) => {
+    setEmojiSize(emojiSize);
+  };
 
   return (
-    <GoalsContext.Provider value={{ updateFillingEmojis,fillingEmojis, columns, rows, textfields, emojis, updateColumns, updateRows, updateTextfields, updateEmojis }}>
+    <GoalsContext.Provider value={{ updateEmojiSize, emojiSize, updateFillingEmojis,fillingEmojis, columns, rows, textfields, emojis, updateColumns, updateRows, updateTextfields, updateEmojis }}>
       {children}
     </GoalsContext.Provider>
   );

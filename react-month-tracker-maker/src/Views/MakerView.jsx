@@ -28,7 +28,7 @@ function MakerView() {
     backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
-  const { columns, rows, textfields, emojis, fillingEmojis } = useGoalsContext();
+  const { columns, rows, textfields, emojis, fillingEmojis, emojiSize } = useGoalsContext();
   
   const dataTemplate = {
     "selectedImageBackground": selectedImageBackground,
@@ -110,6 +110,7 @@ function MakerView() {
             textfields={textfields}
             emojis={emojis} 
             fillingEmojis={fillingEmojis}
+            emojiSize={emojiSize}
             />
         </Grid>
         <Grid

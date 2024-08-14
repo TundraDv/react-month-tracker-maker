@@ -43,6 +43,7 @@ function Calendar({
   textfields,
   emojis,
   fillingEmojis = Array(24).fill(""),
+  emojiSize = 15,
   selectedFonts,
   selectedColors,
   imageLocalDataBackground = [],
@@ -50,7 +51,6 @@ function Calendar({
   imageLocalDataDayShape = [],
   selectedLocalImageDayShape = null,
   indexCard = 0,}) {
-
   const { translate } = useLanguage();
 
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
@@ -198,7 +198,7 @@ function Calendar({
                               top: '50%',
                               left: '50%',
                               transform: 'translate(-50%, -50%)',
-                              fontSize: 16,
+                              fontSize: emojiSize,
                               zIndex: 2,
                             }}
                           >

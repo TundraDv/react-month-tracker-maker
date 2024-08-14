@@ -63,6 +63,10 @@
     "en": "None",
     "es": "Ninguno"
   },
+  "filling-emojiSize": {
+    "en": "Emoji Size",
+    "es": "Tamaño Emojis"
+  },
   "fonts-label": {
     "en": ["Title", "Month", "Year", "Days Name", "Days Numbers", "Goals" , "All"],
     "es": ["Nombre", "Mes", "Año", "Nombres días", "Números días", "Metas", "Todos"]
