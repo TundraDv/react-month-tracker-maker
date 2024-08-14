@@ -76,7 +76,7 @@ function Calendar({
   if (selectedLocalImageDayShape !== null) {
     imgUrlDayShape = `url(${imageLocalDataDayShape[selectedLocalImageDayShape]})`;
   }
-  console.log(imgUrlDayShape);
+
   days.forEach((day, index) => {
     currentRow.push(day);
     if (currentRow.length === 7) {

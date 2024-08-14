@@ -5,7 +5,6 @@ import { Button } from '@mui/material';
 
 function DownloadButton({ id_CardElement, title }) {
   const { translate } = useLanguage();
-  console.log(id_CardElement, title)
   const handleDownload = () => {
     const cardElement = document.getElementById(id_CardElement);
     domtoimage.toPng(cardElement, { 
