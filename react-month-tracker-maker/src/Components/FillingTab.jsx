@@ -20,6 +20,9 @@ function FillingTab() {
 
   return (
     <Box>
+      <Typography>
+        {translate("filling-label")}
+      </Typography>
       <Grid container spacing={2}>
         {Array.from({ length: daysInMonth }, (_, index) => (
           <Grid item xs={12} sm={6} key={index}>
@@ -36,6 +39,9 @@ function FillingTab() {
                   size="small"
                   onChange={(event) => handleChangeSelect(event, index)}
                 >
+                  <MenuItem value="">
+                    <em>{translate("filling-none")}</em>
+                  </MenuItem>
                   {emojis.map((emoji, emojiIndex) =>
                     textfields[emojiIndex] !== "" ? (
                       <MenuItem key={emojiIndex} value={emoji}>

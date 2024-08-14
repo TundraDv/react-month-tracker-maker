@@ -59,6 +59,10 @@
     "en": "Day",
     "es": "Día"
   },
+  "filling-none": {
+    "en": "None",
+    "es": "Ninguno"
+  },
   "fonts-label": {
     "en": ["Title", "Month", "Year", "Days Name", "Days Numbers", "Goals" , "All"],
     "es": ["Nombre", "Mes", "Año", "Nombres días", "Números días", "Metas", "Todos"]
