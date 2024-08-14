@@ -2,7 +2,7 @@
   { 
     "id": 1, 
     "title": "Default",
-    "titleTextContext": "Step Tracker",
+    "titleTextContext": "Playing Tracker",
     "titleContext": true,
     "yearContext": true,
     "daysNameContext": true,
