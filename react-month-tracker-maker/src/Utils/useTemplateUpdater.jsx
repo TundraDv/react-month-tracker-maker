@@ -71,7 +71,7 @@ export const useTemplateUpdater = () => {
       console.error("data is undefined or null");
     }
   }, [
-    updateSelectedLocalImage, updateSelectedImage, updateTransparency, updateBackgroundColor,
+    updateSelectedId, updateSelectedIdDayShape, updateBoldSettings, updateItalicSettings, updateFontSizes, updateSelectedLocalImage, updateSelectedImage, updateTransparency, updateBackgroundColor,
     updateSelectedLocalImageDayShape, updateSelectedImageDayShape, updateTransparencyDayShape, updateBackgroundColorDayShape,
     updatePickerTab, updateTitleTextContext, updateTitleContext, updateYearContext, updateDaysNameContext, updateMonthContext, updateFirstDayContext, updateHeightContext,
     updateSelectedFonts, updateSelectedColors, updateColumns, updateRows, updateTextfields, updateEmojis, updateFillingEmojis
