@@ -24,9 +24,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
+      // {
+      //   path: "/",
+      //   element: <Navigate to="/templates/0" />, 
+      // },
       {
-        path: "/", // Redirect root to templates/0
-        element: <Navigate to="/templates/0" />, 
+        path: "/",
+        element: <MakerView />, 
       },
       {
         path: "/templates",

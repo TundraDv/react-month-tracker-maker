@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
 import { Box, Grid, Container, useMediaQuery, useTheme } from "@mui/material";
 import Calendar from "../Components/Calendar";
 import Picker from "../Components/Picker";
@@ -26,6 +26,8 @@ function MakerView() {
   const { id } = useParams();
 
   const hasAppliedTemplateRef = useRef(false); // Ref to track if applyTemplateData has been called
+
+  const [loading, setLoading] = useState(true); // Loading state
 
   const dataTemplate = useMemo(() => {
     return {
@@ -98,6 +100,10 @@ function MakerView() {
     if (id && templatesData[id] && !hasAppliedTemplateRef.current) {
       applyTemplateData(templatesData[id], 0);
       hasAppliedTemplateRef.current = true; // Mark as applied
+      setLoading(false); // Data has been applied, loading is done
+    }
+    if (!id) {
+      setLoading(false);
     }
   }, [id, templatesData, applyTemplateData]);
 
@@ -107,11 +113,30 @@ function MakerView() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'relative' // Ensures the loading box is positioned correctly
       }}
     >
+      {loading && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#f0f0f0',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1300 // Ensures it appears above other content
+          }}
+        >
+          <span>Loading...</span> {/* You can replace this with a spinner or any loading indicator */}
+        </Box>
+      )}
       <Grid
         container
-        spacing={3}
+        spacing={1}
         direction={isMobile ? 'column' : 'row'}
         justifyContent="center"
         alignItems={isMobile ? 'flex-start' : 'stretch'}
@@ -142,7 +167,7 @@ function MakerView() {
           xs={7}
           key={1}
           container
-          justifyContent={isMobile ? 'center' : 'flex-start'}
+          justifyContent='center'
           alignItems="center"
           sx={{ minWidth: '300px' }}
         >

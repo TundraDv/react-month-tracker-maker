@@ -13,6 +13,7 @@ import SettingTemplateButton from "../Buttons/SettingTemplateButton";
 import DownloadButton from "../Buttons/DownloadButton";
 import FillingPicker from "./FillingPicker";
 import { useLanguage } from '../Contexts/LanguageContext';
+import { useParams } from 'react-router-dom';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,6 +42,7 @@ function Picker() {
   const { translate } = useLanguage();
 
   const componentNames = translate("tabs-names");
+  const { id } = useParams();
 
   const componentList = [
     <ComponentsSwitch />,
@@ -48,7 +50,7 @@ function Picker() {
     <ImagePicker context={useDayShapeContext} />,
     <GoalsPicker />,
     <FontPicker />,
-    <TopImagePicker />,
+    // <TopImagePicker />,
     <FillingPicker />,
   ];
 
@@ -81,7 +83,7 @@ function Picker() {
         </Box>
       </Card>
       <Stack direction={"row"} spacing={1} margin={1}>
-        <SettingTemplateButton index={0} actionType='reset' />
+        <SettingTemplateButton index={id ? id : 0} actionType='reset' />
         <DownloadButton id_CardElement="CustomTracker-0" title={titleTextContext} />
       </Stack>
     </Box>

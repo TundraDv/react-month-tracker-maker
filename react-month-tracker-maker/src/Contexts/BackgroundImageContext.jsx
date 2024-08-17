@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import BackgroundImage from '../Assets/BackgroundImage/backgroundImages.json';
 
 const BackgroundImageContext = createContext();
@@ -35,7 +35,6 @@ export const BackgroundImageProvider = ({ children }) => {
 
   const updateSelectedImage = (image) => {
     const newImg = image.includes("None.png") ? "blank.jpg" : image;
-    console.log(newImg);
     setSettings(prev => ({ ...prev, selectedImageBackground: newImg}));
   };
 
@@ -47,10 +46,12 @@ export const BackgroundImageProvider = ({ children }) => {
     setSettings(prev => ({ ...prev, backgroundColor: value }));
   };
 
+  const memoizedImageData = useMemo(() => BackgroundImage, []);
+
   return (
     <BackgroundImageContext.Provider
       value={{
-        imageData: settings.imageData,
+        imageData: memoizedImageData,
         selectedId: settings.selectedId,
         updateSelectedId,
         imageLocalData: settings.imageLocalData,

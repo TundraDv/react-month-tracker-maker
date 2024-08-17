@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import chroma from "chroma-js";
 import dayjs from 'dayjs';
 import { Typography, Card, Box } from '@mui/material';
 import { useLanguage } from '../Contexts/LanguageContext';
-
 import { hexToCSSFilter } from 'hex-to-css-filter';
-
 import Goals from "./Goals";
+import 'dayjs/locale/es';
+import 'dayjs/locale/en';
 
 function generateDaysArray(selectedDate) {
   const daysInMonth = selectedDate.daysInMonth();
@@ -16,7 +16,7 @@ function generateDaysArray(selectedDate) {
 
 function getStartDayOffset(selectedDate, startDay) {
   const firstDay = selectedDate.startOf('month').day();
-  return (firstDay - startDay + 7) % 7;
+  return (firstDay - startDay + 6) % 7;
 }
 
 function getWeekDays(startDay, weekdays) {
@@ -24,36 +24,42 @@ function getWeekDays(startDay, weekdays) {
 }
 
 function Calendar({ data }) {
-    const {
-      selectedImageDayShape, 
-      transparencyDayShape,
-      backgroundColorDayShape,
-      selectedImageBackground,
-      transparency,
-      backgroundColor,
-      titleTextContext,
-      heightContext,
-      titleContext,
-      yearContext,
-      monthContext,
-      daysNameContext,
-      firstDayContext,
-      dateValueContext = dayjs(),
-      columns,
-      rows,
-      textfields,
-      emojis,
-      fillingEmojis = Array(24).fill(""),
-      emojiSize = 15,
-      selectedFonts,
-      selectedColors,
-      imageLocalDataBackground = [],
-      selectedLocalImageBackground =null,
-      imageLocalDataDayShape = [],
-      selectedLocalImageDayShape = null,
-      indexCard = 0
-    } = data;
-  const { translate } = useLanguage();
+  const {
+    selectedImageDayShape,
+    transparencyDayShape,
+    backgroundColorDayShape,
+    selectedImageBackground,
+    transparency,
+    backgroundColor,
+    titleTextContext,
+    heightContext,
+    titleContext,
+    yearContext,
+    monthContext,
+    daysNameContext,
+    firstDayContext,
+    dateValueContext = dayjs(),
+    columns,
+    rows,
+    textfields,
+    emojis,
+    fillingEmojis = Array(24).fill(""),
+    emojiSize = 15,
+    selectedFonts,
+    selectedColors,
+    imageLocalDataBackground = [],
+    selectedLocalImageBackground = null,
+    imageLocalDataDayShape = [],
+    selectedLocalImageDayShape = null,
+    indexCard = 0
+  } = data;
+
+  const { locale, translate } = useLanguage();
+
+  // Set dayjs locale globally
+  useEffect(() => {
+    dayjs.locale(locale);
+  }, [locale]);
 
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
   const days = generateDaysArray(dateValueContext);
@@ -78,6 +84,8 @@ function Calendar({ data }) {
   if (selectedLocalImageDayShape !== null) {
     imgUrlDayShape = `url(${imageLocalDataDayShape[selectedLocalImageDayShape]})`;
   }
+  
+  const weekdays = getWeekDays(firstDayContext, translate("weekdays"));
 
   days.forEach((day, index) => {
     currentRow.push(day);
@@ -93,8 +101,6 @@ function Calendar({ data }) {
   } else if (rowsCalendar.length === 0) {
     rowsCalendar.push(Array(7).fill(null));
   }
-
-  const weekdays = getWeekDays(firstDayContext, translate("weekdays"));
 
   return (
     <Card
@@ -122,37 +128,37 @@ function Calendar({ data }) {
       >
         {titleContext && (
           <Typography
-          variant="h3"
-          sx={{
-            mb: 2,
-            fontFamily: selectedFonts[0],
-            color: selectedColors[0],
-            textAlign: 'center', // Center the text
-            fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
-            lineHeight: 1.2, // Adjust line height for better fit
-            whiteSpace: 'nowrap', // Prevent text wrapping
-            overflow: 'hidden', // Hide overflow
-            textOverflow: 'ellipsis', // Add ellipsis if needed
-          }}
-        >
-          {titleTextContext}
-        </Typography>
+            variant="h3"
+            sx={{
+              mb: 2,
+              fontFamily: selectedFonts[0],
+              color: selectedColors[0],
+              textAlign: 'center', // Center the text
+              fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
+              lineHeight: 1.2, // Adjust line height for better fit
+              whiteSpace: 'nowrap', // Prevent text wrapping
+              overflow: 'hidden', // Hide overflow
+              textOverflow: 'ellipsis', // Add ellipsis if needed
+            }}
+          >
+            {titleTextContext}
+          </Typography>
         )}
         {monthContext && (
           <Typography variant="h4" sx={{ mb: 2, fontFamily: selectedFonts[1], color: selectedColors[1] }}>
-            {dateValueContext.format('MMMM')}
+            {dateValueContext.locale(locale).format('MMMM')}
           </Typography>
         )}
         {yearContext && (
           <Typography variant="body1" sx={{ mb: 2, fontFamily: selectedFonts[2], color: selectedColors[2] }}>
-            {dateValueContext.format('YYYY')}
+            {dateValueContext.locale(locale).format('YYYY')}
           </Typography>
         )}
         <Box sx={{ width: '100%', margin: 2 }}>
           <Grid container spacing={0} justifyContent="center">
             <Grid container item xs={12} spacing={0} justifyContent="center">
               {daysNameContext && weekdays.map((dayName, index) => (
-                <Grid item xs key={index} sx={{ textAlign: 'center' }}>
+                <Grid item xs={1} key={index} sx={{ textAlign: 'center', minWidth: 50, boxSizing: 'border-box' }}>
                   <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>
                     {dayName}
                   </Typography>
@@ -162,7 +168,7 @@ function Calendar({ data }) {
             {rowsCalendar.map((row, rowIndex) => (
               <Grid container item key={rowIndex} spacing={0} justifyContent="center">
                 {row.map((day, index) => (
-                  <Grid item xs key={index} sx={{ textAlign: 'center', minWidth: 50 }}>
+                  <Grid item xs={1} key={index} sx={{ textAlign: 'center', minWidth: 50, boxSizing: 'border-box' }}>
                     {day !== null && (
                       <Box
                         sx={{
@@ -201,7 +207,8 @@ function Calendar({ data }) {
                             color: selectedColors[4],
                             fontSize: 20,
                             textAlign: 'center',
-                            zIndex: 1, 
+                            zIndex: 1,
+                            opacity: 1, 
                           }}
                         >
                           {day}

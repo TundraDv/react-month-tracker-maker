@@ -10,7 +10,7 @@ function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColor
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginY: 1 }}>
       <Box
       sx={{
-        marginX: 1,
+        marginX: 1.5,
         width: "100%",
         // borderRadius: 4,
         // border: '10px groove  rgba(0, 0, 0, 0.5);',
@@ -37,8 +37,14 @@ function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColor
                 }}>
                   {emojis[index]}
                 </span>
-                <Typography sx={{ fontSize: '0.8rem', fontFamily: lastFont, color: lastColor }}>
+                <Typography sx={{ position: 'relative',
+        // display: 'inline-block',
+        // color: 'white',
+        // textShadow: '1px 1px 2px rgba(0, 0, 0, 1)',
+        fontSize: '0.8rem',fontFamily: lastFont, color: lastColor }}>
+                  {/* <b> */}
                   {textfields[index]}
+                  {/* </b> */}
                 </Typography>
               </Stack>
             ) : null}

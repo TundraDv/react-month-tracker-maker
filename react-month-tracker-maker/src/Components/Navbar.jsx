@@ -75,7 +75,7 @@ const Navbar = () => {
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
-              PaperProps={{ sx: { width: '200px' } }}
+              sx= {{ width: '200px' }}
             >
               <MenuItem onClick={() => handleMenuItemClick("/")}>Maker</MenuItem>
               <MenuItem onClick={() => handleMenuItemClick("/templates")}>{translate("navbar-templates")}</MenuItem>
@@ -86,7 +86,7 @@ const Navbar = () => {
               anchorEl={languageAnchorEl}
               open={Boolean(languageAnchorEl)}
               onClose={handleLanguageClose}
-              PaperProps={{ sx: { width: '200px' } }}
+              sx= {{ width: '200px' }}
             >
               <MenuItem onClick={() => handleLanguageChange('en')}>English</MenuItem>
               <MenuItem onClick={() => handleLanguageChange('es')}>Español</MenuItem>

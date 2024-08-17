@@ -22,7 +22,6 @@ function ImagePicker({ context }) {
   const { translate } = useLanguage();
 
   const handleImageClick = (image, index) => {
-    console.log(index)
     updateSelectedId(index);
     updateSelectedImage(image.src);
     setActiveColorPicker(false);

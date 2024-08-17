@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import DayShapeImage from '../Assets/DayShape/daysShapes.json'; 
 
 const DayShapeContext = createContext();
@@ -57,10 +57,13 @@ export const DayShapeProvider = ({ children }) => {
     setSettings(prev => ({ ...prev, backgroundColor: value }));
   };
 
+  // Memoize the DayShapeImage to prevent unnecessary re-renders
+  const memoizedImageData = useMemo(() => DayShapeImage, []);
+
   return (
     <DayShapeContext.Provider 
       value={{
-        imageData: settings.imageData,
+        imageData: memoizedImageData,
         selectedId: settings.selectedId,
         updateSelectedId,
         imageLocalData: settings.imageLocalData,

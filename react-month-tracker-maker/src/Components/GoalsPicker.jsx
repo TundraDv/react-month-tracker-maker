@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Stack, Slider, Grid, TextField, IconButton } from "@mui/material";
-import EmojiPicker from 'emoji-picker-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Stack, Slider, Grid, TextField, IconButton } from '@mui/material';
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 import { useGoalsContext } from '../Contexts/GoalsContext';
 import { useLanguage } from '../Contexts/LanguageContext';
 
@@ -10,7 +11,6 @@ function GoalsPicker() {
   const [activeFieldIndex, setActiveFieldIndex] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false); 
   const { translate } = useLanguage();
-
   const activeFieldIndexRef = useRef(activeFieldIndex);
 
   useEffect(() => {
@@ -34,14 +34,15 @@ function GoalsPicker() {
     updateRows(value);
   };
 
-  const onEmojiClick = (emojiObject) => {
+  const onEmojiClick = (emoji) => {
     const index = activeFieldIndexRef.current;
     if (index !== null) {
       const newSelectedEmojis = [...selectedEmojis];
-      newSelectedEmojis[index] = emojiObject.emoji;
+      newSelectedEmojis[index] = emoji.native;
       setSelectedEmojis(newSelectedEmojis);
       updateEmojis(newSelectedEmojis);
     }
+    setShowEmojiPicker(false);
   };
 
   const handleEmojiClick = (index) => {
@@ -85,9 +86,7 @@ function GoalsPicker() {
                 variant="outlined"
                 size="small"
                 value={textfields[index]}
-                sx = {{'& .MuiInputBase-input': {
-                        padding: '10px', 
-                      },}}
+                sx={{'& .MuiInputBase-input': { padding: '10px' }}}
                 onChange={(event) => handleTextField(index, event)}
               />
             </Stack>
@@ -95,10 +94,9 @@ function GoalsPicker() {
         ))}
       </Grid>
       {showEmojiPicker && (
-        <EmojiPicker
-          width="100%"
-          onEmojiClick={onEmojiClick}
-          pickerStyle={{ position: 'absolute', zIndex: 1000 }}
+        <Picker
+          data={data}
+          onEmojiSelect={onEmojiClick}
         />
       )}
     </Stack>

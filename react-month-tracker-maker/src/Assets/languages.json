@@ -77,9 +77,13 @@
             "Days Shape", 
             "Goals",
             "Fonts",
-            "Top Images",
             "Fill"],
-    "es":  ["Componentes", "Fondo", "Forma de día", "Goals" ,"Fuentes", "Imágenes Arriba",  "Llenar"]
+    "es":  ["Componentes", 
+            "Fondo", 
+            "Forma de día", 
+            "Goals" ,
+            "Fuentes", 
+            "Llenar"]
   },
   "download-button": {
     "en": "Download",

@@ -7,7 +7,7 @@ import Footer from '../Components/Footer';
 const MainLayout = () => {
   return (
     <div>
-      <Box sx={{ backgroundColor: '#f0f0f0'}}>
+      <Box sx={{ backgroundColor: '#f0f0f0', height: '100%'}}>
         <Navbar />
         <main>
           <Outlet />

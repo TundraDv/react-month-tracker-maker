@@ -3,44 +3,73 @@ import { Select, Box, MenuItem, Grid, Typography } from "@mui/material";
 import { useFontContext } from "../Contexts/FontContext";
 import { HexColorPicker } from "react-colorful";
 import { useLanguage } from '../Contexts/LanguageContext';
-import '@fontsource/roboto';
-import '@fontsource/lobster';
-import '@fontsource/open-sans';
-import '@fontsource/kalam';
-import '@fontsource/spectral';
-import '@fontsource/abril-fatface';
-// Supports weights 100-900
-import '@fontsource-variable/exo';
-// Supports weights 100-900
-import '@fontsource-variable/comfortaa';
-import '@fontsource/poppins';
-import '@fontsource/bebas-neue';
-// Supports weights 100-900
-import '@fontsource-variable/montserrat';
-// Supports weights 200-900
-import '@fontsource-variable/cairo';
-import '@fontsource/dm-serif-display';
-// Supports weights 400-700
-import '@fontsource-variable/dancing-script';
-// Supports weights 200-900
-import '@fontsource-variable/inconsolata';
-import '@fontsource/merriweather';
-import '@fontsource/megrim';
-import '@fontsource/ribeye-marrow';
-// Supports weights 100-700
-import '@fontsource-variable/josefin-sans';
-import '@fontsource/pacifico';
-// Supports weights 100-900
-import '@fontsource-variable/lexend';
-// Supports weights 200-900
-import '@fontsource-variable/nunito';
-// Supports weights 100-900
-import '@fontsource-variable/lexend';
-import '@fontsource/press-start-2p';
-import '@fontsource/audiowide';
-import '@fontsource/bungee-shade';
-import '@fontsource/silkscreen';
-import '@fontsource/bungee-hairline';
+// Import only regular weight for each font
+import '@fontsource/roboto/400.css';         // Regular weight for Roboto
+import '@fontsource/lobster/400.css';        // Regular weight for Lobster
+import '@fontsource/open-sans/400.css';      // Regular weight for Open Sans
+import '@fontsource/kalam/400.css';          // Regular weight for Kalam
+import '@fontsource/spectral/400.css';       // Regular weight for Spectral
+import '@fontsource/abril-fatface/400.css';  // Regular weight for Abril Fatface
+import '@fontsource/poppins/400.css';        // Regular weight for Poppins
+import '@fontsource/bebas-neue/400.css';     // Regular weight for Bebas Neue
+import '@fontsource/merriweather/400.css';   // Regular weight for Merriweather
+import '@fontsource/megrim/400.css';         // Regular weight for Megrim
+import '@fontsource/ribeye-marrow/400.css';  // Regular weight for Ribeye Marrow
+import '@fontsource/pacifico/400.css';       // Regular weight for Pacifico
+import '@fontsource/press-start-2p/400.css'; // Regular weight for Press Start 2P
+import '@fontsource/audiowide/400.css';      // Regular weight for Audiowide
+import '@fontsource/bungee-shade/400.css';   // Regular weight for Bungee Shade
+import '@fontsource/silkscreen/400.css';     // Regular weight for Silkscreen
+import '@fontsource/bungee-hairline/400.css'; // Regular weight for Bungee Hairline
+// Import base or specific weights for variable fonts
+import '@fontsource-variable/exo';               // Base import for Exo variable font
+import '@fontsource-variable/comfortaa';         // Base import for Comfortaa variable font
+import '@fontsource-variable/montserrat';        // Base import for Montserrat variable font
+import '@fontsource-variable/cairo';             // Base import for Cairo variable font
+import '@fontsource-variable/dancing-script';    // Base import for Dancing Script variable font
+import '@fontsource-variable/inconsolata';       // Base import for Inconsolata variable font
+import '@fontsource-variable/josefin-sans';      // Base import for Josefin Sans variable font
+import '@fontsource-variable/lexend';            // Base import for Lexend variable font
+import '@fontsource-variable/nunito';            // Base import for Nunito variable font
+
+// import '@fontsource/roboto/400.css';
+// import '@fontsource/lobster';
+// import '@fontsource/open-sans';
+// import '@fontsource/kalam';
+// import '@fontsource/spectral';
+// import '@fontsource/abril-fatface';
+// // Supports weights 100-900
+// import '@fontsource-variable/exo';
+// // Supports weights 100-900
+// import '@fontsource-variable/comfortaa';
+// import '@fontsource/poppins';
+// import '@fontsource/bebas-neue';
+// // Supports weights 100-900
+// import '@fontsource-variable/montserrat';
+// // Supports weights 200-900
+// import '@fontsource-variable/cairo';
+// import '@fontsource/dm-serif-display';
+// // Supports weights 400-700
+// import '@fontsource-variable/dancing-script';
+// // Supports weights 200-900
+// import '@fontsource-variable/inconsolata';
+// import '@fontsource/merriweather';
+// import '@fontsource/megrim';
+// import '@fontsource/ribeye-marrow';
+// // Supports weights 100-700
+// import '@fontsource-variable/josefin-sans';
+// import '@fontsource/pacifico';
+// // Supports weights 100-900
+// import '@fontsource-variable/lexend';
+// // Supports weights 200-900
+// import '@fontsource-variable/nunito';
+// // Supports weights 100-900
+// import '@fontsource-variable/lexend';
+// import '@fontsource/press-start-2p';
+// import '@fontsource/audiowide';
+// import '@fontsource/bungee-shade';
+// import '@fontsource/silkscreen';
+// import '@fontsource/bungee-hairline';
 
 function FontPicker() {
   const { selectedFonts, updateSelectedFonts, selectedColors, updateSelectedColors } = useFontContext();

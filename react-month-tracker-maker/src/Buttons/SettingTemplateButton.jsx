@@ -8,7 +8,7 @@ import { useLanguage } from '../Contexts/LanguageContext';
 const SettingTemplateButton = ({ index, actionType }) => {
   const navigate = useNavigate();
   const { templatesData } = useTemplates();
-  const dataDefault = actionType === 'reset' ? templatesData[0] : templatesData[index];
+  const dataDefault = templatesData[index];
   const { translate } = useLanguage();
   const { applyTemplateData } = useTemplateUpdater(); // Use the custom hook
 
@@ -39,7 +39,7 @@ const SettingTemplateButton = ({ index, actionType }) => {
         return;
     }
     applyTemplateData(dataDefault, tabIndex);
-    navigate(`/maker/templates/${index}`);
+    navigate(`/templates/${index}`);
   };
   
 
