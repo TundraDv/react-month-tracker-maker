@@ -48,7 +48,7 @@ function ImageUploadButton({ context }) {
       {imageLocalData.length > 1 && (
         <Alert
           severity="error"
-          sx={{ marginBottom: 2, position: 'absolute', top: 60, left: 0, right: 0, zIndex: 10 }}
+          sx={{ marginY: 1, top: 60, left: 0, right: 0, zIndex: 10 }}
         >
           {translate("upload-alert")}
         </Alert>

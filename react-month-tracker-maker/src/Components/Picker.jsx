@@ -11,7 +11,7 @@ import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import SettingTemplateButton from "../Buttons/SettingTemplateButton";
 import DownloadButton from "../Buttons/DownloadButton";
-import FillingTab from "../Components/FillingTab";
+import FillingPicker from "./FillingPicker";
 import { useLanguage } from '../Contexts/LanguageContext';
 
 function CustomTabPanel(props) {
@@ -37,8 +37,7 @@ CustomTabPanel.propTypes = {
 };
 
 function Picker() {
-  const [tab, setTab] = useState(0);
-  const { titleTextContext } = useComponentsContext();
+  const { titleTextContext, pickerTab, updatePickerTab } = useComponentsContext();
   const { translate } = useLanguage();
 
   const componentNames = translate("tabs-names");
@@ -50,20 +49,20 @@ function Picker() {
     <GoalsPicker />,
     <FontPicker />,
     <TopImagePicker />,
-    <FillingTab />,
+    <FillingPicker />,
   ];
 
   const handleChange = (event, newValue) => {
-    setTab(newValue);
+    updatePickerTab(newValue);
   };
 
   return (
     <Box sx={{ width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
-      <Card sx={{ height: 650, width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
+      <Card sx={{ height: "80vh", width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
-              value={tab}
+              value={pickerTab}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons="auto"
@@ -75,7 +74,7 @@ function Picker() {
             </Tabs>
           </Box>
           {componentList.map((component, index) => (
-            <CustomTabPanel key={index} value={tab} index={index}>
+            <CustomTabPanel key={index} value={pickerTab} index={index}>
               {component}
             </CustomTabPanel>
           ))}

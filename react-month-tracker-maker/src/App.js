@@ -3,6 +3,7 @@ import * as React from "react";
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import MakerView from "./Views/MakerView";
 import ErrorView from "./Views/ErrorView";
@@ -21,19 +22,23 @@ import { TemplatesProvider } from './Contexts/TemplatesContext'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />, 
+    element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: "/", // Redirect root to templates/0
+        element: <Navigate to="/templates/0" />, 
+      },
+      {
+        path: "/templates",
+        element: <TemplatesView />,
+      },
+      {
+        path: "/templates/:id", 
         element: <MakerView />,
       },
       {
         path: "/month",
         element: <MakerView />,
-      },
-      {
-        path: "/templates",
-        element: <TemplatesView />,
       },
       {
         path: "/about",
@@ -46,24 +51,25 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 function App() {
   return (
     <LanguageProvider>
-      <DayShapeProvider>
-        <BackgroundImageProvider>
-          <GoalsProvider>
-            <ComponentsProvider>
-              <FontProvider>
-                <TemplatesProvider>
-                <div className="App">
-                  <RouterProvider router={router} />
-                </div>
-                </TemplatesProvider>
-              </FontProvider>
-            </ComponentsProvider>
-          </GoalsProvider>
-        </BackgroundImageProvider>
-      </DayShapeProvider>
+      <TemplatesProvider>
+        <DayShapeProvider>
+          <BackgroundImageProvider>
+            <GoalsProvider>
+              <ComponentsProvider>
+                <FontProvider>
+                  <div className="App">
+                    <RouterProvider router={router} />
+                  </div>
+                </FontProvider>
+              </ComponentsProvider>
+            </GoalsProvider>
+          </BackgroundImageProvider>
+        </DayShapeProvider>
+      </TemplatesProvider>
     </LanguageProvider>
   );
 }

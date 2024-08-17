@@ -8,6 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function ImagePicker({ context }) {
   const [activeColorPicker, setActiveColorPicker] = useState(false);
   const { imageData,
+          selectedId,
+          updateSelectedId,
           imageLocalData,
           updateImageLocalData,
           selectedLocalImage,
@@ -17,11 +19,11 @@ function ImagePicker({ context }) {
           updateBackgroundColor, 
           transparency, 
           backgroundColor } = context();
-  const [selectedId, setSelectedId] = useState(1);
   const { translate } = useLanguage();
 
-  const handleImageClick = (image) => {
-    setSelectedId(image.id);
+  const handleImageClick = (image, index) => {
+    console.log(index)
+    updateSelectedId(index);
     updateSelectedImage(image.src);
     setActiveColorPicker(false);
     updateSelectedLocalImage(null);
@@ -161,17 +163,17 @@ function ImagePicker({ context }) {
               </IconButton>
             </ImageListItem>
           ))}
-          {imageData.map((item) => (
+          {imageData && imageData.map((item, index) => (
             <ImageListItem
-              key={item.id}
+              key={index}
               sx={{
                 position: 'relative',
                 paddingTop: '100%',
                 overflow: 'hidden',
                 borderRadius: 1,
-                cursor: 'pointer', // Add cursor style for hover effect
+                cursor: 'pointer', 
               }}
-              onClick={() => handleImageClick(item)}
+              onClick={() => handleImageClick(item, index)}
             >
               <img
                 src={require(`../Assets/${item.src}`)}
@@ -187,7 +189,7 @@ function ImagePicker({ context }) {
                   objectFit: 'cover',
                 }}
               />
-              {(item.id === selectedId) && (selectedLocalImage === null) && (
+              {(index === selectedId) && (selectedLocalImage === null) && (
                 <div
                   style={{
                     position: 'absolute',

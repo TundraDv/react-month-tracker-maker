@@ -89,6 +89,10 @@
     "en": "Reset",
     "es": "Resetear"
   },
+  "fill-button": {
+    "en": "Fill",
+    "es": "Llenar"
+  },
   "edit-button": {
     "en": "Edit",
     "es": "Editar"
@@ -127,11 +131,15 @@
   },
   "about-body": {
     "en": "Hello, I'm the creator of this page. I enjoy building web applications and sharing knowledge with the community.",
-    "es": "Hola, soy el creador esta página. Disfruto creando aplicaciones web y compartiendo conocimientos con la comunidad."
+    "es": "Hola, yo he creado esta página. Disfruto creando aplicaciones web y compartiendo conocimientos con la comunidad."
   },
   "about-body2": {
     "en": "Feel free to make the trackers you need.",
     "es": "Se libre de hacer los trackers que quieras."
+  },
+  "about-body3": {
+    "en": "Please contact me on Twitter/X to remove any picture.",
+    "es": "Por favor contactame por Twitter/X para sacar cualquier imagen."
   },
   "error-h1": {
     "en": "Oops! Something went wrong.",

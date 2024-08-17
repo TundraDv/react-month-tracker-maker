@@ -23,34 +23,36 @@ function getWeekDays(startDay, weekdays) {
   return [...weekdays.slice(startDay), ...weekdays.slice(0, startDay)];
 }
 
-function Calendar({ 
-  selectedImageDayShape, 
-  transparencyDayShape,
-  backgroundColorDayShape,
-  selectedImageBackground,
-  transparency,
-  backgroundColor,
-  titleTextContext,
-  heightContext,
-  titleContext,
-  yearContext,
-  monthContext,
-  daysNameContext,
-  firstDayContext,
-  dateValueContext = dayjs(),
-  columns,
-  rows,
-  textfields,
-  emojis,
-  fillingEmojis = Array(24).fill(""),
-  emojiSize = 15,
-  selectedFonts,
-  selectedColors,
-  imageLocalDataBackground = [],
-  selectedLocalImageBackground =null,
-  imageLocalDataDayShape = [],
-  selectedLocalImageDayShape = null,
-  indexCard = 0,}) {
+function Calendar({ data }) {
+    const {
+      selectedImageDayShape, 
+      transparencyDayShape,
+      backgroundColorDayShape,
+      selectedImageBackground,
+      transparency,
+      backgroundColor,
+      titleTextContext,
+      heightContext,
+      titleContext,
+      yearContext,
+      monthContext,
+      daysNameContext,
+      firstDayContext,
+      dateValueContext = dayjs(),
+      columns,
+      rows,
+      textfields,
+      emojis,
+      fillingEmojis = Array(24).fill(""),
+      emojiSize = 15,
+      selectedFonts,
+      selectedColors,
+      imageLocalDataBackground = [],
+      selectedLocalImageBackground =null,
+      imageLocalDataDayShape = [],
+      selectedLocalImageDayShape = null,
+      indexCard = 0
+    } = data;
   const { translate } = useLanguage();
 
   const rgbaColor = chroma(backgroundColor).alpha(transparency).rgba();
@@ -119,9 +121,22 @@ function Calendar({
         }}
       >
         {titleContext && (
-          <Typography variant="h3" sx={{ mb: 2, fontFamily: selectedFonts[0], color: selectedColors[0] }}>
-            {titleTextContext}
-          </Typography>
+          <Typography
+          variant="h3"
+          sx={{
+            mb: 2,
+            fontFamily: selectedFonts[0],
+            color: selectedColors[0],
+            textAlign: 'center', // Center the text
+            fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
+            lineHeight: 1.2, // Adjust line height for better fit
+            whiteSpace: 'nowrap', // Prevent text wrapping
+            overflow: 'hidden', // Hide overflow
+            textOverflow: 'ellipsis', // Add ellipsis if needed
+          }}
+        >
+          {titleTextContext}
+        </Typography>
         )}
         {monthContext && (
           <Typography variant="h4" sx={{ mb: 2, fontFamily: selectedFonts[1], color: selectedColors[1] }}>

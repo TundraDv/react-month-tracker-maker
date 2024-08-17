@@ -5,7 +5,7 @@ import { Select, Slider, FormControl, Box, Grid, MenuItem, Typography } from "@m
 import { useGoalsContext } from "../Contexts/GoalsContext";
 import { useComponentsContext } from "../Contexts/ComponentsContext";
 
-function FillingTab() {
+function FillingPicker() {
   const { translate } = useLanguage();
   const { textfields, emojis, fillingEmojis, updateFillingEmojis, emojiSize, updateEmojiSize } = useGoalsContext();
   const { dateValueContext } = useComponentsContext();
@@ -76,4 +76,4 @@ function FillingTab() {
   );
 }
 
-export default FillingTab;
+export default FillingPicker;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { Box, Grid, Container, useMediaQuery, useTheme } from "@mui/material";
 import Calendar from "../Components/Calendar";
 import Picker from "../Components/Picker";
@@ -8,49 +8,98 @@ import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import { useFontContext } from "../Contexts/FontContext";
 import { useGoalsContext } from '../Contexts/GoalsContext';
+import { useTemplates } from '../Contexts/TemplatesContext'; 
+import { useParams } from 'react-router-dom';
+import { useTemplateUpdater } from '../Utils/useTemplateUpdater';
 
 function MakerView() {
+  const { applyTemplateData } = useTemplateUpdater();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const {
-    imageLocalData: imageLocalDataDayShape,  
-    selectedLocalImage: selectedLocalImageDayShape,
-    selectedImageDayShape,
-    transparency: transparencyDayShape,
-    backgroundColor: backgroundColorDayShape
-  } = useDayShapeContext();
-  const { 
-    imageLocalData: imageLocalDataBackground, 
-    selectedLocalImage: selectedLocalImageBackground,
-    selectedImageBackground, 
-    transparency, 
-    backgroundColor } = useBackgroundImageContext();
+  const { templatesData } = useTemplates();
+  
+  const { selectedId: selectedIdDayShape, imageLocalData: imageLocalDataDayShape, selectedLocalImage: selectedLocalImageDayShape, selectedImageDayShape, transparency: transparencyDayShape, backgroundColor: backgroundColorDayShape } = useDayShapeContext();
+  const { selectedId, imageLocalData: imageLocalDataBackground, selectedLocalImage: selectedLocalImageBackground, selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
   const { selectedFonts, selectedColors } = useFontContext();
   const { columns, rows, textfields, emojis, fillingEmojis, emojiSize } = useGoalsContext();
-  
-  const dataTemplate = {
-    "selectedImageBackground": selectedImageBackground,
-    "transparency": transparency,
-    "backgroundColor": backgroundColor,
-    "selectedImageDayShape": selectedImageDayShape,
-    "transparencyDayShape": transparencyDayShape,
-    "backgroundColorDayShape": backgroundColorDayShape,
-    "titleTextContext": titleTextContext,
-    "titleContext": titleContext,
-    "yearContext": yearContext,
-    "daysNameContext": daysNameContext,
-    "monthContext": monthContext,
-    "firstDayContext": firstDayContext,
-    "heightContext": heightContext,
-    "selectedFonts": selectedFonts,
-    "selectedColors": selectedColors,
-    "columns": columns,
-    "rows": rows,
-    "textfields": textfields,
-    "emojis": emojis
-  };
+  const { id } = useParams();
+
+  const hasAppliedTemplateRef = useRef(false); // Ref to track if applyTemplateData has been called
+
+  const dataTemplate = useMemo(() => {
+    return {
+      selectedId,
+      selectedIdDayShape,
+      selectedImageBackground,
+      transparency,
+      backgroundColor,
+      selectedImageDayShape,
+      transparencyDayShape,
+      backgroundColorDayShape,
+      titleTextContext,
+      titleContext,
+      yearContext,
+      daysNameContext,
+      monthContext,
+      firstDayContext,
+      heightContext,
+      selectedFonts,
+      selectedColors,
+      columns,
+      rows,
+      textfields,
+      emojis
+    };
+  }, [
+    selectedId, selectedIdDayShape, selectedImageBackground, transparency, backgroundColor,
+    selectedImageDayShape, transparencyDayShape, backgroundColorDayShape,
+    titleTextContext, titleContext, yearContext, daysNameContext, monthContext, firstDayContext, heightContext,
+    selectedFonts, selectedColors, columns, rows, textfields, emojis
+  ]);
+
+  const calendarData = useMemo(() => {
+    return {
+      selectedImageDayShape,
+      transparencyDayShape,
+      backgroundColorDayShape,
+      selectedImageBackground,
+      transparency,
+      backgroundColor,
+      titleTextContext,
+      heightContext,
+      titleContext,
+      yearContext,
+      monthContext,
+      daysNameContext,
+      firstDayContext,
+      dateValueContext,
+      columns,
+      rows,
+      textfields,
+      emojis,
+      fillingEmojis,
+      emojiSize,
+      selectedFonts,
+      selectedColors,
+      imageLocalDataBackground,
+      selectedLocalImageBackground,
+      imageLocalDataDayShape,
+      selectedLocalImageDayShape
+    };
+  }, [
+    selectedImageDayShape, transparencyDayShape, backgroundColorDayShape, selectedImageBackground, transparency, backgroundColor,
+    titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext,
+    columns, rows, textfields, emojis, fillingEmojis, emojiSize, selectedFonts, selectedColors,
+    imageLocalDataBackground, selectedLocalImageBackground, imageLocalDataDayShape, selectedLocalImageDayShape
+  ]);
+
+  useEffect(() => {
+    if (id && templatesData[id] && !hasAppliedTemplateRef.current) {
+      applyTemplateData(templatesData[id], 0);
+      hasAppliedTemplateRef.current = true; // Mark as applied
+    }
+  }, [id, templatesData, applyTemplateData]);
 
   return (
     <Container
@@ -85,33 +134,8 @@ function MakerView() {
           sx={{ minWidth: '300px' }}
         >
           <Calendar 
-            selectedImageDayShape={selectedImageDayShape} 
-            transparencyDayShape={transparencyDayShape}
-            backgroundColorDayShape={backgroundColorDayShape}
-            selectedImageBackground={selectedImageBackground}
-            transparency={transparency}
-            backgroundColor={backgroundColor}
-            titleTextContext={titleTextContext}
-            heightContext={heightContext}
-            titleContext={titleContext}
-            yearContext={yearContext}
-            monthContext={monthContext}
-            daysNameContext={daysNameContext}
-            firstDayContext={firstDayContext}
-            dateValueContext={dateValueContext}
-            selectedFonts={selectedFonts}
-            selectedColors={selectedColors}
-            imageLocalDataBackground={imageLocalDataBackground}
-            selectedLocalImageBackground={selectedLocalImageBackground}
-            imageLocalDataDayShape={imageLocalDataDayShape}
-            selectedLocalImageDayShape={selectedLocalImageDayShape}
-            columns={columns}
-            rows={rows}
-            textfields={textfields}
-            emojis={emojis} 
-            fillingEmojis={fillingEmojis}
-            emojiSize={emojiSize}
-            />
+            data={calendarData}
+          />
         </Grid>
         <Grid
           item

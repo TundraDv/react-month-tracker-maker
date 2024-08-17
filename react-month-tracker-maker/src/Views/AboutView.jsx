@@ -37,8 +37,11 @@ const AboutView = () => {
           <Typography variant="body2" color="text.secondary" sx={{ marginBottom: 2 }}>
             {translate("about-body")}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" sx={{ marginBottom: 2 }}>
             {translate("about-body2")}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {translate("about-body3")}
           </Typography>
         </CardContent>
         <Stack direction="row" spacing={1} justifyContent="center" mb={2}>

@@ -80,7 +80,7 @@ const Navbar = () => {
               <MenuItem onClick={() => handleMenuItemClick("/")}>Maker</MenuItem>
               <MenuItem onClick={() => handleMenuItemClick("/templates")}>{translate("navbar-templates")}</MenuItem>
               <MenuItem onClick={handleLanguageClick}>{translate("navbar-language")}</MenuItem>
-              <MenuItem onClick={() => handleMenuItemClick("/about")}>{translate("navbar-about")}</MenuItem>
+              {/* <MenuItem onClick={() => handleMenuItemClick("/about")}>{translate("navbar-about")}</MenuItem> */}
             </Menu>
             <Menu
               anchorEl={languageAnchorEl}
@@ -106,7 +106,7 @@ const Navbar = () => {
               <MenuItem onClick={() => handleLanguageChange('en')}>English</MenuItem>
               <MenuItem onClick={() => handleLanguageChange('es')}>Español</MenuItem>
             </Menu>
-            <Button color="inherit" onClick={() => handleMenuItemClick("/about")}>{translate("navbar-about")}</Button>
+            {/* <Button color="inherit" onClick={() => handleMenuItemClick("/about")}>{translate("navbar-about")}</Button> */}
           </Box>
         )}
       </Toolbar>

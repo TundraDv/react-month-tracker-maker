@@ -1,74 +1,60 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-
+import { useTemplates } from './TemplatesContext';
 const GoalsContext = createContext();
 
 export const GoalsProvider = ({ children }) => {
-  const [columns, setColumns] = useState(() => {
-    const saved = localStorage.getItem('columns');
-    return saved ? JSON.parse(saved) : 3;
+  const { templatesIdData } = useTemplates();
+
+  const [goalsSettings, setGoalsSettings] = useState(() => {
+    const saved = localStorage.getItem('goalsSettings');
+    return saved ? JSON.parse(saved) : {
+      columns: 3,
+      rows: 3,
+      textfields: Array(24).fill(null).map((_, index) => `${index + 1}K Steps`),
+      emojis: Array(24).fill('❤️'),
+      fillingEmojis: Array(24).fill(''),
+      emojiSize: 15
+    };
   });
 
-  const [rows, setRows] = useState(() => {
-    const saved = localStorage.getItem('rows');
-    return saved ? JSON.parse(saved) : 3;
-  });
-
-  const [textfields, setTextfields] = useState(() => {
-    const saved = localStorage.getItem('textfields');
-    return saved ? JSON.parse(saved) : Array(24).fill(null).map((_, index) => `${index+1}K Steps`);
-  });
-  
-  const [emojis, setEmojis] = useState(() => {
-    const saved = localStorage.getItem('emojis');
-    return saved ? JSON.parse(saved) : Array(24).fill('❤️');
-  });
-  const [fillingEmojis, setFillingEmojis] = useState(() => {
-    const saved = localStorage.getItem('fillingEmojis');
-    return saved ? JSON.parse(saved) : Array(24).fill('');
-  });
-  const [emojiSize, setEmojiSize] = useState(() => {
-    const saved = localStorage.getItem('emojiSize');
-    return saved ? JSON.parse(saved) : 15;
-  });
-
-  
   useEffect(() => {
-    localStorage.setItem('emojiSize', JSON.stringify(emojiSize));
-    localStorage.setItem('columns', JSON.stringify(columns));
-    localStorage.setItem('rows', JSON.stringify(rows));
-    localStorage.setItem('textfields', JSON.stringify(textfields));
-    localStorage.setItem('emojis', JSON.stringify(emojis));
-    localStorage.setItem('fillingEmojis', JSON.stringify(fillingEmojis));
-  }, [
-    emojiSize,
-    columns,
-    rows,
-    textfields,
-    emojis,
-    fillingEmojis,
-  ]);
+    localStorage.setItem('goalsSettings', JSON.stringify(goalsSettings));
+  }, [goalsSettings]);
 
   const updateColumns = (columns) => {
-    setColumns(columns);
+    setGoalsSettings(prev => ({ ...prev, columns }));
   };
+
   const updateRows = (rows) => {
-    setRows(rows);
+    setGoalsSettings(prev => ({ ...prev, rows }));
   };
+
   const updateTextfields = (textfields) => {
-    setTextfields(textfields);
+    setGoalsSettings(prev => ({ ...prev, textfields }));
   };
+
   const updateEmojis = (emojis) => {
-    setEmojis(emojis);
+    setGoalsSettings(prev => ({ ...prev, emojis }));
   };
+
   const updateFillingEmojis = (fillingEmojis) => {
-    setFillingEmojis(fillingEmojis);
+    setGoalsSettings(prev => ({ ...prev, fillingEmojis }));
   };
+
   const updateEmojiSize = (emojiSize) => {
-    setEmojiSize(emojiSize);
+    setGoalsSettings(prev => ({ ...prev, emojiSize }));
   };
 
   return (
-    <GoalsContext.Provider value={{ updateEmojiSize, emojiSize, updateFillingEmojis,fillingEmojis, columns, rows, textfields, emojis, updateColumns, updateRows, updateTextfields, updateEmojis }}>
+    <GoalsContext.Provider value={{ 
+      updateColumns, 
+      updateRows, 
+      updateTextfields, 
+      updateEmojis, 
+      updateFillingEmojis, 
+      updateEmojiSize,
+      ...goalsSettings 
+    }}>
       {children}
     </GoalsContext.Provider>
   );

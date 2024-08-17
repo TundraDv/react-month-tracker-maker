@@ -8,7 +8,7 @@ function DownloadButton({ id_CardElement, title }) {
   const handleDownload = () => {
     const cardElement = document.getElementById(id_CardElement);
     domtoimage.toPng(cardElement, { 
-      bgcolor: 'null', 
+      bgcolor: '#fff', 
       quality: 1 
     }).then((dataUrl) => {
         const link = document.createElement('a');

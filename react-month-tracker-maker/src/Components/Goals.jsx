@@ -7,8 +7,18 @@ function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColor
 
   const totalItems = rows * columns;
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginY: 2 }}>
-      <Grid container spacing={0.7} justifyContent="center" alignItems="center" sx={{ marginLeft: 1}}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginY: 1 }}>
+      <Box
+      sx={{
+        marginX: 1,
+        width: "100%",
+        // borderRadius: 4,
+        // border: '10px groove  rgba(0, 0, 0, 0.5);',
+        // borderColor: "#84DF9B",
+        // backgroundColor: "#fff"
+      }}
+    >
+      <Grid container spacing={0.7} justifyContent="center" alignItems="center">
         {Array.from({ length: totalItems }).map((_, index) => (
           <Grid item xs={12 / columns} key={index}>
             {/[^\s]/.test(textfields[index]) ? (
@@ -35,6 +45,7 @@ function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColor
           </Grid>
         ))}
       </Grid>
+        </Box>
     </Box>
   );
 }

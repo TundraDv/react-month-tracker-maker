@@ -1,111 +1,79 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import dayjs from 'dayjs';
+import { useTemplates } from './TemplatesContext';
 
 const ComponentsContext = createContext();
 
 export const ComponentsProvider = ({ children }) => {
-  const [titleTextContext, setTitleTextContext] = useState(() => {
-    const saved = localStorage.getItem('titleTextContext');
-    return saved ? JSON.parse(saved) : "Step Tracker";
-  });
-  
-  const [titleContext, setTitle] = useState(() => {
-    const saved = localStorage.getItem('titleContext');
-    return saved ? JSON.parse(saved) : true;
-  });
+  const { templatesIdData } = useTemplates();
 
-  const [yearContext, setYearContext] = useState(() => {
-    const saved = localStorage.getItem('yearContext');
-    return saved ? JSON.parse(saved) : true;
-  });
-
-  const [daysNameContext, setDaysNameContext] = useState(() => {
-    const saved = localStorage.getItem('daysNameContext');
-    return saved ? JSON.parse(saved) : true;
-  });
-
-  const [monthContext, setMonthContext] = useState(() => {
-    const saved = localStorage.getItem('monthContext');
-    return saved ? JSON.parse(saved) : true;
-  });
-
-  const [dateValueContext, setDateValueContext] = useState(() => {
-    const saved = localStorage.getItem('dateValueContext');
-    return saved ? dayjs(JSON.parse(saved)) : dayjs();
-  });
-
-  const [firstDayContext, setFirstDayContext] = useState(() => {
-    const saved = localStorage.getItem('firstDayContext');
-    return saved ? JSON.parse(saved) : 0;
-  });
-
-  const [heightContext, setHeightContext] = useState(() => {
-    const saved = localStorage.getItem('heightContext');
-    return saved ? JSON.parse(saved) : 660;
+  const [componentsSettings, setComponentsSettings] = useState(() => {
+    const saved = localStorage.getItem('componentsSettings');
+    const parsedSettings = saved ? JSON.parse(saved) : {
+      pickerTab: 0,
+      titleTextContext: "Step Tracker",
+      titleContext: true,
+      yearContext: true,
+      daysNameContext: true,
+      monthContext: true,
+      dateValueContext: dayjs(),
+      firstDayContext: 0,
+      heightContext: 660
+    };
+    // Convert dateValueContext back to dayjs object
+    return {
+      ...parsedSettings,
+      dateValueContext: dayjs(parsedSettings.dateValueContext)
+    };
   });
 
   useEffect(() => {
-    localStorage.setItem('titleTextContext', JSON.stringify(titleTextContext));
-    localStorage.setItem('titleContext', JSON.stringify(titleContext));
-    localStorage.setItem('yearContext', JSON.stringify(yearContext));
-    localStorage.setItem('daysNameContext', JSON.stringify(daysNameContext));
-    localStorage.setItem('monthContext', JSON.stringify(monthContext));
-    localStorage.setItem('dateValueContext', JSON.stringify(dateValueContext.format()));
-    localStorage.setItem('firstDayContext', JSON.stringify(firstDayContext));
-    localStorage.setItem('heightContext', JSON.stringify(heightContext));
-  }, [
-    titleTextContext,
-    titleContext,
-    yearContext,
-    daysNameContext,
-    monthContext,
-    dateValueContext,
-    firstDayContext,
-    heightContext
-  ]);
+    localStorage.setItem('componentsSettings', JSON.stringify({
+      ...componentsSettings,
+      dateValueContext: componentsSettings.dateValueContext.format()  // Convert dayjs object to string
+    }));
+  }, [componentsSettings]);
+
+  const updatePickerTab = (value) => {
+    setComponentsSettings(prev => ({ ...prev, pickerTab: value }));
+  };
 
   const updateTitleTextContext = (value) => {
-    setTitleTextContext(value);
+    setComponentsSettings(prev => ({ ...prev, titleTextContext: value }));
   };
 
   const updateTitleContext = (value) => {
-    setTitle(value);
+    setComponentsSettings(prev => ({ ...prev, titleContext: value }));
   };
 
   const updateYearContext = (value) => {
-    setYearContext(value);
+    setComponentsSettings(prev => ({ ...prev, yearContext: value }));
   };
 
   const updateDaysNameContext = (value) => {
-    setDaysNameContext(value);
+    setComponentsSettings(prev => ({ ...prev, daysNameContext: value }));
   };
 
   const updateMonthContext = (value) => {
-    setMonthContext(value);
+    setComponentsSettings(prev => ({ ...prev, monthContext: value }));
   };
 
   const updateDateValueContext = (value) => {
-    setDateValueContext(value);
+    setComponentsSettings(prev => ({ ...prev, dateValueContext: value }));
   };
 
   const updateFirstDayContext = (value) => {
-    setFirstDayContext(value);
+    setComponentsSettings(prev => ({ ...prev, firstDayContext: value }));
   };
 
   const updateHeightContext = (value) => {
-    setHeightContext(value);
+    setComponentsSettings(prev => ({ ...prev, heightContext: value }));
   };
 
   return (
     <ComponentsContext.Provider value={{ 
-      daysNameContext,
-      dateValueContext,
-      monthContext,
-      titleTextContext, 
-      titleContext, 
-      yearContext,
-      firstDayContext,
-      heightContext,
+      ...componentsSettings,
+      updatePickerTab,
       updateHeightContext,
       updateDaysNameContext,
       updateTitleTextContext,
