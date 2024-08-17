@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box, ImageList, ImageListItem, Slider, Grid, Typography, IconButton } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
 import { useLanguage } from '../Contexts/LanguageContext';
@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 function ImagePicker({ context }) {
   const [activeColorPicker, setActiveColorPicker] = useState(false);
+  const colorPickerRef = useRef(null);
   const { imageData,
           selectedId,
           updateSelectedId,
@@ -20,6 +21,19 @@ function ImagePicker({ context }) {
           transparency, 
           backgroundColor } = context();
   const { translate } = useLanguage();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (colorPickerRef.current && !colorPickerRef.current.contains(event.target)) {
+        setActiveColorPicker(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleImageClick = (image, index) => {
     updateSelectedId(index);
@@ -86,6 +100,7 @@ function ImagePicker({ context }) {
       </Grid>
       {activeColorPicker && (
         <Box
+          ref={colorPickerRef}
           sx={{
             position: 'absolute',
             top: 60,
