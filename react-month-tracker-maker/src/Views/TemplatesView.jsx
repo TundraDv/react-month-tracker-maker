@@ -14,6 +14,8 @@ function TemplatesView() {
       <Grid container sx={{ justifyContent: 'center', alignItems: 'center' }}>
         {templatesData.map((item, index) => {
           const calendarData = {
+            selectedId: item.selectedId,
+            selectedIdDayShape: item.selectedIdDayShape,
             selectedImageDayShape: item.selectedImageDayShape, 
             transparencyDayShape: item.transparencyDayShape,
             backgroundColorDayShape: item.backgroundColorDayShape,

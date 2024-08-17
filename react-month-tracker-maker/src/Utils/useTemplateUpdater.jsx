@@ -6,11 +6,13 @@ import { useFontContext } from '../Contexts/FontContext';
 import { useGoalsContext } from '../Contexts/GoalsContext';
 
 export const useTemplateUpdater = () => {
-  const { updateSelectedLocalImage, 
+  const { updateSelectedId,
+          updateSelectedLocalImage, 
           updateSelectedImage, 
           updateTransparency, 
           updateBackgroundColor } = useBackgroundImageContext();
-  const { updateSelectedLocalImage: updateSelectedLocalImageDayShape, 
+  const { updateSelectedId: updateSelectedIdDayShape,
+          updateSelectedLocalImage: updateSelectedLocalImageDayShape, 
           updateSelectedImage: updateSelectedImageDayShape, 
           updateTransparency: updateTransparencyDayShape, 
           updateBackgroundColor: updateBackgroundColorDayShape } = useDayShapeContext();
@@ -20,6 +22,9 @@ export const useTemplateUpdater = () => {
 
   const applyTemplateData = useCallback((data, tabIndex) => {
     if (data) {
+      updateSelectedId(data.selectedId);
+      updateSelectedIdDayShape(data.selectedIdDayShape);
+
       updateSelectedLocalImage(null);
       updateSelectedImage(data.selectedImageBackground);
       updateTransparency(data.transparency);

@@ -1,14 +1,14 @@
 [
   { 
     "selectedId": 0,
-"selectedIdDayShape": 0,
+    "selectedIdDayShape": 0,
     "id": 1, 
     "title": "Default",
     "titleTextContext": "Playing Tracker",
     "titleContext": true,
     "yearContext": true,
     "daysNameContext": true,
-"emojiSize": 15,
+    "emojiSize": 15,
     "monthContext" : true,
     "firstDayContext" : 0,
     "heightContext" : 660,
@@ -92,7 +92,7 @@
   },
   {
     "selectedId": 0,
-"selectedIdDayShape": 0,
+    "selectedIdDayShape": 2,
     "selectedImageBackground": "blank.jpg",
     "transparency": 0,
     "backgroundColor": "#fff",
@@ -103,7 +103,7 @@
     "titleContext": false,
     "yearContext": false,
     "daysNameContext": true,
-"emojiSize": 15,
+    "emojiSize": 15,
     "monthContext": true,
     "firstDayContext": 0,
     "heightContext": 570,
@@ -181,7 +181,7 @@
   },
   {
     "selectedId": 0,
-"selectedIdDayShape": 0,
+    "selectedIdDayShape": 23,
     "selectedImageBackground": "",
     "transparency": 0,
     "backgroundColor": "#fff",
@@ -192,7 +192,7 @@
     "titleContext": true,
     "yearContext": false,
     "daysNameContext": true,
-"emojiSize": 15,
+    "emojiSize": 15,
     "monthContext": true,
     "firstDayContext": 0,
     "heightContext": 560,
@@ -270,8 +270,8 @@
     ]
   },
   {
-    "selectedId": 0,
-"selectedIdDayShape": 0,
+    "selectedId": 30,
+    "selectedIdDayShape": 8,
     "selectedImageBackground": "BackgroundImage/aimoon.jpg",
     "transparency": 0.5,
     "backgroundColor": "#fff",
@@ -282,7 +282,7 @@
     "titleContext": true,
     "yearContext": true,
     "daysNameContext": true,
-"emojiSize": 15,
+    "emojiSize": 15,
     "monthContext": true,
     "firstDayContext": 0,
     "heightContext": 660,
@@ -360,8 +360,8 @@
     ]
   },
   {
-    "selectedId": 0,
-"selectedIdDayShape": 0,
+    "selectedId": 31,
+    "selectedIdDayShape": 17,
     "selectedImageBackground": "BackgroundImage/aiwhite.jpg",
     "transparency": 0.6,
     "backgroundColor": "#2d4556",
@@ -372,7 +372,7 @@
     "titleContext": true,
     "yearContext": false,
     "daysNameContext": true,
-"emojiSize": 15,
+    "emojiSize": 15,
     "monthContext": true,
     "firstDayContext": 0,
     "heightContext": 660,
@@ -541,8 +541,8 @@
       ""
     ]  
   },{
-    "selectedId": 0,
-"selectedIdDayShape": 0,
+    "selectedId": 10,
+    "selectedIdDayShape": 21,
     "selectedImageBackground": "BackgroundImage/skyaero.jpg",
     "transparency": 0.7,
     "backgroundColor": "#c8ffd7",
@@ -553,7 +553,7 @@
     "titleContext": true,
     "yearContext": false,
     "daysNameContext": true,
-"emojiSize": 15,
+    "emojiSize": 15,
     "monthContext": true,
     "firstDayContext": 0,
     "heightContext": 660,
@@ -630,8 +630,8 @@
         "🪂"
     ]
 },{
-  "selectedId": 0,
-"selectedIdDayShape": 0,
+  "selectedId": 28,
+  "selectedIdDayShape": 5,
   "selectedImageBackground": "BackgroundImage/roses.jpg",
   "transparency": 0.6,
   "backgroundColor": "#5d7ca5",
@@ -642,7 +642,7 @@
   "titleContext": true,
   "yearContext": false,
   "daysNameContext": true,
-"emojiSize": 15,
+  "emojiSize": 15,
   "monthContext": true,
   "firstDayContext": 0,
   "heightContext": 630,
