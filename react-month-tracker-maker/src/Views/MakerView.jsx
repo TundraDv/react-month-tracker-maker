@@ -21,7 +21,7 @@ function MakerView() {
   const { selectedId: selectedIdDayShape, imageLocalData: imageLocalDataDayShape, selectedLocalImage: selectedLocalImageDayShape, selectedImageDayShape, transparency: transparencyDayShape, backgroundColor: backgroundColorDayShape } = useDayShapeContext();
   const { selectedId, imageLocalData: imageLocalDataBackground, selectedLocalImage: selectedLocalImageBackground, selectedImageBackground, transparency, backgroundColor } = useBackgroundImageContext();
   const { titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext } = useComponentsContext();
-  const { selectedFonts, selectedColors } = useFontContext();
+  const { selectedFonts, selectedColors, boldSettings, italicSettings, fontSizes } = useFontContext();
   const { columns, rows, textfields, emojis, fillingEmojis, emojiSize } = useGoalsContext();
   const { id } = useParams();
 
@@ -48,13 +48,16 @@ function MakerView() {
       heightContext,
       selectedFonts,
       selectedColors,
+      boldSettings, 
+      italicSettings, 
+      fontSizes,
       columns,
       rows,
       textfields,
       emojis
     };
   }, [
-    selectedId, selectedIdDayShape, selectedImageBackground, transparency, backgroundColor,
+    selectedId, boldSettings, italicSettings, fontSizes, selectedIdDayShape, selectedImageBackground, transparency, backgroundColor,
     selectedImageDayShape, transparencyDayShape, backgroundColorDayShape,
     titleTextContext, titleContext, yearContext, daysNameContext, monthContext, firstDayContext, heightContext,
     selectedFonts, selectedColors, columns, rows, textfields, emojis
@@ -84,13 +87,16 @@ function MakerView() {
       emojiSize,
       selectedFonts,
       selectedColors,
+      boldSettings, 
+      italicSettings, 
+      fontSizes,
       imageLocalDataBackground,
       selectedLocalImageBackground,
       imageLocalDataDayShape,
       selectedLocalImageDayShape
     };
   }, [
-    selectedImageDayShape, transparencyDayShape, backgroundColorDayShape, selectedImageBackground, transparency, backgroundColor,
+    selectedImageDayShape, boldSettings, italicSettings, fontSizes, transparencyDayShape, backgroundColorDayShape, selectedImageBackground, transparency, backgroundColor,
     titleTextContext, heightContext, titleContext, yearContext, monthContext, daysNameContext, firstDayContext, dateValueContext,
     columns, rows, textfields, emojis, fillingEmojis, emojiSize, selectedFonts, selectedColors,
     imageLocalDataBackground, selectedLocalImageBackground, imageLocalDataDayShape, selectedLocalImageDayShape

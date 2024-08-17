@@ -1,9 +1,16 @@
 import React from "react";
 import { Grid, Stack, Typography, Box } from "@mui/material"
 
-function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColors} ) {
-  const lastFont = selectedFonts[selectedFonts.length - 2];
-  const lastColor = selectedColors[selectedColors.length - 2];
+function Goals( {goalsSettings} ) {
+  const { columns,
+    rows, 
+    textfields,
+    emojis,
+    goalsSelectedFonts,
+    goalsSelectedColors,
+    goalsBoldSettings,
+    goalsItalicSettings,
+    goalsFontSizes } = goalsSettings;
 
   const totalItems = rows * columns;
   return (
@@ -37,14 +44,20 @@ function Goals( {columns, rows, textfields, emojis, selectedFonts, selectedColor
                 }}>
                   {emojis[index]}
                 </span>
-                <Typography sx={{ position: 'relative',
-        // display: 'inline-block',
-        // color: 'white',
-        // textShadow: '1px 1px 2px rgba(0, 0, 0, 1)',
-        fontSize: '0.8rem',fontFamily: lastFont, color: lastColor }}>
-                  {/* <b> */}
+                <Typography 
+                sx={{ 
+                  position: 'relative',
+                  // display: 'inline-block',
+                  // color: 'white',
+                  // textShadow: '1px 1px 2px rgba(0, 0, 0, 1)',
+                  fontFamily: goalsSelectedFonts, 
+                  color: goalsSelectedColors,
+                  fontWeight: goalsBoldSettings ? 'bold' : 'normal',
+                  fontStyle: goalsItalicSettings ? 'italic' : 'normal',
+                  fontSize: goalsFontSizes,
+                  textAlign: 'center'
+                  }}>
                   {textfields[index]}
-                  {/* </b> */}
                 </Typography>
               </Stack>
             ) : null}

@@ -69,22 +69,26 @@ const fonts = [
 ];
 
 function FontPicker() {
-  const { selectedFonts, 
-          updateSelectedFonts, 
-          selectedColors, 
-          updateSelectedColors, 
-          boldSettings, 
-          updateBoldSettings, 
-          italicSettings, 
-          updateItalicSettings, 
-          fontSizes, 
-          updateFontSizes } = useFontContext();
+  const { 
+    selectedFonts, 
+    updateSelectedFonts, 
+    selectedColors, 
+    updateSelectedColors, 
+    boldSettings, 
+    updateBoldSettings, 
+    italicSettings, 
+    updateItalicSettings, 
+    fontSizes, 
+    updateFontSizes 
+  } = useFontContext();
+
+  const fontsLength = selectedFonts.length
+
   const { translate } = useLanguage();
-  
   const parts = translate("fonts-label");
   const [activeIndex, setActiveIndex] = useState(null);
   const maxFontSize = 36; // Maximum font size
-  const minFontSize = 12; // Minimum font size
+  const minFontSize = 10; // Minimum font size
 
   // Ref to the color picker
   const colorPickerRef = useRef(null);
@@ -96,80 +100,110 @@ function FontPicker() {
         setActiveIndex(null);
       }
     }
-    
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [colorPickerRef]);
 
-  // Update font selection
   const handleFontChange = (index) => (event) => {
     const newSelectedFonts = [...selectedFonts];
-    if (index === (selectedFonts.length - 1)) {
-      updateSelectedFonts(newSelectedFonts.fill(event.target.value));
+    if (index === (fontsLength - 1)) {
+      newSelectedFonts.fill(event.target.value);
     } else {
       newSelectedFonts[index] = event.target.value;
-      newSelectedFonts[selectedFonts.length - 1] = '';
-      updateSelectedFonts(newSelectedFonts);
+      newSelectedFonts[fontsLength - 1] = '';
     }
+    updateSelectedFonts(newSelectedFonts);
     setActiveIndex(null);
   };
 
-  // Toggle color picker visibility
   const toggleColorPicker = (index) => () => {
-    setActiveIndex(activeIndex === index ? null : index);
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  // Update color selection
   const handleColorChange = (color) => {
+    const newSelectedColors = [...selectedColors];
     if (activeIndex !== null) {
-      const newSelectedColors = [...selectedColors];
-      newSelectedColors[activeIndex] = color;
-      newSelectedColors[selectedFonts.length - 1] = '';
+      if (activeIndex === (fontsLength - 1)) {
+        newSelectedColors.fill(color);
+      } else {
+        newSelectedColors[activeIndex] = color;
+        newSelectedColors[fontsLength - 1] = '';
+      }
       updateSelectedColors(newSelectedColors);
     }
   };
+  
 
-  // Toggle bold/italic styles
-  const toggleStyle = (style) => {
+  const handleBold = (index) => () => {
     const newBoldSettings = [...boldSettings];
+    if (index === (fontsLength - 1)) {
+      const newBoldValue = !newBoldSettings[index];
+      newBoldSettings.fill(newBoldValue);
+    } else {
+      newBoldSettings[index] = !newBoldSettings[index];
+    }
+    updateBoldSettings(newBoldSettings); 
+  };
+
+  const handleItalic = (index) => () => {
     const newItalicSettings = [...italicSettings];
-    if (style === 'fontWeight') {
-      newBoldSettings[activeIndex] = !newBoldSettings[activeIndex];
-      updateBoldSettings(newBoldSettings);
-    } else if (style === 'fontStyle') {
-      newItalicSettings[activeIndex] = !newItalicSettings[activeIndex];
-      updateItalicSettings(newItalicSettings);
+    if (index === (fontsLength - 1)) {
+      const newItalicValue = !newItalicSettings[index]; 
+      newItalicSettings.fill(newItalicValue)
+    } else {
+      newItalicSettings[index] = !newItalicSettings[index];
+      newItalicSettings[fontsLength - 1] = false;
     }
+    updateItalicSettings(newItalicSettings);
   };
 
-  // Increase font size
-  const increaseFontSize = () => {
+  const handleIncreaseFontSize = (index) => () => {
     const newFontSizes = [...fontSizes];
-    const currentSize = newFontSizes[activeIndex] || 16; // Default font size
-    if (currentSize < maxFontSize) {
-      newFontSizes[activeIndex] = currentSize + 2;
-      updateFontSizes(newFontSizes);
+    if (index === (fontsLength - 1)) {
+      for (let i = 0; i < fontsLength-1; i++) {
+        const currentSize = newFontSizes[i] || 16; 
+        if (currentSize < maxFontSize) {
+          newFontSizes[i] = Math.min(currentSize + 2, maxFontSize);
+        }
+      }
+    } else {
+      const currentSize = newFontSizes[index] || 16;
+      if (currentSize < maxFontSize) {
+        newFontSizes[index] = Math.min(currentSize + 2, maxFontSize);
+      }
     }
+    updateFontSizes(newFontSizes); 
   };
+  
 
-  // Decrease font size
-  const decreaseFontSize = () => {
+  const handleDecreaseFontSize = (index) => () => {
     const newFontSizes = [...fontSizes];
-    const currentSize = newFontSizes[activeIndex] || 16; // Default font size
-    if (currentSize > minFontSize) {
-      newFontSizes[activeIndex] = currentSize - 2;
-      updateFontSizes(newFontSizes);
+    if (index === (fontsLength - 1)) {
+      for (let i = 0; i < fontsLength-1; i++) {
+        const currentSize = newFontSizes[i] || 16; 
+        if (currentSize > minFontSize) {
+          newFontSizes[i] = Math.max(currentSize - 2, minFontSize);
+        }
+      }
+    } else {
+      const currentSize = newFontSizes[index] || 16; 
+      if (currentSize > minFontSize) {
+        newFontSizes[index] = Math.max(currentSize - 2, minFontSize);
+      }
     }
+  
+    updateFontSizes(newFontSizes); 
   };
+  
 
   return (
     <Box>
       {parts.map((part, index) => (
         <Box key={index} sx={{ position: 'relative', marginBottom: 2 }}>
-          <Grid container alignItems="center" spacing={1}>
-            <Grid item xs={3}>
+          <Grid container alignItems="center" spacing={0.5}>
+            <Grid item xs={2.5}>
               <Typography>{part}</Typography>
             </Grid>
             <Grid item xs={4}>
@@ -194,7 +228,7 @@ function FontPicker() {
                 ))}
               </Select>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={5.5}>
               <Stack direction="row" spacing={0.5} alignItems="center">
                 <Box
                   sx={{
@@ -208,18 +242,18 @@ function FontPicker() {
                   }}
                   onClick={toggleColorPicker(index)}
                 />
-                <Stack direction="row" spacing={0.5}>
-                  <IconButton onClick={() => toggleStyle('fontWeight')}>
+                <Stack direction="row" spacing={0.3}>
+                  <IconButton size="small" onClick={handleBold(index)}>
                     <FormatBoldIcon color={boldSettings[index] ? 'primary' : 'action'} />
                   </IconButton>
-                  <IconButton onClick={() => toggleStyle('fontStyle')}>
+                  <IconButton size="small" onClick={handleItalic(index)}>
                     <FormatItalicIcon color={italicSettings[index] ? 'primary' : 'action'} />
                   </IconButton>
-                  <IconButton onClick={increaseFontSize} disabled={(fontSizes[index] || 16) >= maxFontSize}>
-                    <TextIncreaseIcon />
+                  <IconButton size="small" onClick={handleDecreaseFontSize(index)} disabled={(fontSizes[index] || 16) <= minFontSize}>
+                    <TextDecreaseIcon color={(fontSizes[index] || 16) <= minFontSize ? 'disabled' : 'action'} />
                   </IconButton>
-                  <IconButton onClick={decreaseFontSize} disabled={(fontSizes[index] || 16) <= minFontSize}>
-                    <TextDecreaseIcon />
+                  <IconButton size="small" onClick={handleIncreaseFontSize(index)} disabled={(fontSizes[index] || 16) >= maxFontSize}>
+                    <TextIncreaseIcon color={(fontSizes[index] || 16) >= maxFontSize ? 'disabled' : 'action'} />
                   </IconButton>
                 </Stack>
               </Stack>
@@ -227,7 +261,7 @@ function FontPicker() {
           </Grid>
           {activeIndex === index && (
             <Box
-              ref={colorPickerRef} // Attach ref here
+              ref={colorPickerRef}
               sx={{
                 position: 'absolute',
                 top: 0, 

@@ -16,14 +16,26 @@ export const useTemplateUpdater = () => {
           updateSelectedImage: updateSelectedImageDayShape, 
           updateTransparency: updateTransparencyDayShape, 
           updateBackgroundColor: updateBackgroundColorDayShape } = useDayShapeContext();
-  const { updatePickerTab, updateTitleTextContext, updateTitleContext, updateYearContext, updateDaysNameContext, updateMonthContext, updateFirstDayContext, updateHeightContext } = useComponentsContext();
-  const { updateSelectedFonts, updateSelectedColors } = useFontContext();
+  const { updatePickerTab, 
+          updateTitleTextContext, 
+          updateTitleContext, 
+          updateYearContext, 
+          updateDaysNameContext, 
+          updateMonthContext, 
+          updateFirstDayContext, 
+          updateHeightContext } = useComponentsContext();
+  const { updateSelectedFonts, 
+          updateSelectedColors,
+          updateBoldSettings, 
+          updateItalicSettings, 
+          updateFontSizes} = useFontContext();
   const { updateColumns, updateRows, updateTextfields, updateEmojis, updateFillingEmojis } = useGoalsContext();
 
   const applyTemplateData = useCallback((data, tabIndex) => {
     if (data) {
       updateSelectedId(data.selectedId);
       updateSelectedIdDayShape(data.selectedIdDayShape);
+      
 
       updateSelectedLocalImage(null);
       updateSelectedImage(data.selectedImageBackground);
@@ -46,6 +58,9 @@ export const useTemplateUpdater = () => {
 
       updateSelectedFonts(data.selectedFonts);
       updateSelectedColors(data.selectedColors);
+      updateBoldSettings(data.boldSettings);
+      updateItalicSettings(data.italicSettings);
+      updateFontSizes(data.fontSizes);
 
       updateColumns(data.columns);
       updateRows(data.rows);

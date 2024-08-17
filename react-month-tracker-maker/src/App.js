@@ -3,7 +3,6 @@ import * as React from "react";
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
 } from "react-router-dom";
 import MakerView from "./Views/MakerView";
 import ErrorView from "./Views/ErrorView";

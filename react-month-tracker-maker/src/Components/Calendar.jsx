@@ -47,16 +47,36 @@ function Calendar({ data }) {
     emojiSize = 15,
     selectedFonts,
     selectedColors,
+    boldSettings,
+    italicSettings,
+    fontSizes,
     imageLocalDataBackground = [],
     selectedLocalImageBackground = null,
     imageLocalDataDayShape = [],
     selectedLocalImageDayShape = null,
     indexCard = 0
   } = data;
+  const selectedFontsLength = selectedFonts.length;
+  const goalsSelectedFonts=selectedFonts[selectedFontsLength-2];
+  const goalsSelectedColors=selectedColors[selectedFontsLength-2];
+  const goalsBoldSettings=boldSettings[selectedFontsLength-2];
+  const goalsItalicSettings=italicSettings[selectedFontsLength-2];
+  const goalsFontSizes=fontSizes[selectedFontsLength-2];
+
+  const goalsSettings = {
+    columns,
+    rows, 
+    textfields,
+    emojis,
+    goalsSelectedFonts,
+    goalsSelectedColors,
+    goalsBoldSettings,
+    goalsItalicSettings,
+    goalsFontSizes
+  }
 
   const { locale, translate } = useLanguage();
 
-  // Set dayjs locale globally
   useEffect(() => {
     dayjs.locale(locale);
   }, [locale]);
@@ -130,27 +150,43 @@ function Calendar({ data }) {
           <Typography
             variant="h3"
             sx={{
-              mb: 2,
+              mb: 1,
               fontFamily: selectedFonts[0],
               color: selectedColors[0],
-              textAlign: 'center', // Center the text
-              fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
+              fontWeight: boldSettings[0] ? 'bold' : 'normal',
+              fontStyle: italicSettings[0] ? 'italic' : 'normal',
+              fontSize: fontSizes[0],
+              textAlign: 'center',
               lineHeight: 1.2, // Adjust line height for better fit
-              whiteSpace: 'nowrap', // Prevent text wrapping
-              overflow: 'hidden', // Hide overflow
-              textOverflow: 'ellipsis', // Add ellipsis if needed
+              // whiteSpace: 'nowrap', // Prevent text wrapping
+              // overflow: 'hidden', // Hide overflow
+              // textOverflow: 'ellipsis', // Add ellipsis if needed
             }}
           >
             {titleTextContext}
           </Typography>
         )}
         {monthContext && (
-          <Typography variant="h4" sx={{ mb: 2, fontFamily: selectedFonts[1], color: selectedColors[1] }}>
+          <Typography variant="h4" 
+          sx={{ mb: 2, 
+                fontFamily: selectedFonts[1], 
+                color: selectedColors[1],
+                fontWeight: boldSettings[1] ? 'bold' : 'normal',
+                fontStyle: italicSettings[1] ? 'italic' : 'normal',
+                fontSize: fontSizes[1],
+                textAlign: 'center' }}>
             {dateValueContext.locale(locale).format('MMMM')}
           </Typography>
         )}
         {yearContext && (
-          <Typography variant="body1" sx={{ mb: 2, fontFamily: selectedFonts[2], color: selectedColors[2] }}>
+          <Typography variant="body1"
+          sx={{ mb: 2, 
+            fontFamily: selectedFonts[2], 
+            color: selectedColors[2],
+            fontWeight: boldSettings[2] ? 'bold' : 'normal',
+            fontStyle: italicSettings[2] ? 'italic' : 'normal',
+            fontSize: fontSizes[2],
+            textAlign: 'center' }}>
             {dateValueContext.locale(locale).format('YYYY')}
           </Typography>
         )}
@@ -159,7 +195,14 @@ function Calendar({ data }) {
             <Grid container item xs={12} spacing={0} justifyContent="center">
               {daysNameContext && weekdays.map((dayName, index) => (
                 <Grid item xs={1} key={index} sx={{ textAlign: 'center', minWidth: 50, boxSizing: 'border-box' }}>
-                  <Typography variant="body2" sx={{ fontFamily: selectedFonts[3], color: selectedColors[3] }}>
+                  <Typography variant="body2" 
+                    sx={{ mb: 1, 
+                      fontFamily: selectedFonts[3], 
+                      color: selectedColors[3],
+                      fontWeight: boldSettings[3] ? 'bold' : 'normal',
+                      fontStyle: italicSettings[3] ? 'italic' : 'normal',
+                      fontSize: fontSizes[3],
+                      textAlign: 'center' }}>
                     {dayName}
                   </Typography>
                 </Grid>
@@ -203,9 +246,11 @@ function Calendar({ data }) {
                         <Typography
                           sx={{
                             position: 'relative',
-                            fontFamily: selectedFonts[4],
+                            fontFamily: selectedFonts[4], 
                             color: selectedColors[4],
-                            fontSize: 20,
+                            fontWeight: boldSettings[4] ? 'bold' : 'normal',
+                            fontStyle: italicSettings[4] ? 'italic' : 'normal',
+                            fontSize: fontSizes[4],
                             textAlign: 'center',
                             zIndex: 1,
                             opacity: 1, 
@@ -236,12 +281,7 @@ function Calendar({ data }) {
           </Grid>
         </Box>
         <Goals 
-          columns={columns} 
-          rows={rows} 
-          textfields={textfields} 
-          emojis={emojis} 
-          selectedFonts={selectedFonts} 
-          selectedColors={selectedColors} 
+          goalsSettings = {goalsSettings}
         />
       </Box>
     </Card>

@@ -10,12 +10,13 @@ export const FontProvider = ({ children }) => {
       selectedColors: ['#aabbcc', '#000', '#286097', '#26486A', '#7E8389', '#aabbcc', ''],
       boldSettings: [false, false, false, false, false, false, false], // Example default
       italicSettings: [false, false, false, false, false, false, false], // Example default
-      fontSizes: [16, 16, 16, 16, 16, 16, 16], // Example default font size in px
+      fontSizes: [30, 26, 15, 16, 16, 12, 12] // Example default font size in px
     };
   });
 
   useEffect(() => {
     localStorage.setItem('fontSettings', JSON.stringify(fontSettings));
+  
   }, [fontSettings]);
 
   const updateSelectedFonts = (value) => {
@@ -26,22 +27,16 @@ export const FontProvider = ({ children }) => {
     setFontSettings(prev => ({ ...prev, selectedColors: value }));
   };
 
-  const updateBoldSettings = (index, value) => {
-    const newBoldSettings = [...fontSettings.boldSettings];
-    newBoldSettings[index] = value;
-    setFontSettings(prev => ({ ...prev, boldSettings: newBoldSettings }));
+  const updateBoldSettings = (value) => {
+    setFontSettings(prev => ({ ...prev, boldSettings: value }));
   };
 
-  const updateItalicSettings = (index, value) => {
-    const newItalicSettings = [...fontSettings.italicSettings];
-    newItalicSettings[index] = value;
-    setFontSettings(prev => ({ ...prev, italicSettings: newItalicSettings }));
+  const updateItalicSettings = (value) => {
+    setFontSettings(prev => ({ ...prev, italicSettings: value }));
   };
 
-  const updateFontSizes = (index, size) => {
-    const newFontSizes = [...fontSettings.fontSizes];
-    newFontSizes[index] = size;
-    setFontSettings(prev => ({ ...prev, fontSizes: newFontSizes }));
+  const updateFontSizes = (value) => {
+    setFontSettings(prev => ({ ...prev, fontSizes: value }));
   };
 
   return (
