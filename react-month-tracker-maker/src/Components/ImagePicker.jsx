@@ -188,7 +188,6 @@ function ImagePicker({ context }) {
                   objectFit: 'cover',
                 }}
               />
-              {console.log(index, selectedId)}
               {(index === selectedId) && (selectedLocalImage === null) && (
                 <div
                   style={{
