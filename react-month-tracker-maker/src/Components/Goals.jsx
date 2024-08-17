@@ -55,7 +55,7 @@ function Goals( {goalsSettings} ) {
                   fontWeight: goalsBoldSettings ? 'bold' : 'normal',
                   fontStyle: goalsItalicSettings ? 'italic' : 'normal',
                   fontSize: goalsFontSizes,
-                  textAlign: 'center'
+                  textAlign: 'left'
                   }}>
                   {textfields[index]}
                 </Typography>

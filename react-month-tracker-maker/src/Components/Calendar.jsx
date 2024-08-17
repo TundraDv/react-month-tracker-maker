@@ -158,7 +158,7 @@ function Calendar({ data }) {
               fontSize: fontSizes[0],
               textAlign: 'center',
               lineHeight: 1.2, // Adjust line height for better fit
-              // whiteSpace: 'nowrap', // Prevent text wrapping
+              whiteSpace: 'nowrap', // Prevent text wrapping
               // overflow: 'hidden', // Hide overflow
               // textOverflow: 'ellipsis', // Add ellipsis if needed
             }}
