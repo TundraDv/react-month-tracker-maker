@@ -9,7 +9,7 @@ import ErrorView from "./Views/ErrorView";
 import TemplatesView from "./Views/TemplatesView";
 import AboutView from "./Views/AboutView";
 import MainLayout from "./Layouts/MainLayout";
-
+import MakerTemplateSetting from "./Utils/MakerTemplateSetting";
 import { LanguageProvider } from './Contexts/LanguageContext'
 import { DayShapeProvider } from './Contexts/DayShapeContext';
 import { BackgroundImageProvider } from './Contexts/BackgroundImageContext';
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/templates/:id", 
-        element: <MakerView />,
+        element: <MakerTemplateSetting />,
       },
       {
         path: "/month",

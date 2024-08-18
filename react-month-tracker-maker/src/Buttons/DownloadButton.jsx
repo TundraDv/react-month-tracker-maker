@@ -9,10 +9,8 @@ function DownloadButton({ id_CardElement, title }) {
   const handleDownload = () => {
     const cardElement = document.getElementById(id_CardElement);
     
-    // Use a fixed scale factor for testing
     const scale = 2; // Adjust as needed
 
-    // Calculate scaled dimensions
     const width = cardElement.offsetWidth * scale;
     const height = cardElement.offsetHeight * scale;
 
@@ -27,7 +25,7 @@ function DownloadButton({ id_CardElement, title }) {
       bgcolor: '#fff', 
       width,
       height,
-      quality: 1, // Quality parameter for JPEG
+      quality: 1,
       style
     };
 

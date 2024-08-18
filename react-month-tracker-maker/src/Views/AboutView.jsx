@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Box, CardContent, Typography, CardMedia, Stack, IconButton, Container } from '@mui/material';
+import { Card, Box, CardContent, Typography, CardMedia, Stack, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import avatarUrl from '../Assets/avatar.jpg';

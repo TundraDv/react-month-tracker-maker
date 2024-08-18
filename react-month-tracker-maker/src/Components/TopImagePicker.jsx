@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, ImageList, ImageListItem, Slider, Grid, Typography } from "@mui/material";
+import { Box, Slider, Typography } from "@mui/material";
 import { useLanguage } from '../Contexts/LanguageContext';
 
 function LanguageButton() {

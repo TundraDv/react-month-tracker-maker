@@ -267,6 +267,7 @@ function Calendar({ data }) {
                               transform: 'translate(-50%, -50%)',
                               fontSize: emojiSize,
                               zIndex: 2,
+                              opacity: 1,
                             }}
                           >
                             {fillingEmojis[day - 1]}
