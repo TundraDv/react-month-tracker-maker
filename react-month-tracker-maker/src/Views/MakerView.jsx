@@ -38,6 +38,7 @@ function MakerView() {
       firstDayContext,
       heightContext,
       selectedFonts,
+      fillingEmojis,
       selectedColors,
       boldSettings, 
       italicSettings, 
@@ -141,12 +142,10 @@ function MakerView() {
         >
           <Picker />
           <Box sx={{ width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
-      <Stack direction={"row"} spacing={1} margin={1}>
-          <DownloadJsonButton dataTemplate={dataTemplate}/>
-          <ImportConfigButton />
-
-      </Stack>
-
+            <Stack direction={"row"} spacing={1} margin={1}>
+              <DownloadJsonButton dataTemplate={dataTemplate}/>
+              <ImportConfigButton />
+            </Stack>
           </Box>
         </Grid>
       </Grid>

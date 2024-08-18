@@ -29,7 +29,11 @@ export const useTemplateUpdater = () => {
           updateBoldSettings, 
           updateItalicSettings, 
           updateFontSizes} = useFontContext();
-  const { updateColumns, updateRows, updateTextfields, updateEmojis, updateFillingEmojis } = useGoalsContext();
+  const { updateColumns, 
+          updateRows, 
+          updateTextfields, 
+          updateEmojis, 
+          updateFillingEmojis } = useGoalsContext();
 
   const applyTemplateData = useCallback((data, tabIndex) => {
     if (data) {
@@ -66,7 +70,7 @@ export const useTemplateUpdater = () => {
       updateRows(data.rows);
       updateTextfields(data.textfields);
       updateEmojis(data.emojis);
-      updateFillingEmojis(Array(24).fill(""));
+      updateFillingEmojis( data.fillingEmojis ? data.fillingEmojis : Array(24).fill(""));
     } else {
       console.error("data is undefined or null");
     }
