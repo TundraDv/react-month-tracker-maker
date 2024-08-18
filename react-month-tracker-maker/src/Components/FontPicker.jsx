@@ -68,6 +68,33 @@ const fonts = [
   'Spectral'
 ];
 
+const convertToPx = (size, unit) => {
+  const baseFontSize = 16; // Base font size for rem/em
+  switch (unit) {
+    case 'px':
+      return size;
+    case 'em':
+    case 'rem':
+      return size * baseFontSize;
+    default:
+      return size;
+  }
+};
+
+const convertFromPx = (size, unit) => {
+  const baseFontSize = 16; // Base font size for rem/em
+  switch (unit) {
+    case 'px':
+      return size;
+    case 'em':
+    case 'rem':
+      return size / baseFontSize;
+    default:
+      return size;
+  }
+};
+
+
 function FontPicker() {
   const { 
     selectedFonts, 
@@ -88,7 +115,7 @@ function FontPicker() {
   const parts = translate("fonts-label");
   const [activeIndex, setActiveIndex] = useState(null);
   const maxFontSize = 36; // Maximum font size
-  const minFontSize = 10; // Minimum font size
+  const minFontSize = 8; // Minimum font size
 
   // Ref to the color picker
   const colorPickerRef = useRef(null);
@@ -159,44 +186,50 @@ function FontPicker() {
     updateItalicSettings(newItalicSettings);
   };
 
-  const handleIncreaseFontSize = (index) => () => {
-    const newFontSizes = [...fontSizes];
-    if (index === (fontsLength - 1)) {
-      for (let i = 0; i < fontsLength-1; i++) {
-        const currentSize = newFontSizes[i] || 16; 
-        if (currentSize < maxFontSize) {
-          newFontSizes[i] = Math.min(currentSize + 2, maxFontSize);
-        }
-      }
-    } else {
-      const currentSize = newFontSizes[index] || 16;
-      if (currentSize < maxFontSize) {
-        newFontSizes[index] = Math.min(currentSize + 2, maxFontSize);
-      }
-    }
-    updateFontSizes(newFontSizes); 
-  };
-  
+  const unit = 'px'; // or 'em', 'rem'
 
-  const handleDecreaseFontSize = (index) => () => {
-    const newFontSizes = [...fontSizes];
-    if (index === (fontsLength - 1)) {
-      for (let i = 0; i < fontsLength-1; i++) {
-        const currentSize = newFontSizes[i] || 16; 
-        if (currentSize > minFontSize) {
-          newFontSizes[i] = Math.max(currentSize - 2, minFontSize);
-        }
-      }
-    } else {
-      const currentSize = newFontSizes[index] || 16; 
-      if (currentSize > minFontSize) {
-        newFontSizes[index] = Math.max(currentSize - 2, minFontSize);
+const handleIncreaseFontSize = (index) => () => {
+  const newFontSizes = [...fontSizes];
+  const maxFontSizeInPx = convertToPx(maxFontSize, unit); // Convert maxFontSize to px
+  const increment = 1; // Font size increment in px
+
+  if (index === (fontsLength - 1)) {
+    for (let i = 0; i < fontsLength - 1; i++) {
+      const currentSizeInPx = convertToPx(newFontSizes[i], unit);
+      if (currentSizeInPx < maxFontSizeInPx) {
+        newFontSizes[i] = convertFromPx(Math.min(currentSizeInPx + increment, maxFontSizeInPx), unit);
       }
     }
-  
-    updateFontSizes(newFontSizes); 
-  };
-  
+  } else {
+    const currentSizeInPx = convertToPx(newFontSizes[index], unit);
+    if (currentSizeInPx < maxFontSizeInPx) {
+      newFontSizes[index] = convertFromPx(Math.min(currentSizeInPx + increment, maxFontSizeInPx), unit);
+    }
+  }
+  updateFontSizes(newFontSizes);
+};
+
+const handleDecreaseFontSize = (index) => () => {
+  const newFontSizes = [...fontSizes];
+  const minFontSizeInPx = convertToPx(minFontSize, unit); // Convert minFontSize to px
+  const decrement = 1; // Font size decrement in px
+
+  if (index === (fontsLength - 1)) {
+    for (let i = 0; i < fontsLength - 1; i++) {
+      const currentSizeInPx = convertToPx(newFontSizes[i], unit);
+      if (currentSizeInPx > minFontSizeInPx) {
+        newFontSizes[i] = convertFromPx(Math.max(currentSizeInPx - decrement, minFontSizeInPx), unit);
+      }
+    }
+  } else {
+    const currentSizeInPx = convertToPx(newFontSizes[index], unit);
+    if (currentSizeInPx > minFontSizeInPx) {
+      newFontSizes[index] = convertFromPx(Math.max(currentSizeInPx - decrement, minFontSizeInPx), unit);
+    }
+  }
+  updateFontSizes(newFontSizes);
+};
+
 
   return (
     <Box>

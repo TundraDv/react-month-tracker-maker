@@ -234,7 +234,7 @@ function Calendar({ data }) {
                               left: '50%',
                               transform: 'translate(-50%, -50%)',
                               backgroundImage: imgUrlDayShape,
-                              backgroundSize: 'contain',
+                              backgroundSize: 'cover',
                               backgroundRepeat: 'no-repeat',
                               backgroundPosition: 'center',
                               filter: hexToCSSFilter(backgroundColorDayShape).filter,

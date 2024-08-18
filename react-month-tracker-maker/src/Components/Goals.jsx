@@ -17,7 +17,7 @@ function Goals( {goalsSettings} ) {
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginY: 1 }}>
       <Box
       sx={{
-        marginX: 1.5,
+        marginX: 3,
         width: "100%",
         // borderRadius: 4,
         // border: '10px groove  rgba(0, 0, 0, 0.5);',
@@ -25,13 +25,13 @@ function Goals( {goalsSettings} ) {
         // backgroundColor: "#fff"
       }}
     >
-      <Grid container spacing={0.7} justifyContent="center" alignItems="center">
+      <Grid container spacing={0.1} justifyContent="center" alignItems="center">
         {Array.from({ length: totalItems }).map((_, index) => (
           <Grid item xs={12 / columns} key={index}>
             {/[^\s]/.test(textfields[index]) ? (
               <Stack
                 direction="row"
-                spacing={0.5}
+                spacing={0.1}
                 alignItems="center"
                 justifyContent="flex-start"
                 sx={{ width: '100%' }}
@@ -55,6 +55,7 @@ function Goals( {goalsSettings} ) {
                   fontWeight: goalsBoldSettings ? 'bold' : 'normal',
                   fontStyle: goalsItalicSettings ? 'italic' : 'normal',
                   fontSize: goalsFontSizes,
+                  whiteSpace: 'nowrap', 
                   textAlign: 'left'
                   }}>
                   {textfields[index]}
