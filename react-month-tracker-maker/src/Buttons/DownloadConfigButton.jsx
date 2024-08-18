@@ -19,7 +19,7 @@ const DownloadJsonButton = ( {dataTemplate} ) => {
   };
 
   return (
-    <Button variant="outlined" color="primary" onClick={downloadJson}>
+    <Button sx={{ width: "50%" }} variant="outlined" color="primary" onClick={downloadJson}>
        {translate("config-button")}
     </Button>
   );

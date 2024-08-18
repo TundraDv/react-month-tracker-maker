@@ -113,6 +113,22 @@
     "en": "Download CONFIG",
     "es": "Descargar CONFIG"
   },
+  "uploadconfig-button": {
+    "en": "Upload CONFIG",
+    "es": "Subir CONFIG"
+  },
+  "uploadconfig-alert-ok": {
+    "en": "Template data applied successfully!",
+    "es": "La configuración de la plantilla fue aplicada"
+  },
+  "uploadconfig-alert-error": {
+    "en": "Failed to apply the template",
+    "es": "Fallo la aplicación de plantilla"
+  },
+  "uploadconfig-alert-instruct": {
+    "en": "Please upload a valid JSON file.",
+    "es": "Por favor, suba una configuración válida"
+  },
   "selected-label": {
     "en": "Selected",
     "es": "Seleccionada"

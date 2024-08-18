@@ -39,7 +39,7 @@ const SettingTemplateButton = ({ index, actionType }) => {
         return;
     }
     applyTemplateData(dataDefault, tabIndex);
-    navigate(`/templates/${index}`);
+    navigate('/');
   };
   
 

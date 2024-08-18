@@ -1,5 +1,5 @@
 import React, { useMemo} from "react";
-import { Grid, Container, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, Stack,Box, Container, useMediaQuery, useTheme } from "@mui/material";
 import Calendar from "../Components/Calendar";
 import Picker from "../Components/Picker";
 import DownloadJsonButton from "../Buttons/DownloadConfigButton";
@@ -8,6 +8,7 @@ import { useBackgroundImageContext } from '../Contexts/BackgroundImageContext';
 import { useComponentsContext } from '../Contexts/ComponentsContext';
 import { useFontContext } from "../Contexts/FontContext";
 import { useGoalsContext } from '../Contexts/GoalsContext';
+import ImportConfigButton from "../Buttons/ImportConfigButton"
 
 function MakerView() {
   const theme = useTheme();
@@ -139,7 +140,14 @@ function MakerView() {
           sx={{ minWidth: '300px' }}
         >
           <Picker />
+          <Box sx={{ width: { xs: "100%", sm: "550px" }, overflow: 'auto' }}>
+      <Stack direction={"row"} spacing={1} margin={1}>
           <DownloadJsonButton dataTemplate={dataTemplate}/>
+          <ImportConfigButton />
+
+      </Stack>
+
+          </Box>
         </Grid>
       </Grid>
     </Container>
