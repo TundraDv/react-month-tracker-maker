@@ -24,6 +24,7 @@ function DownloadButton({ id_CardElement, title }) {
     };
 
     const param = {
+      bgcolor: '#fff', 
       width,
       height,
       quality: 1, // Quality parameter for JPEG
